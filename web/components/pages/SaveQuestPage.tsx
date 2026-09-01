@@ -2,17 +2,22 @@
 
 import { useState } from "react";
 import { CaseStudyGallery } from "@/components/CaseStudyGallery";
-import { SCHOLUB_COPY, type ScholubLang } from "@/lib/scholub-copy";
+import { SAVEQUEST_COPY, type SaveQuestLang } from "@/lib/savequest-copy";
 
-const GALLERY = [
-  { src: "/images/scholub/demo.mp4", alt: "Scholub demo", poster: "/images/scholub/demo-poster.jpg" },
-  { src: "/images/scholub/home.jpg", alt: "Scholub home feed" },
-  { src: "/images/scholub/detail.jpg", alt: "Scholub paper detail" },
-  { src: "/images/scholub/profile.png", alt: "Scholub profile" },
-  { src: "/images/work/scholub.jpg", alt: "Scholub cover" },
+const PHONES = [
+  { src: "/images/savequest/home.jpg", alt: "SaveQuest home" },
+  { src: "/images/savequest/ranking.jpg", alt: "SaveQuest challenge and ranking" },
+  { src: "/images/savequest/shop.jpg", alt: "SaveQuest shop" },
 ];
 
-function LangToggle({ lang, onChange }: { lang: ScholubLang; onChange: (lang: ScholubLang) => void }) {
+const GALLERY = [
+  { src: "/images/savequest/demo.mp4", alt: "SaveQuest demo", poster: "/images/savequest/home.jpg" },
+  ...PHONES,
+  { src: "/images/savequest/challenge.jpg", alt: "SaveQuest challenge states" },
+  { src: "/images/savequest/overview.jpg", alt: "SaveQuest service overview" },
+];
+
+function LangToggle({ lang, onChange }: { lang: SaveQuestLang; onChange: (lang: SaveQuestLang) => void }) {
   return (
     <div className="cs-lang" role="group" aria-label="Language">
       <button type="button" className={`cs-lang__btn${lang === "en" ? " is-active" : ""}`} onClick={() => onChange("en")}>EN</button>
@@ -21,9 +26,9 @@ function LangToggle({ lang, onChange }: { lang: ScholubLang; onChange: (lang: Sc
   );
 }
 
-export function ScholubPage() {
-  const [lang, setLang] = useState<ScholubLang>("ko");
-  const t = SCHOLUB_COPY[lang];
+export function SaveQuestPage() {
+  const [lang, setLang] = useState<SaveQuestLang>("ko");
+  const t = SAVEQUEST_COPY[lang];
 
   return (
     <>
@@ -89,7 +94,7 @@ export function ScholubPage() {
           <section id="overview" className="section cs-hero">
             <div className="centered">
               <h1 className="cs-hero__title cs-hero__title--logo reveal-load" data-reveal-delay="100">
-                Scholub
+                SaveQuest
                 <span className="cs-hero__year-badge">2025</span>
               </h1>
 
@@ -109,8 +114,10 @@ export function ScholubPage() {
 
           <section className="cs-image cs-image--wide">
             <div className="centered">
-              <div className="cs-image__wrap reveal-load" data-reveal-delay="300">
-                <img src="/images/work/scholub.jpg" alt="Scholub" loading="lazy" />
+              <div className="cs-phones reveal-load" data-reveal-delay="300">
+                {PHONES.map((screen) => (
+                  <img key={screen.src} src={screen.src} alt={screen.alt} loading="lazy" />
+                ))}
               </div>
             </div>
           </section>
@@ -183,7 +190,7 @@ export function ScholubPage() {
 
           <section className="cs-image cs-image--wide">
             <div className="centered">
-              <div className="cs-diagram cs-tree" id="pipelineTree"></div>
+              <div className="cs-diagram cs-tree" id="savequestPipelineTree"></div>
             </div>
           </section>
 
@@ -199,7 +206,7 @@ export function ScholubPage() {
 
           <section className="cs-image cs-image--wide">
             <div className="centered">
-              <div className="cs-diagram cs-tree" id="systemTree"></div>
+              <div className="cs-diagram cs-tree" id="savequestSystemTree"></div>
             </div>
           </section>
 
@@ -219,7 +226,7 @@ export function ScholubPage() {
 
           <section className="cs-image cs-image--gallery">
             <div className="centered">
-              <CaseStudyGallery slides={GALLERY} />
+              <CaseStudyGallery slides={GALLERY} variant="phone" showDots />
             </div>
           </section>
 

@@ -53,6 +53,7 @@ export function SiteFooter() {
                 <a href="/scholub">Scholub</a>
                 <a href="/slop">SLOP</a>
                 <a href="/sipsiilban">십시일반</a>
+                <a href="/savequest">SaveQuest</a>
               </div>
 
               <div className="taped-footer__col taped-footer__col--desktop">

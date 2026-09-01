@@ -879,4 +879,58 @@
   createTree('seoulSystemTree', SEOUL_SYSTEM, { depthGap: 240, sibGap: 10, collapseAt: 2 });
   createTree('slopPipelineTree', SLOP_PIPELINE, { depthGap: 240, sibGap: 10 });
   createTree('slopSystemTree', SLOP_SYSTEM, { depthGap: 240, sibGap: 10, collapseAt: 2 });
+
+  var SAVEQUEST_PIPELINE = { label: 'Payment', children: [
+    { label: 'Collect', children: [
+      { label: 'Card charges' },
+      { label: 'Merchant id' }
+    ]},
+    { label: 'Match', children: [
+      { label: 'Category / store' },
+      { label: 'User challenge' }
+    ]},
+    { label: 'Judge', children: [
+      { label: 'Spend vs cap' },
+      { label: 'Safe / danger / fail' }
+    ]},
+    { label: 'Reward', children: [
+      { label: 'XP + coins' },
+      { label: 'Ranking / shop' }
+    ]}
+  ]};
+
+  var SAVEQUEST_SYSTEM = { label: 'SaveQuest', children: [
+    { label: 'Clients', children: [
+      { label: 'App', children: [
+        { label: 'Home' },
+        { label: 'Challenge' },
+        { label: 'Shop' },
+        { label: 'Profile' }
+      ]}
+    ]},
+    { label: 'Server', children: [
+      { label: 'Ingest', children: [
+        { label: 'Payments' },
+        { label: 'Merchants' }
+      ]},
+      { label: 'Engine', children: [
+        { label: 'Limits' },
+        { label: 'Status' },
+        { label: 'Alerts' }
+      ]},
+      { label: 'Rewards', children: [
+        { label: 'XP / coins' },
+        { label: 'Ranking' },
+        { label: 'Shop' }
+      ]}
+    ]},
+    { label: 'Infra', children: [
+      { label: 'User state' },
+      { label: 'Payment log' },
+      { label: 'Assets' }
+    ]}
+  ]};
+
+  createTree('savequestPipelineTree', SAVEQUEST_PIPELINE, { depthGap: 240, sibGap: 10 });
+  createTree('savequestSystemTree', SAVEQUEST_SYSTEM, { depthGap: 240, sibGap: 10, collapseAt: 2 });
 })();

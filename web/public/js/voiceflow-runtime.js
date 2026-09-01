@@ -754,7 +754,7 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
       if (window.innerWidth > 900) return;
       var isMobileSmall = window.innerWidth < 680;
 
-      ['blocksTree', 'messageTree', 'pipelineTree', 'systemTree', 'seoulPipelineTree', 'seoulSystemTree', 'slopPipelineTree', 'slopSystemTree'].forEach(function(id) {
+      ['blocksTree', 'messageTree', 'pipelineTree', 'systemTree', 'seoulPipelineTree', 'seoulSystemTree', 'slopPipelineTree', 'slopSystemTree', 'savequestPipelineTree', 'savequestSystemTree'].forEach(function(id) {
         var el = document.getElementById(id);
         if (!el) return;
         el.style.overflowX = 'auto';
