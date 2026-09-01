@@ -1,19 +1,10 @@
 "use client";
 
-import { FormEvent, useState } from "react";
 import { youtubeThumb } from "@/lib/now-playing";
 import { usePlayer } from "@/components/player/PlayerProvider";
 
 export function NowPlaying() {
-  const { tracks, index, track, playing, go, toggle, loadPlaylist, playlistBusy, playlistError } = usePlayer();
-  const [link, setLink] = useState("");
-
-  async function onSubmit(e: FormEvent) {
-    e.preventDefault();
-    const ok = await loadPlaylist(link);
-    if (ok) setLink("");
-  }
-
+  const { tracks, index, track, playing, go, toggle } = usePlayer();
   if (!track) return null;
 
   return (
@@ -49,21 +40,6 @@ export function NowPlaying() {
           </button>
         </div>
       </div>
-
-      <form className="now-playing__link" onSubmit={onSubmit}>
-        <input
-          type="text"
-          value={link}
-          onChange={(e) => setLink(e.target.value)}
-          placeholder="유튜브 플레이리스트 링크"
-          aria-label="유튜브 플레이리스트 링크"
-          disabled={playlistBusy}
-        />
-        <button type="submit" disabled={playlistBusy || !link.trim()}>
-          {playlistBusy ? "불러오는 중" : "넣기"}
-        </button>
-      </form>
-      {playlistError ? <p className="now-playing__link-error">{playlistError}</p> : null}
 
       <ul className="now-playing__list">
         {tracks.map((item, i) => (

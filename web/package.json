@@ -2,9 +2,9 @@
   "name": "murynmukha-web",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 3001",
+    "dev": "next dev --port 3000",
     "build": "next build",
-    "start": "next start --port 3001"
+    "start": "next start --port 3000"
   },
   "dependencies": {
     "lottie-react": "^2.4.1",

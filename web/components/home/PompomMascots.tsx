@@ -6,10 +6,18 @@ import bluePompomData from "@/lib/lottie/blue-pompom.json";
 
 const POMPOM_WIDTH = 160;
 
-export function PompomMascots() {
+export function PompomMascots({
+  followMouse = true,
+  width = POMPOM_WIDTH,
+}: {
+  followMouse?: boolean;
+  width?: number;
+}) {
   const wrapRef = useRef<HTMLDivElement>(null);
+  const height = Math.round((width * 90) / POMPOM_WIDTH);
 
   useEffect(() => {
+    if (!followMouse) return;
     const el = wrapRef.current;
     const track = el?.parentElement;
     if (!el || !track) return;
@@ -24,8 +32,8 @@ export function PompomMascots() {
         const minX = nameEl ? nameEl.getBoundingClientRect().left - trackRect.left : 0;
         // Character's x must always match the mouse's x exactly (centered on cursor),
         // but only between the "신이현" name's x and 40% of the footer's width.
-        const rawX = t.clientX - trackRect.left - POMPOM_WIDTH / 2;
-        const maxX = trackRect.width * 0.4 - POMPOM_WIDTH / 2;
+        const rawX = t.clientX - trackRect.left - width / 2;
+        const maxX = trackRect.width * 0.4 - width / 2;
         const x = Math.max(minX, Math.min(rawX, maxX));
         el.style.transform = `translateX(${x}px)`;
       });
@@ -35,12 +43,12 @@ export function PompomMascots() {
       window.removeEventListener("mousemove", handleMouseMove);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [followMouse, width]);
 
   return (
-    <div className="footer-pompom" aria-hidden="true">
+    <div className={followMouse ? "footer-pompom" : "now-playing__pompom"} aria-hidden="true">
       <div className="pompom-row BluePomPomWrap" ref={wrapRef}>
-        <Lottie animationData={bluePompomData} loop autoplay style={{ width: POMPOM_WIDTH, height: 90 }} />
+        <Lottie animationData={bluePompomData} loop autoplay style={{ width, height }} />
       </div>
     </div>
   );

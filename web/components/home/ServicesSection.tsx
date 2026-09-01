@@ -1,4 +1,5 @@
 import { NowPlaying } from "@/components/home/NowPlaying";
+import { PompomMascots } from "@/components/home/PompomMascots";
 
 export function ServicesSection() {
   return (
@@ -7,7 +8,7 @@ export function ServicesSection() {
           {/* Services / Hero Section */}
           <section id="hero" className="section section--hero">
             <div className="centered">
-              <h1 className="hero-name shiny-hover reveal-load" data-reveal-delay="100">Before building it, I ask why it needs to be built.</h1>
+              <h1 className="hero-name shiny-hover reveal-load" data-reveal-delay="100">A developer growing through constant challenge.</h1>
 
               <div className="hero-bio reveal-load" data-reveal-delay="200">
                 <p>잘 동작하는 코드를 넘어, 사용자의 문제를 데이터로 읽고 해결책을 설계하는 개발을 지향합니다.</p>
@@ -47,6 +48,7 @@ export function ServicesSection() {
                   </div>
                   <div className="sp-card sp-card--now-playing">
                     <NowPlaying />
+                    <PompomMascots followMouse={false} width={72} />
                   </div>
                 </div>
               </div>

@@ -637,6 +637,9 @@ blockquote {
 
 .sp-stack__card--active span {
   display: block;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-break: strict;
 }
 
 .sp-services__arrow {
@@ -692,6 +695,7 @@ blockquote {
 }
 
 .sp-card--now-playing {
+  position: relative;
   background: rgba(255, 230, 232, 0.88);
   width: 100%;
   height: 364px;
@@ -699,6 +703,20 @@ blockquote {
   flex-direction: column;
   padding: 14px 14px 12px;
   box-sizing: border-box;
+}
+
+.now-playing__pompom {
+  position: absolute;
+  right: 2px;
+  bottom: -2px;
+  width: 72px;
+  height: 40px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.now-playing__pompom .pompom-row {
+  position: static;
 }
 
 /* Testimonial Card */
@@ -3738,53 +3756,6 @@ a.work-card {
   background: #fff;
 }
 
-.now-playing__link {
-  display: flex;
-  gap: 6px;
-  padding: 0 2px 8px;
-  flex-shrink: 0;
-}
-
-.now-playing__link input {
-  flex: 1;
-  min-width: 0;
-  height: 32px;
-  border: 0;
-  border-radius: 10px;
-  padding: 0 10px;
-  font-size: 12px;
-  letter-spacing: -0.2px;
-  color: #211B1C;
-  background: rgba(255, 255, 255, 0.72);
-}
-
-.now-playing__link input::placeholder {
-  color: #8A8484;
-}
-
-.now-playing__link button {
-  height: 32px;
-  border: 0;
-  border-radius: 10px;
-  padding: 0 12px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #002E71;
-  background: #fff;
-  cursor: pointer;
-}
-
-.now-playing__link button:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
-
-.now-playing__link-error {
-  margin: 0 2px 8px;
-  font-size: 12px;
-  color: #9B2C2C;
-}
-
 .now-playing__list {
   list-style: none;
   margin: 0;
@@ -4727,7 +4698,7 @@ a.work-card {
   }
 
   .page-home .section--hero {
-    padding-top: 132px;
+    padding-top: 196px;
   }
 }
 
