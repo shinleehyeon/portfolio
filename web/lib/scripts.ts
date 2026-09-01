@@ -18,7 +18,6 @@ export const VOICEFLOW_SCRIPTS = [
   "https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js",
   "/trees.js",
   ...GSAP_CASE,
-  "/ask-ai-circles.js",
   "/js/voiceflow-runtime.js",
 ];
 export const SCHOLUB_SCRIPTS = VOICEFLOW_SCRIPTS;
