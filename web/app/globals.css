@@ -1,0 +1,2 @@
+body { opacity: 0; }
+body.fonts-ready { opacity: 1; transition: opacity 0.15s ease; }

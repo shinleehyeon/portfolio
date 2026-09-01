@@ -1,0 +1,12 @@
+# murynmukha.com
+
+User-agent: *
+Allow: /
+
+# Assets not useful for indexing
+Disallow: /case-study-template.html
+Disallow: /voiceflow-review.html
+Disallow: /twain-review.html
+
+# Sitemap
+Sitemap: https://murynmukha.com/sitemap.xml

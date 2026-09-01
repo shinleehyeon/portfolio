@@ -1,0 +1,678 @@
+// Services skill-wheel — circular arc with tangent rotation
+(function() {
+  var track = document.querySelector('.sp-wheel__track');
+  var arrow = document.querySelector('.sp-services__arrow');
+  var wheelContainer = document.querySelector('.sp-services__wheel');
+  if (!track) return;
+
+  var services = [
+    '문제 정의',
+    '데이터로 읽기',
+    '해결 설계',
+    '기획',
+    '프론트엔드',
+    '풀스택',
+    'AI 프로덕트',
+    '시각화',
+    '사용자 검증',
+    '인프라',
+    '운영'
+  ];
+
+  var descriptions = [
+    '만드는 것보다, 왜 필요한지부터 묻습니다. 기능 목록보다 풀 문제를 먼저 고릅니다.',
+    '추측 대신 로그·설문·공개 데이터로 어디가 막히는지 봅니다.',
+    '잘 돌아가는 코드보다, 그 문제가 풀리는 흐름을 먼저 그립니다.',
+    '범위와 우선순위를 나눕니다. v1에 넣을 것과 빼도 되는 것을 가릅니다.',
+    '화면이 설명이 되게 만듭니다. 사용자가 다음 행동을 고민하지 않게.',
+    'API부터 화면까지 이어서 구현합니다. 핸드오프에서 빠지는 디테일을 줄입니다.',
+    '모델 데모가 아니라, 요약·검색·추천이 실제 과업을 줄이게 붙입니다.',
+    '표만으로는 안 보이는 패턴을 지도와 대시보드로 보여 줍니다.',
+    '만든 다음이 아니라 만드는 중에 씁니다. 막히는 지점을 다시 설계에 넣습니다.',
+    '배포·연동·데이터가 끊기지 않게 밑단을 같이 봅니다.',
+    '출시 후에도 남는 문제를 고칩니다. 한 번 만들고 끝내지 않습니다.'
+  ];
+
+  // pill/pillText now managed by stack system (elActive/elActiveText)
+
+  // --- Card stack ---
+  var pillStack = document.getElementById('pillStack');
+  var stackAnimating = false;
+  var ANIM_DUR = 450;
+  var ANIM_EASE = 'cubic-bezier(0.4, 0, 0.2, 1)';
+  var ANIM_TR = 'all ' + ANIM_DUR + 'ms ' + ANIM_EASE;
+
+  var elTop2 = document.getElementById('stackTop2');
+  var elTop1 = document.getElementById('stackTop1');
+  var elActive = document.getElementById('stackActive');
+  var elBot1 = document.getElementById('stackBot1');
+  var elBot2 = document.getElementById('stackBot2');
+  var elActiveText = elActive.querySelector('span');
+
+  // Default specs from Figma
+  var S = {
+    top2:   { w: 134, h: 20, bg: 0.24, r: '14px 14px 0 0', shadow: '0 -12px 8px 0 rgba(255,243,244,0.35)', stroke: 'none', pad: '0', scale: 1, opacity: 1, yOff: 0 },
+    top1:   { w: 184, h: 28, bg: 0.44, r: '18px 18px 0 0', shadow: '0 -12px 8px 0 rgba(255,243,244,0.35)', stroke: 'none', pad: '0', scale: 1, opacity: 1, yOff: 0 },
+    active: { w: 260, h: 175, bg: 0.92, r: '32px', shadow: '0 -12px 8px 0 rgba(255,243,244,0.35)', stroke: 'inset 0 -2px 0 0 rgba(255,206,209,0.32)', pad: '22px 28px 23px', scale: 1, opacity: 1, yOff: 0 },
+    bot1:   { w: 184, h: 28, bg: 0.44, r: '0 0 18px 18px', shadow: 'none', stroke: 'inset 0 -1.5px 0 0 rgba(255,222,224,0.32)', pad: '0', scale: 1, opacity: 1, yOff: 0 },
+    bot2:   { w: 134, h: 20, bg: 0.24, r: '0 0 14px 14px', shadow: 'none', stroke: 'inset 0 -1.5px 0 0 rgba(255,222,224,0.24)', pad: '0', scale: 1, opacity: 1, yOff: 0 },
+  };
+
+  function applyState(el, s, animate) {
+    el.style.transition = animate ? ANIM_TR : 'none';
+    el.style.width = s.w + 'px';
+    el.style.height = s.h + 'px';
+    el.style.background = 'rgba(255,222,224,' + s.bg + ')';
+    el.style.borderRadius = s.r;
+    el.style.boxShadow = (s.stroke !== 'none' && s.shadow !== 'none') ? s.stroke + ',' + s.shadow : (s.stroke !== 'none' ? s.stroke : s.shadow);
+    el.style.padding = s.pad;
+    el.style.transform = 'scale(' + s.scale + ') translateY(' + s.yOff + 'px)';
+    el.style.opacity = s.opacity;
+  }
+
+  // Set initial resting state
+  applyState(elTop2, S.top2, false);
+  applyState(elTop1, S.top1, false);
+  applyState(elActive, S.active, false);
+  applyState(elBot1, S.bot1, false);
+  applyState(elBot2, S.bot2, false);
+  elActiveText.textContent = descriptions[0];
+
+  function updateDescription(idx) {
+    if (stackAnimating) return;
+    stackAnimating = true;
+
+    var nextText = descriptions[idx];
+
+    // Move elTop2 (will exit upward) to the end of the DOM as the incoming bottom card
+    // First set it to the enter-from-bottom state BEFORE moving
+    applyState(elTop2, Object.assign({}, S.bot2, { scale: 0.5, opacity: 0, yOff: 20 }), false);
+    // Move to end of flex container
+    pillStack.appendChild(elTop2);
+
+    // Pre-create text in bot1 (hidden), so it's there when it expands
+    var newSpan = document.createElement('span');
+    newSpan.style.opacity = '0';
+    newSpan.textContent = nextText;
+    elBot1.appendChild(newSpan);
+    elBot1.classList.add('sp-stack__card--active');
+
+    // Hide active text
+    elActiveText.style.transition = 'opacity 0.15s ease-out';
+    elActiveText.style.opacity = '0';
+
+    pillStack.offsetHeight;
+
+    requestAnimationFrame(function() {
+      // top1 → top2 specs
+      applyState(elTop1, S.top2, true);
+      // active → top1 specs (collapse)
+      applyState(elActive, Object.assign({}, S.top1, { pad: '0' }), true);
+      // bot1 → active specs (expand)
+      applyState(elBot1, S.active, true);
+      // bot2 → bot1 specs
+      applyState(elBot2, S.bot1, true);
+      // elTop2 (now at bottom) → bot2 specs (appear from nothing)
+      applyState(elTop2, S.bot2, true);
+    });
+
+    // After animation: reassign roles
+    setTimeout(function() {
+      // Clean old active
+      elActive.classList.remove('sp-stack__card--active');
+      if (elActiveText.parentNode) elActiveText.parentNode.removeChild(elActiveText);
+
+      // Rotate references: top2 went to bottom, everything shifts up
+      var oldTop2 = elTop2;
+      elTop2 = elTop1;
+      elTop1 = elActive;
+      elActive = elBot1;
+      elActiveText = newSpan;
+      elBot1 = elBot2;
+      elBot2 = oldTop2;
+
+      pillStack.offsetHeight;
+
+      // Fade text in
+      elActiveText.style.transition = 'opacity 0.2s ease-in';
+      elActiveText.style.opacity = '1';
+
+      setTimeout(function() {
+        elActiveText.style.transition = '';
+        stackAnimating = false;
+      }, 220);
+    }, ANIM_DUR + 10);
+  }
+
+  var N = services.length;
+  var wheelEl = document.querySelector('.sp-services__wheel');
+  var CARD_H = wheelEl ? wheelEl.offsetHeight : 364;
+  var CENTER_Y = CARD_H / 2;
+
+  // Recalculate on resize
+  window.addEventListener('resize', function() {
+    if (wheelEl) {
+      CARD_H = wheelEl.offsetHeight;
+      CENTER_Y = CARD_H / 2;
+      render();
+    }
+  });
+
+  var R = 128;
+  var STEP_DEG = 12;
+  var DEG = Math.PI / 180;
+
+  var CX = 64 - R;
+  var CY = CENTER_Y;
+
+  var BLUR = [0, 1, 2, 3, 4, 5];
+
+  function getBlur(dist) {
+    var i = Math.min(Math.floor(dist), BLUR.length - 2);
+    var f = dist - i;
+    return BLUR[i] + (BLUR[i + 1] - BLUR[i]) * f;
+  }
+
+  var COPIES = 3;
+  var total = N * COPIES;
+  var els = [];
+
+  track.style.position = 'absolute';
+  track.style.inset = '0';
+
+  for (var c = 0; c < COPIES; c++) {
+    for (var i = 0; i < N; i++) {
+      var el = document.createElement('span');
+      el.className = 'sp-wheel__item';
+      el.textContent = services[i];
+      el.style.transformOrigin = 'left center';
+      el.dataset.serviceIdx = i;
+      track.appendChild(el);
+      els.push(el);
+    }
+  }
+
+  var currentIdx = 0;
+  var scrollAngle = 0;
+  var arrowNudge = 0;
+  var activeNudge = 0;
+  var hoveredEl = null;
+  var isAnimating = false;
+
+  function render() {
+    var activeSlot = N + currentIdx;
+
+    for (var i = 0; i < total; i++) {
+      var el = els[i];
+      var slotDiff = i - activeSlot;
+      var angleDeg = slotDiff * STEP_DEG - scrollAngle;
+      var angleRad = angleDeg * DEG;
+
+      var x = CX + R * Math.cos(angleRad);
+      var y = CY + R * Math.sin(angleRad);
+      var rot = angleDeg;
+
+      var dist = Math.abs(angleDeg) / STEP_DEG;
+      var nx = dist < 0.5 ? activeNudge : 0;
+
+      el.style.left = (x + nx).toFixed(1) + 'px';
+      el.style.top = (y - 12.8).toFixed(1) + 'px';
+      el.style.transform = 'rotate(' + rot.toFixed(2) + 'deg)';
+
+      var isActive = dist < 0.5;
+      var isHovered = el === hoveredEl && !isActive;
+
+      if (isActive) {
+        el.style.fontWeight = '600';
+        if (el !== sweepingEl) {
+          el.style.color = 'var(--text-body)';
+        }
+        el.style.opacity = '1';
+        el.style.filter = 'none';
+      } else if (isHovered) {
+        el.style.fontWeight = '400';
+        el.style.color = 'var(--neutral-850)';
+        el.style.opacity = '0.72';
+        el.style.filter = 'none';
+      } else {
+        el.style.fontWeight = '400';
+        el.style.color = 'var(--neutral-500)';
+        el.style.opacity = '0.4';
+        var blur = getBlur(dist);
+        el.style.filter = blur > 0.3 ? 'blur(' + blur.toFixed(1) + 'px)' : 'none';
+      }
+
+      el.style.visibility = Math.abs(angleDeg) > 70 ? 'hidden' : 'visible';
+      el.style.cursor = isActive ? 'default' : (Math.abs(angleDeg) < 50 ? 'pointer' : 'default');
+    }
+
+    if (arrow) {
+      // Squash-and-stretch tied to nudge: as the arrow pushes forward it
+      // elongates horizontally and thins vertically (tips pulled in), preserving
+      // visual volume — exaggerates the sense of motion.
+      var stretchAmt = Math.abs(arrowNudge) / 16; // normalize against max nudge
+      var sx = 1 + stretchAmt * 0.22;
+      var sy = 1 - stretchAmt * 0.16;
+      arrow.style.transform = 'translateY(-50%) translateX(' + arrowNudge.toFixed(1) + 'px) scale(' + sx.toFixed(3) + ', ' + sy.toFixed(3) + ')';
+    }
+  }
+
+  render();
+  updateDescription(currentIdx);
+
+  // --- Hover ---
+  wheelContainer.style.pointerEvents = 'auto';
+
+  track.addEventListener('mouseover', function(e) {
+    var target = e.target.closest('.sp-wheel__item');
+    if (target && target !== hoveredEl) {
+      hoveredEl = target;
+      render();
+    }
+  });
+
+  track.addEventListener('mouseout', function(e) {
+    if (hoveredEl) {
+      hoveredEl = null;
+      render();
+    }
+  });
+
+  // --- Click to scroll ---
+  track.addEventListener('click', function(e) {
+    if (dragging) return;
+    var target = e.target.closest('.sp-wheel__item');
+    if (!target || isAnimating) return;
+
+    var targetServiceIdx = parseInt(target.dataset.serviceIdx, 10);
+    if (targetServiceIdx === currentIdx) return;
+
+    scrollToService(targetServiceIdx);
+  });
+
+  function scrollToService(targetIdx) {
+    // Calculate shortest path (how many steps forward)
+    var diff = targetIdx - currentIdx;
+    // Normalize to shortest direction
+    if (diff > N / 2) diff -= N;
+    if (diff < -N / 2) diff += N;
+    if (diff === 0) return;
+
+    var steps = Math.abs(diff);
+    var direction = diff > 0 ? 1 : -1;
+    var totalDeg = steps * STEP_DEG * direction;
+
+    isAnimating = true;
+    var from = 0;
+    var to = totalDeg;
+    var start = performance.now();
+    // Duration scales with steps but caps out
+    var dur = Math.min(300 + steps * 150, 900);
+    var nudgeStarted = false;
+
+    function tick(now) {
+      var p = Math.min((now - start) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      scrollAngle = from + (to - from) * e;
+
+      if (!nudgeStarted && p > 0.95) {
+        nudgeStarted = true;
+        currentIdx = targetIdx;
+        scrollAngle = 0;
+        isAnimating = false;
+        resetTimer();
+        animateNudge();
+      }
+
+      render();
+      if (p < 1 && !nudgeStarted) {
+        requestAnimationFrame(tick);
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // --- Spring nudge ---
+  function springPushReturn(t) {
+    if (t < 0.2) {
+      var p = t / 0.2;
+      return p * p * (3 - 2 * p);
+    } else {
+      var p = (t - 0.2) / 0.8;
+      var decay = Math.exp(-5 * p);
+      var osc = Math.cos(p * Math.PI * 2.5);
+      return decay * osc;
+    }
+  }
+
+  var isNarrowMobile = window.matchMedia('(max-width: 553px)');
+  var INTERVAL_DEFAULT = 5250;
+  var SWEEP_DEFAULT = 4750;
+  var NARROW_OFFSET = 3750;
+
+  var INTERVAL = isNarrowMobile.matches ? INTERVAL_DEFAULT - NARROW_OFFSET : INTERVAL_DEFAULT;
+  var NUDGE_DUR = 700;
+  var SWEEP_DUR = INTERVAL - NUDGE_DUR;
+
+  var sweepingEl = null;
+  var sweepRAF = null;
+  var sweepElapsed = 0;
+  var sweepLastTime = 0;
+  var sweepDur = isNarrowMobile.matches ? SWEEP_DEFAULT - NARROW_OFFSET : SWEEP_DEFAULT;
+
+  isNarrowMobile.addEventListener('change', function(e) {
+    INTERVAL = e.matches ? INTERVAL_DEFAULT - NARROW_OFFSET : INTERVAL_DEFAULT;
+    SWEEP_DUR = INTERVAL - NUDGE_DUR;
+    sweepDur = e.matches ? SWEEP_DEFAULT - NARROW_OFFSET : SWEEP_DEFAULT;
+  });
+  var sweepPaused = false;
+
+  function triggerSweep() {
+    var activeSlot = N + currentIdx;
+    var el = els[activeSlot];
+    if (!el) return;
+
+    if (sweepingEl) clearSweep(sweepingEl);
+    sweepingEl = el;
+    sweepElapsed = 0;
+    sweepPaused = false;
+
+    el.style.backgroundImage = 'linear-gradient(90deg, var(--text-body) 0%, var(--text-body) 44%, var(--accent-300) 50%, var(--text-body) 56%, var(--text-body) 100%)';
+    el.style.backgroundSize = '200% auto';
+    el.style.webkitBackgroundClip = 'text';
+    el.style.backgroundClip = 'text';
+    el.style.webkitTextFillColor = 'transparent';
+    el.style.backgroundPosition = '100% center';
+
+    sweepLastTime = performance.now();
+    sweepTick();
+  }
+
+  function sweepTick() {
+    if (!sweepingEl) return;
+
+    var now = performance.now();
+    if (!sweepPaused) {
+      sweepElapsed += now - sweepLastTime;
+    }
+    sweepLastTime = now;
+
+    var p = Math.min(sweepElapsed / sweepDur, 1);
+    var pos = 100 - 100 * p;
+    sweepingEl.style.backgroundPosition = pos.toFixed(1) + '% center';
+
+    if (p < 1) {
+      sweepRAF = requestAnimationFrame(sweepTick);
+    } else {
+      clearSweep(sweepingEl);
+    }
+  }
+
+  function pauseSweep() {
+    sweepPaused = true;
+  }
+
+  function resumeSweep() {
+    if (!sweepingEl) return;
+    sweepPaused = false;
+    sweepLastTime = performance.now();
+  }
+
+  function clearSweep(el) {
+    if (sweepRAF) { cancelAnimationFrame(sweepRAF); sweepRAF = null; }
+    if (el) {
+      el.style.backgroundImage = '';
+      el.style.backgroundSize = '';
+      el.style.webkitBackgroundClip = '';
+      el.style.backgroundClip = '';
+      el.style.webkitTextFillColor = '';
+      el.style.backgroundPosition = '';
+    }
+    sweepingEl = null;
+  }
+
+  function animateNudge() {
+    var start = performance.now();
+    var distance = 16;
+    var arrowLead = 60;
+    var sweepTriggered = false;
+
+    function tick(now) {
+      var elapsed = now - start;
+
+      var arrowT = Math.min(elapsed / NUDGE_DUR, 1);
+      arrowNudge = distance * springPushReturn(arrowT);
+
+      var textElapsed = Math.max(0, elapsed - arrowLead);
+      var textT = Math.min(textElapsed / (NUDGE_DUR - arrowLead), 1);
+      activeNudge = distance * springPushReturn(textT);
+
+      // Trigger sweep + card switch at arrow peak (~120ms)
+      if (!sweepTriggered && elapsed >= 120) {
+        sweepTriggered = true;
+        updateDescription(currentIdx);
+        triggerSweep();
+      }
+
+      render();
+
+      if (elapsed < NUDGE_DUR) {
+        requestAnimationFrame(tick);
+      } else {
+        arrowNudge = 0;
+        activeNudge = 0;
+        render();
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // --- Auto-advance with pausable timer ---
+  var paused = false;
+  var offScreen = false;
+
+  // Expose global control for visibility observer
+  window.wheelSetPaused = function(val) {
+    offScreen = val;
+    if (val) pauseSweep();
+    else if (!paused) resumeSweep();
+  };
+  var timerElapsed = 0;
+  var timerLastTime = performance.now();
+  var timerRAF = null;
+
+  wheelContainer.addEventListener('mouseenter', function() {
+    paused = true;
+    pauseSweep();
+  });
+  wheelContainer.addEventListener('mouseleave', function() {
+    paused = false;
+    timerLastTime = performance.now();
+    hoveredEl = null;
+    resumeSweep();
+    render();
+  });
+
+  function advance() {
+    var from = 0;
+    var to = STEP_DEG;
+    var start = performance.now();
+    var dur = 600;
+    var nudgeStarted = false;
+    isAnimating = true;
+
+    function tick(now) {
+      var p = Math.min((now - start) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      scrollAngle = from + (to - from) * e;
+
+      if (!nudgeStarted && p > 0.95) {
+        nudgeStarted = true;
+        currentIdx = (currentIdx + 1) % N;
+        scrollAngle = 0;
+        isAnimating = false;
+        animateNudge();
+      }
+
+      render();
+      if (p < 1 && !nudgeStarted) {
+        requestAnimationFrame(tick);
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function timerTick() {
+    var now = performance.now();
+    if (!paused && !offScreen && !isAnimating) {
+      timerElapsed += now - timerLastTime;
+    }
+    timerLastTime = now;
+
+    if (timerElapsed >= INTERVAL) {
+      timerElapsed = 0;
+      advance();
+    }
+
+    timerRAF = requestAnimationFrame(timerTick);
+  }
+
+  // Reset timer when wheel changes (click, drag)
+  function resetTimer() {
+    timerElapsed = 0;
+    timerLastTime = performance.now();
+  }
+
+  timerTick();
+  triggerSweep();
+
+  // --- Drag to spin ---
+  var pointerDown = false;
+  var dragging = false;
+  var dragStartY = 0;
+  var dragVelocity = 0;
+  var lastDragY = 0;
+  var lastDragTime = 0;
+  var DRAG_THRESHOLD = 4;
+
+  function onPointerDown(y) {
+    if (isAnimating) return;
+    pointerDown = true;
+    dragging = false;
+    dragStartY = y;
+    lastDragY = y;
+    lastDragTime = performance.now();
+    dragVelocity = 0;
+  }
+
+  function onPointerMove(y) {
+    if (!pointerDown) return;
+
+    // Only enter drag mode after threshold
+    if (!dragging) {
+      if (Math.abs(y - dragStartY) < DRAG_THRESHOLD) return;
+      dragging = true;
+      if (sweepingEl) clearSweep(sweepingEl);
+    }
+
+    var now = performance.now();
+    var dt = now - lastDragTime;
+    if (dt > 0) dragVelocity = (y - lastDragY) / dt;
+    lastDragY = y;
+    lastDragTime = now;
+
+    var pxPerStep = R * Math.sin(STEP_DEG * DEG);
+    scrollAngle = -(y - dragStartY) / pxPerStep * STEP_DEG;
+    render();
+  }
+
+  function onPointerUp() {
+    if (!pointerDown) return;
+    pointerDown = false;
+
+    if (!dragging) return; // was a click, not a drag
+    dragging = false;
+
+    // Snap to nearest item based on current scroll position
+    var stepsOffset = Math.round(scrollAngle / STEP_DEG);
+    if (stepsOffset === 0) {
+      animateSnapBack();
+      return;
+    }
+
+    var targetIdx = ((currentIdx + stepsOffset) % N + N) % N;
+    // Commit immediately and animate the remainder
+    currentIdx = targetIdx;
+    scrollAngle = scrollAngle - stepsOffset * STEP_DEG; // leftover fractional offset
+
+    // Animate snap to exact position
+    var from = scrollAngle;
+    var start = performance.now();
+    var dur = 200;
+    isAnimating = true;
+
+    function tick(now) {
+      var p = Math.min((now - start) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      if (p < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        scrollAngle = 0;
+        isAnimating = false;
+        render();
+        resetTimer();
+        animateNudge();
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function animateSnapBack() {
+    var from = scrollAngle;
+    var start = performance.now();
+    var dur = 300;
+    isAnimating = true;
+
+    function tick(now) {
+      var p = Math.min((now - start) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      if (p < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        scrollAngle = 0;
+        isAnimating = false;
+        render();
+        triggerSweep();
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // Mouse events
+  wheelContainer.addEventListener('mousedown', function(e) {
+    e.preventDefault();
+    onPointerDown(e.clientY);
+  });
+  window.addEventListener('mousemove', function(e) {
+    if (pointerDown) { e.preventDefault(); onPointerMove(e.clientY); }
+  });
+  window.addEventListener('mouseup', function() { onPointerUp(); });
+
+  // Touch events
+  wheelContainer.addEventListener('touchstart', function(e) {
+    onPointerDown(e.touches[0].clientY);
+  }, { passive: true });
+  window.addEventListener('touchmove', function(e) {
+    if (pointerDown) onPointerMove(e.touches[0].clientY);
+  }, { passive: true });
+  window.addEventListener('touchend', function() { onPointerUp(); });
+
+  // Change cursor on wheel
+  wheelContainer.style.cursor = 'grab';
+  wheelContainer.addEventListener('mousedown', function() {
+    wheelContainer.style.cursor = 'grabbing';
+  });
+  window.addEventListener('mouseup', function() {
+    wheelContainer.style.cursor = 'grab';
+  });
+})();
