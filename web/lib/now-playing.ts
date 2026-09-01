@@ -4,6 +4,23 @@ export type PlaylistTrack = {
   artist: string;
 };
 
+export const DEFAULT_PLAYLIST_ID = "PLRz1AQjOKrFmEpurQigk029b53Y9t_Gaj";
+export const PLAYLIST_STORAGE_KEY = "site-playlist-id";
+
+export function parsePlaylistId(input: string): string | null {
+  const raw = input.trim();
+  if (!raw) return null;
+  try {
+    const url = new URL(raw);
+    const list = url.searchParams.get("list");
+    if (list && list !== "WL" && list !== "LL") return list;
+  } catch {
+    /* bare id */
+  }
+  if (/^(PL|OL|UU|FL|RD)[\w-]+$/.test(raw)) return raw;
+  return null;
+}
+
 /** YouTube Music playlist PLRz1AQjOKrFmEpurQigk029b53Y9t_Gaj */
 export const NOW_PLAYING = {
   tracks: [

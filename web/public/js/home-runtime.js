@@ -1,3 +1,4 @@
+(function () {
 // 0. Mobile header: hide on scroll down, show on scroll up
     (function() {
       var header = document.querySelector('.mobile-header');
@@ -1816,20 +1817,8 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
       }
     })();
 ;
-// Save scroll position when navigating to case studies
-    document.querySelectorAll('a[href$=".html"]').forEach(function(a) {
-      if (a.target === '_blank') return;
-      a.addEventListener('click', function() {
-        sessionStorage.setItem('homeScrollY', window.scrollY);
-      });
-    });
-    // Restore scroll position when returning from a case study
-    (function() {
-      var saved = sessionStorage.getItem('homeScrollY');
-      if (saved) {
-        window.scrollTo(0, parseInt(saved, 10));
-        sessionStorage.removeItem('homeScrollY');
-      }
-    })();
+// Scroll restore is handled by PathScroll / ClientNav.
 ;
 (function(){function r(){document.body.classList.add('fonts-ready')}if(document.fonts&&document.fonts.ready){document.fonts.ready.then(r)}else{setTimeout(r,500)}setTimeout(r,3000)})();
+
+})();

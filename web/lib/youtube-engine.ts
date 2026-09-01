@@ -1,4 +1,4 @@
-import { NOW_PLAYING } from "@/lib/now-playing";
+import { NOW_PLAYING, type PlaylistTrack } from "@/lib/now-playing";
 
 type YTPlayer = {
   playVideo: () => void;
@@ -39,9 +39,10 @@ export type PlayerSnap = {
   duration: number;
   ready: boolean;
   dismissed: boolean;
+  playlistRev: number;
 };
 
-const tracks = NOW_PLAYING.tracks;
+let tracks: PlaylistTrack[] = NOW_PLAYING.tracks;
 const listeners = new Set<(snap: PlayerSnap) => void>();
 
 let player: YTPlayer | null = null;
@@ -53,6 +54,7 @@ let snap: PlayerSnap = {
   duration: 0,
   ready: false,
   dismissed: true,
+  playlistRev: 0,
 };
 
 function emit() {
@@ -83,6 +85,19 @@ function loadYoutubeApi(): Promise<void> {
 
 export function getSnap() {
   return snap;
+}
+
+export function getTracks() {
+  return tracks;
+}
+
+export function setTracks(next: PlaylistTrack[]) {
+  if (!next.length) return;
+  tracks = next;
+  setSnap({ index: 0, currentTime: 0, duration: 0, playlistRev: snap.playlistRev + 1 });
+  if (!player) return;
+  if (snap.playing) player.loadVideoById(tracks[0].youtubeId);
+  else player.cueVideoById(tracks[0].youtubeId);
 }
 
 export function subscribe(fn: (snap: PlayerSnap) => void) {

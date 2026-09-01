@@ -1,14 +1,19 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, type ReactNode } from "react";
 
-function loadScript(src: string) {
+function isRuntimeSrc(src: string) {
+  return /\/(js\/home-runtime|js\/voiceflow-runtime|wheel|trees)\.js(\?|$)/.test(src);
+}
+
+function loadScript(src: string, force: boolean) {
   return new Promise<void>((resolve, reject) => {
-    const existing = document.querySelector<HTMLScriptElement>(`script[data-site-src="${src}"]`);
-    if (existing) {
+    const existing = document.querySelectorAll<HTMLScriptElement>(`script[data-site-src="${src}"]`);
+    if (!force && existing.length) {
       resolve();
       return;
     }
+    if (force) existing.forEach((el) => el.remove());
     const el = document.createElement("script");
     el.src = src;
     el.async = false;
@@ -16,6 +21,15 @@ function loadScript(src: string) {
     el.onload = () => resolve();
     el.onerror = () => reject(new Error(`Failed to load ${src}`));
     document.body.appendChild(el);
+  });
+}
+
+function activateReveals() {
+  document.querySelectorAll(".reveal-load").forEach((node) => {
+    node.classList.add("reveal-load--active");
+  });
+  document.querySelectorAll(".reveal-scroll").forEach((node) => {
+    node.classList.add("reveal-scroll--visible");
   });
 }
 
@@ -28,34 +42,41 @@ export function SiteRuntime({
   scripts: string[];
   extraCss?: string[];
 }) {
-  const started = useRef(false);
+  const scriptKey = scripts.join("|");
 
-  useEffect(() => {
-    extraCss?.forEach((href) => {
-      if (document.querySelector(`link[data-site-css="${href}"]`)) return;
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = href;
-      link.dataset.siteCss = href;
-      document.head.appendChild(link);
-    });
-  }, [extraCss]);
+  useLayoutEffect(() => {
+    activateReveals();
+  }, [scriptKey]);
 
   useEffect(() => {
     document.body.classList.add("fonts-ready");
-    if (started.current) return;
-    started.current = true;
     let cancelled = false;
-    (async () => {
-      for (const src of scripts) {
-        if (cancelled) return;
-        await loadScript(src);
-      }
-    })();
+    const timer = window.setTimeout(() => {
+      void (async () => {
+        for (const src of scripts) {
+          if (cancelled) return;
+          if (isRuntimeSrc(src)) continue;
+          await loadScript(src, false);
+        }
+        for (const src of scripts) {
+          if (cancelled) return;
+          if (!isRuntimeSrc(src)) continue;
+          await loadScript(src, true);
+        }
+      })();
+    }, 0);
     return () => {
       cancelled = true;
+      window.clearTimeout(timer);
     };
-  }, [scripts]);
+  }, [scriptKey, scripts]);
 
-  return <>{children}</>;
+  return (
+    <>
+      {extraCss?.map((href) => (
+        <link key={href} rel="stylesheet" href={href} />
+      ))}
+      {children}
+    </>
+  );
 }

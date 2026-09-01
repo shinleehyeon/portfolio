@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { saveHomeScroll } from "@/lib/home-scroll";
 import { isSiteUrl } from "@/lib/site-origin";
 import { close as engineClose } from "@/lib/youtube-engine";
 
@@ -28,7 +29,8 @@ export function ClientNav() {
       }
       if (url.pathname === window.location.pathname && url.hash) return;
       event.preventDefault();
-      router.push(`${url.pathname}${url.search}${url.hash}`);
+      if (url.pathname !== "/") saveHomeScroll();
+      router.push(`${url.pathname}${url.search}${url.hash}`, { scroll: false });
     };
 
     document.addEventListener("click", onClick, true);

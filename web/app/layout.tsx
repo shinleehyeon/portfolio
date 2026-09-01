@@ -26,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" href="/fonts/UCityProWeb-Semibold.woff2" as="font" type="font/woff2" crossOrigin="" />
         <link rel="preload" href="/fonts/UCityProWeb-Bold.woff2" as="font" type="font/woff2" crossOrigin="" />
         <link rel="stylesheet" href="/style.css" />
+        <link rel="stylesheet" href="/case-study.css" />
       </head>
       <body>
         <SitePlayer>{children}</SitePlayer>
