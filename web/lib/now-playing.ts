@@ -117,3 +117,8 @@ export function youtubeWatchUrl(id: string): string {
 export function youtubeThumb(id: string): string {
   return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 }
+
+/** 16:9 crop without hqdefault letterbox bars */
+export function youtubeThumbFill(id: string): string {
+  return `https://i.ytimg.com/vi/${id}/mqdefault.jpg`;
+}

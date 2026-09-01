@@ -852,7 +852,7 @@
         if (window.innerWidth >= 768) return;
         var link = card.querySelector('.case-study__btn');
         if (link && !e.target.closest('a')) {
-          window.location.href = link.href;
+          link.click();
         }
       });
     });

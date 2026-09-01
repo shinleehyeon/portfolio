@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SitePlayer } from "@/components/player/SitePlayer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -27,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="stylesheet" href="/style.css" />
       </head>
       <body>
-        {children}
+        <SitePlayer>{children}</SitePlayer>
         <script src="/js/dot-cursor.js" defer />
       </body>
     </html>
