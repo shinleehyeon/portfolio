@@ -117,6 +117,8 @@ export function ensureEngine() {
     const wrap = document.createElement("div");
     wrap.className = "mini-player__yt";
     wrap.setAttribute("aria-hidden", "true");
+    wrap.style.cssText =
+      "position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;clip:rect(0 0 0 0)";
     host = document.createElement("div");
     host.id = "yt-engine-host";
     wrap.appendChild(host);

@@ -1,0 +1,12 @@
+/* Hidden YouTube IFrame host — audio only */
+.mini-player__yt,
+.mini-player__yt iframe {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  opacity: 0;
+  pointer-events: none;
+  clip: rect(0 0 0 0);
+}
