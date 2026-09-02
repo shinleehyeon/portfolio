@@ -253,7 +253,7 @@ const AWARDS = [
     award: "창의재단이사장상 (2등)",
     rank: "2nd",
     project: "Fresio",
-    href: "/#projects",
+    href: "/fresio",
     image: "/images/work/fresio.png",
     gradient: "linear-gradient(135deg, #4DD9C0 0%, #2E8FA8 100%)",
     badgeColor: "#1F7A70",

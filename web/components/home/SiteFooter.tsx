@@ -51,6 +51,7 @@ export function SiteFooter() {
                 <h4 className="taped-footer__heading">Projects</h4>
                 <a href="/seoul-bike">Seoul Bike Accident</a>
                 <a href="/scholub">Scholub</a>
+                <a href="/fresio">Fresio</a>
                 <a href="/slop">SLOP</a>
                 <a href="/sipsiilban">십시일반</a>
                 <a href="/savequest">SaveQuest</a>

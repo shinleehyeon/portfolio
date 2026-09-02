@@ -1,16 +1,16 @@
 import type { CaseStudyCopy } from "@/lib/case-study/types";
 
 const PHONES = [
-  { src: "/images/savequest/home.jpg", alt: "SaveQuest home" },
-  { src: "/images/savequest/ranking.jpg", alt: "SaveQuest challenge and ranking" },
-  { src: "/images/savequest/shop.jpg", alt: "SaveQuest shop" },
+  { src: "/images/savequest/home.jpg", alt: "SaveQuest home", fit: "phone" as const },
+  { src: "/images/savequest/ranking.jpg", alt: "SaveQuest challenge and ranking", fit: "phone" as const },
+  { src: "/images/savequest/shop.jpg", alt: "SaveQuest shop", fit: "phone" as const },
 ];
 
 const GALLERY = [
-  { src: "/images/savequest/demo.mp4", alt: "SaveQuest demo", poster: "/images/savequest/home.jpg" },
+  { src: "/images/savequest/demo.mp4", alt: "SaveQuest demo", poster: "/images/savequest/home.jpg", fit: "phone" as const },
   ...PHONES,
-  { src: "/images/savequest/challenge.jpg", alt: "SaveQuest challenge states" },
-  { src: "/images/savequest/overview.jpg", alt: "SaveQuest service overview" },
+  { src: "/images/savequest/challenge.jpg", alt: "SaveQuest challenge states", fit: "web" as const },
+  { src: "/images/savequest/overview.jpg", alt: "SaveQuest service overview", fit: "web" as const },
 ];
 
 const NAV = {

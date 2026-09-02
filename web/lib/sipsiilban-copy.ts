@@ -1,12 +1,12 @@
 import type { CaseStudyCopy } from "@/lib/case-study/types";
 
 const GALLERY = [
-  { src: "/images/sipsiilban/verify.jpg", alt: "신원 인증" },
-  { src: "/images/sipsiilban/verify-confirm.jpg", alt: "촬영 확인" },
-  { src: "/images/sipsiilban/home.jpg", alt: "홈" },
-  { src: "/images/sipsiilban/map.jpg", alt: "지도" },
-  { src: "/images/sipsiilban/search.jpg", alt: "검색" },
-  { src: "/images/sipsiilban/qr.jpg", alt: "QR 결제" },
+  { src: "/images/sipsiilban/verify.jpg", alt: "신원 인증", fit: "phone" as const },
+  { src: "/images/sipsiilban/verify-confirm.jpg", alt: "촬영 확인", fit: "phone" as const },
+  { src: "/images/sipsiilban/home.jpg", alt: "홈", fit: "phone" as const },
+  { src: "/images/sipsiilban/map.jpg", alt: "지도", fit: "phone" as const },
+  { src: "/images/sipsiilban/search.jpg", alt: "검색", fit: "phone" as const },
+  { src: "/images/sipsiilban/qr.jpg", alt: "QR 결제", fit: "phone" as const },
 ];
 
 const NAV = {

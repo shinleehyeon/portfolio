@@ -2,7 +2,18 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export type CaseStudySlide = { src: string; alt: string; poster?: string };
+export type CaseStudyFit = "phone" | "web";
+
+export type CaseStudySlide = {
+  src: string;
+  alt: string;
+  poster?: string;
+  fit?: CaseStudyFit;
+};
+
+function slideFit(slide: CaseStudySlide | undefined, fallback: CaseStudyFit): CaseStudyFit {
+  return slide?.fit ?? fallback;
+}
 
 const RATES = [0.5, 0.75, 1] as const;
 
@@ -66,6 +77,7 @@ export function CaseStudyGallery({
   const [shown, setShown] = useState(slides[0].src);
   const transitioning = useRef(false);
   const pixelsRef = useRef<HTMLDivElement>(null);
+  const thumbsRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
   const [time, setTime] = useState(0);
@@ -82,6 +94,11 @@ export function CaseStudyGallery({
     const v = videoRef.current;
     if (v) v.playbackRate = rate;
   }, [rate, shown]);
+
+  useEffect(() => {
+    const active = thumbsRef.current?.querySelector<HTMLElement>(".cs-gallery__thumb--active");
+    active?.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+  }, [i]);
 
   const toggle = () => {
     const v = videoRef.current;
@@ -145,8 +162,11 @@ export function CaseStudyGallery({
     return { n, size, col, row };
   });
 
+  const defaultFit: CaseStudyFit = variant === "phone" ? "phone" : "web";
+  const fit = slideFit(slides[i], defaultFit);
+
   return (
-    <div className={`cs-gallery cs-gallery--fixed-frame cs-gallery--react${variant === "phone" ? " cs-gallery--phone" : ""}`}>
+    <div className={`cs-gallery cs-gallery--fixed-frame cs-gallery--react cs-gallery--fit-${fit}${variant === "phone" && fit === "phone" ? " cs-gallery--phone" : ""}`}>
       <div className="cs-gallery__main">
         {isVideo(shown) ? (
           <video
@@ -237,17 +257,21 @@ export function CaseStudyGallery({
         <button type="button" className="cs-gallery__nav cs-gallery__nav--prev" aria-label="Previous" onClick={() => goTo(i - 1)}>
           {PREV}
         </button>
-        <div className="cs-gallery__thumbs">
-          {slides.map((slide, idx) => (
+        <div className="cs-gallery__thumbs" ref={thumbsRef}>
+          {slides.map((slide, idx) => {
+            const thumb = slide.poster || (isVideo(slide.src) ? undefined : slide.src);
+            return (
             <button
               type="button"
               key={slide.src}
-              className={`cs-gallery__thumb${idx === i ? " cs-gallery__thumb--active" : ""}`}
+              className={`cs-gallery__thumb${slideFit(slide, defaultFit) === "phone" ? " cs-gallery__thumb--phone" : ""}${idx === i ? " cs-gallery__thumb--active" : ""}`}
               onClick={() => goTo(idx)}
             >
-              <img src={slide.poster || slide.src} alt="" />
+              {thumb ? <img src={thumb} alt="" /> : null}
+              {isVideo(slide.src) ? <span className="cs-gallery__thumb-play" aria-hidden /> : null}
             </button>
-          ))}
+            );
+          })}
         </div>
         <button type="button" className="cs-gallery__nav cs-gallery__nav--next" aria-label="Next" onClick={() => goTo(i + 1)}>
           {NEXT}

@@ -516,15 +516,23 @@
   height: auto;
 }
 
-.cs-gallery--phone .cs-gallery__main {
+.cs-gallery--phone .cs-gallery__main,
+.cs-gallery--fit-phone .cs-gallery__main {
   display: flex;
   align-items: center;
   justify-content: center;
   background: #f3eee9;
 }
 
+.cs-gallery--fixed-frame.cs-gallery--fit-phone .cs-gallery__main,
+.cs-gallery--phone .cs-gallery__main {
+  overflow: hidden;
+}
+
 .cs-gallery--phone .cs-gallery__main img,
-.cs-gallery--phone .cs-gallery__main video {
+.cs-gallery--phone .cs-gallery__main video,
+.cs-gallery--fixed-frame.cs-gallery--fit-phone .cs-gallery__main img,
+.cs-gallery--fixed-frame.cs-gallery--fit-phone .cs-gallery__main video {
   width: auto;
   height: 100%;
   max-width: 100%;
@@ -532,7 +540,8 @@
   object-fit: contain;
 }
 
-.cs-gallery--phone .cs-gallery__thumb {
+.cs-gallery--phone .cs-gallery__thumb,
+.cs-gallery__thumb--phone {
   width: 40px;
   height: 72px;
 }
@@ -544,10 +553,15 @@
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   padding-bottom: 2px;
-  justify-content: center;
+  justify-content: flex-start;
+  width: max-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cs-gallery__thumb {
+  position: relative;
   flex-shrink: 0;
   width: 80px;
   height: 48px;
@@ -573,6 +587,26 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.cs-gallery__thumb-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(24, 18, 18, 0.28);
+  pointer-events: none;
+}
+
+.cs-gallery__thumb-play::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 0 5px 8px;
+  border-color: transparent transparent transparent #fff;
+  margin-left: 1px;
 }
 
 /* Thumb row with nav arrows */
