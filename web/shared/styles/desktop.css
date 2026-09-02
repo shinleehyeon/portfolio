@@ -1,9 +1,5 @@
-/* Desktop / sidebar breakpoints */
-
-/* ---------- Desktop Breakpoint (1296px+) ---------- */
 @media (min-width: 1296px) {
 
-  /* Hide mobile header */
   .mobile-header {
     display: none;
   }
@@ -12,7 +8,6 @@
     display: none !important;
   }
 
-  /* Show sidebar */
   .sidebar {
     display: flex;
     flex-direction: column;
@@ -64,28 +59,24 @@
     gap: 12px;
   }
 
-  /* Content offset */
   .content {
     margin-left: var(--sidebar-width);
     padding: 0 40px 48px;
   }
 }
 
-/* ---------- Sidebar: narrower padding at <1328px ---------- */
 @media (min-width: 1296px) and (max-width: 1327px) {
   .content {
     padding: 0 24px 48px;
   }
 }
 
-/* ---------- Sidebar: narrower at <1400px ---------- */
 @media (min-width: 1296px) and (max-width: 1399px) {
   :root {
     --sidebar-width: 160px;
   }
 }
 
-/* ---------- Sidebar: compact at <1340px ---------- */
 @media (min-width: 1296px) and (max-width: 1339px) {
   :root {
     --sidebar-width: 148px;
@@ -95,14 +86,12 @@
   }
 }
 
-/* ---------- Content side padding when sidebar hidden but still desktop ---------- */
 @media (min-width: 1000px) and (max-width: 1295px) {
   .content {
     padding: 0 24px 48px;
   }
 }
 
-/* ---------- Services widget tighter at <1130px ---------- */
 @media (max-width: 1127px) {
   .publications__tools {
     padding-left: 0;

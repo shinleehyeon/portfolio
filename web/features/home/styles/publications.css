@@ -1,6 +1,3 @@
-/* Publications / highlights */
-
-/* ---------- Publications Section ---------- */
 .publications-section {
   padding-top: 116px;
   padding-bottom: 80px;
@@ -21,7 +18,6 @@
   gap: 40px;
 }
 
-/* Articles */
 .publications__articles {
   display: flex;
   flex-direction: column;
@@ -30,7 +26,6 @@
   min-width: 0;
 }
 
-/* Awards & Activity column */
 .publications__awards-column {
   display: flex;
   flex-direction: column;
@@ -93,7 +88,6 @@ a.award-row:hover .award-row__title {
   color: var(--neutral-600);
 }
 
-/* Mouse-following hover preview (matches devfiro.com's award hover card) */
 .award-preview {
   display: flex;
   position: absolute;
@@ -186,7 +180,6 @@ a.award-row:hover .award-row__title {
   }
 }
 
-/* Activity (ported from devfiro.com) */
 .activity {
   display: flex;
   flex-direction: column;
@@ -284,7 +277,6 @@ a.award-row:hover .award-row__title {
   }
 }
 
-/* CTA Banner (ported from webdorks.com bottom quote banner) */
 .cta-banner {
   padding-bottom: 0;
 }
@@ -439,7 +431,6 @@ a.award-row:hover .award-row__title {
   object-position: left top;
 }
 
-
 .pub-article__logo {
   position: absolute;
   width: 28px;
@@ -480,7 +471,6 @@ a.award-row:hover .award-row__title {
   margin: 0;
 }
 
-/* Tools */
 .publications__tools {
   display: flex;
   flex-direction: column;
@@ -589,7 +579,6 @@ a.award-row:hover .award-row__title {
   animation: logo-tilt 2s ease-in-out;
 }
 
-/* Publications mobile */
 @media (max-width: 999px) {
   .publications__content {
     flex-direction: column;
@@ -646,7 +635,6 @@ a.award-row:hover .award-row__title {
   }
 }
 
-/* No sidebar (<1296px) — keep desktop layout, just hide sidebar */
 @media (max-width: 1295px) {
   .content {
     margin-left: 0;
@@ -654,7 +642,6 @@ a.award-row:hover .award-row__title {
   }
 }
 
-/* Social proof mobile */
 @media (max-width: 999px) {
   .social-proof {
     flex-direction: column;
@@ -696,7 +683,6 @@ a.award-row:hover .award-row__title {
   }
 }
 
-/* Tablet: shift wheel right, center cards in remaining space */
 @media (min-width: 700px) and (max-width: 999px) {
   .sp-services__arrow {
     left: 62px;
@@ -713,8 +699,6 @@ a.award-row:hover .award-row__title {
   }
 }
 
-
-/* Very narrow mobile: hide cards, show only wheel */
 @media (max-width: 553px) {
   .sp-services__pill-stack {
     display: none;

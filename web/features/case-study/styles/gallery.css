@@ -1,6 +1,3 @@
-/* Gallery, lightbox, images */
-
-/* ---------- Image Gallery Carousel ---------- */
 .cs-gallery {
   position: relative;
 }
@@ -130,7 +127,6 @@
   margin-left: 1px;
 }
 
-/* Thumb row with nav arrows */
 .cs-gallery__thumb-row {
   display: flex;
   align-items: center;
@@ -143,7 +139,6 @@
   margin-top: 0;
 }
 
-/* Nav arrows */
 .cs-gallery__nav {
   width: 36px;
   height: 36px;
@@ -175,7 +170,6 @@
   opacity: 0.64;
 }
 
-/* Counter */
 .cs-gallery__counter {
   display: none;
 }
@@ -212,7 +206,6 @@
   }
 }
 
-/* ---------- Lightbox ---------- */
 .cs-lightbox {
   position: fixed;
   inset: 0;
@@ -295,12 +288,10 @@
 .cs-lightbox__nav--prev { left: 20px; }
 .cs-lightbox__nav--next { right: 20px; }
 
-/* Hide old gallery items (replaced by JS) */
 .cs-gallery__item {
   display: none;
 }
 
-/* ---------- Two Column (Objectives / Outcome) ---------- */
 .cs-two-col {
   display: flex;
   gap: 64px;
@@ -348,7 +339,6 @@
   color: var(--text);
 }
 
-/* ---------- Case Study Images ---------- */
 .cs-image {
   padding-top: 44px;
 }

@@ -1,6 +1,3 @@
-/* Signature draw, cat cursor */
-
-/* ---------- Signature Draw Animation ---------- */
 .signature-wrap {
   position: relative;
   width: 123px;
@@ -17,7 +14,6 @@
   transition: opacity 0.08s ease;
 }
 
-/* ---------- Cat Cursor Easter Egg ---------- */
 .cat-cursor {
   position: fixed;
   pointer-events: none;
@@ -32,7 +28,6 @@
   display: block;
 }
 
-/* The blob canvas is the background "ink blot" */
 .cat-cursor .blob-canvas {
   position: absolute;
   top: 0;
@@ -41,7 +36,6 @@
   height: 100%;
 }
 
-/* Cat sits on top of the blob */
 .cat-cursor .cat {
   position: absolute;
   bottom: 15%;
@@ -57,7 +51,6 @@
 .cat-cursor--cat-visible .cat {
   opacity: 1;
 }
-
 
 .cat-cursor .ear {
   position: absolute;

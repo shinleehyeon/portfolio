@@ -1,6 +1,3 @@
-/* Taped footer and footer responsive */
-
-/* ---------- Taped Footer (21st.dev Footer Taped Design) ---------- */
 .page-home .content {
   padding-bottom: 0;
 }
@@ -79,6 +76,8 @@
   font-weight: 500;
   line-height: 1.45;
   color: rgba(43, 37, 37, 0.5);
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .footer-pompom {
@@ -229,7 +228,6 @@
   }
 }
 
-/* ---------- About / Footer Responsive ---------- */
 @media (max-width: 1110px) {
   .about__body {
     gap: 16px;

@@ -3,7 +3,7 @@ import "@/features/case-study/styles/index.css";
 export function VoiceflowPage() {
   return (
     <>
-      {/* Mobile Header */}
+
         <header className="mobile-header">
           <a href="/" className="mobile-logo cs-back-mobile reveal-load" data-reveal-delay="60"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path fillRule="evenodd" clipRule="evenodd" d="M18.25 11C18.6642 11 19 11.3358 19 11.75C19 12.1642 18.6642 12.5 18.25 12.5L7.35127 12.5L10.8262 16.2698C11.0913 16.5881 11.0483 17.061 10.7301 17.3261C10.4119 17.5913 9.939 17.5483 9.67383 17.2301L5.17383 12.2301C4.94205 11.952 4.94205 11.548 5.17383 11.2698L9.67383 6.26984C9.939 5.95163 10.4119 5.90864 10.7301 6.17382C11.0483 6.43899 11.0913 6.91191 10.8262 7.23012L7.35129 11L18.25 11Z" fill="currentColor" /></svg> Back</a>
           <nav className="mobile-header__nav">
@@ -22,7 +22,6 @@ export function VoiceflowPage() {
           </button>
         </header>
 
-        {/* Mobile Menu */}
         <div className="mobile-menu" aria-hidden="true">
           <a href="/#hero" className="mobile-menu-link">Hero</a>
           <a href="/#about" className="mobile-menu-link">About</a>
@@ -35,7 +34,6 @@ export function VoiceflowPage() {
           </div>
         </div>
 
-        {/* Sidebar */}
         <aside className="sidebar cs-sidebar reveal-load">
           <div className="sidebar-top">
             <a href="/" className="cs-back reveal-load" data-reveal-delay="60"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path fillRule="evenodd" clipRule="evenodd" d="M18.25 11C18.6642 11 19 11.3358 19 11.75C19 12.1642 18.6642 12.5 18.25 12.5L7.35127 12.5L10.8262 16.2698C11.0913 16.5881 11.0483 17.061 10.7301 17.3261C10.4119 17.5913 9.939 17.5483 9.67383 17.2301L5.17383 12.2301C4.94205 11.952 4.94205 11.548 5.17383 11.2698L9.67383 6.26984C9.939 5.95163 10.4119 5.90864 10.7301 6.17382C11.0483 6.43899 11.0913 6.91191 10.8262 7.23012L7.35129 11L18.25 11Z" fill="currentColor" /></svg> Back</a>
@@ -59,7 +57,6 @@ export function VoiceflowPage() {
           </div>
         </aside>
 
-        {/* Summary panel (fixed overlay) */}
         <div className="cs-summarize__panel" id="summarizePanel">
           <div className="cs-summarize__panel-inner">
             <button className="cs-summarize__panel-close" id="summarizePanelClose">&times;</button>
@@ -69,10 +66,8 @@ export function VoiceflowPage() {
           </div>
         </div>
 
-        {/* Main Content */}
         <main className="content">
 
-          {/* Hero / Overview */}
           <section id="overview" className="section cs-hero">
             <div className="centered">
               <h1 className="cs-hero__title cs-hero__title--logo reveal-load" data-reveal-delay="100">
@@ -96,7 +91,6 @@ export function VoiceflowPage() {
             </div>
           </section>
 
-          {/* Hero image */}
           <section className="cs-image cs-image--wide">
             <div className="centered">
               <div className="cs-image__wrap reveal-load" data-reveal-delay="300">
@@ -105,7 +99,6 @@ export function VoiceflowPage() {
             </div>
           </section>
 
-          {/* Focus */}
           <section className="cs-section">
             <div className="centered">
               <h2 className="cs-heading shiny-hover">Focus</h2>
@@ -136,7 +129,6 @@ export function VoiceflowPage() {
             </div>
           </section>
 
-          {/* Process */}
           <section className="cs-section">
             <div className="centered">
               <h2 className="cs-heading shiny-hover">Scope</h2>
@@ -188,7 +180,6 @@ export function VoiceflowPage() {
             </div>
           </section>
 
-          {/* Product Research */}
           <section id="research" className="cs-section">
             <div className="centered">
               <h2 className="cs-heading shiny-hover">Product research</h2>
@@ -225,14 +216,12 @@ export function VoiceflowPage() {
             </div>
           </section>
 
-          {/* Research mind map */}
           <section className="cs-image cs-image--wide">
             <div className="centered">
               <div className="cs-diagram cs-tree" id="researchTree"></div>
             </div>
           </section>
 
-          {/* User Research */}
           <section className="cs-section">
             <div className="centered">
               <h2 className="cs-heading shiny-hover">User research</h2>
@@ -248,7 +237,6 @@ export function VoiceflowPage() {
             </div>
           </section>
 
-          {/* Building Blocks */}
           <section id="building-blocks" className="cs-section">
             <div className="centered">
               <h2 className="cs-heading shiny-hover">Rethinking conversation building blocks</h2>
@@ -259,14 +247,12 @@ export function VoiceflowPage() {
             </div>
           </section>
 
-          {/* Building blocks diagram */}
           <section className="cs-image cs-image--wide">
             <div className="centered">
               <div className="cs-diagram cs-tree" id="blocksTree"></div>
             </div>
           </section>
 
-          {/* Conversation structure gallery */}
           <section className="cs-image cs-image--gallery">
             <div className="centered">
               <div className="cs-gallery">
@@ -279,7 +265,6 @@ export function VoiceflowPage() {
             </div>
           </section>
 
-          {/* Message */}
           <section id="message" className="cs-section">
             <div className="centered">
               <h2 className="cs-heading shiny-hover">Message</h2>
@@ -290,14 +275,12 @@ export function VoiceflowPage() {
             </div>
           </section>
 
-          {/* Message map diagram */}
           <section className="cs-image cs-image--wide">
             <div className="centered">
               <div className="cs-diagram cs-tree" id="messageTree"></div>
             </div>
           </section>
 
-          {/* Attachments */}
           <section className="cs-section">
             <div className="centered">
               <h2 className="cs-heading shiny-hover">Attachments</h2>
@@ -319,7 +302,6 @@ export function VoiceflowPage() {
             </div>
           </section>
 
-          {/* Voice Effects */}
           <section id="voice" className="cs-section">
             <div className="centered">
               <h2 className="cs-heading shiny-hover">Voice effects</h2>
@@ -354,7 +336,6 @@ export function VoiceflowPage() {
             </div>
           </section>
 
-          {/* Variables and Conditions */}
           <section id="variables" className="cs-section">
             <div className="centered">
               <h2 className="cs-heading shiny-hover">Variables and conditions</h2>
@@ -389,7 +370,6 @@ export function VoiceflowPage() {
             </div>
           </section>
 
-          {/* Actions */}
           <section id="actions" className="cs-section">
             <div className="centered">
               <h2 className="cs-heading shiny-hover">Actions</h2>
@@ -417,7 +397,6 @@ export function VoiceflowPage() {
             </div>
           </section>
 
-          {/* User Input */}
           <section id="input" className="cs-section">
             <div className="centered">
               <h2 className="cs-heading shiny-hover">User input</h2>
@@ -448,7 +427,6 @@ export function VoiceflowPage() {
             </div>
           </section>
 
-          {/* Centralized Model Management */}
           <section id="model" className="cs-section">
             <div className="centered">
               <h2 className="cs-heading shiny-hover">Centralized model management</h2>
@@ -479,7 +457,6 @@ export function VoiceflowPage() {
             </div>
           </section>
 
-          {/* Outcome */}
           <section id="outcome" className="cs-section">
             <div className="centered">
               <h2 className="cs-heading shiny-hover">Outcome</h2>
@@ -511,7 +488,6 @@ export function VoiceflowPage() {
             </div>
           </section>
 
-          {/* Footer */}
           <footer className="site-footer">
             <div className="centered">
               <div className="footer__inner">

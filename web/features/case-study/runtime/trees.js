@@ -1,4 +1,3 @@
-/* trees.js — D3.js interactive diagrams */
 (function() {
   'use strict';
 
@@ -31,7 +30,6 @@
     }, { threshold: 0.1 }).observe(el);
   }
 
-  // Word-wrap helper: splits text into lines that fit within maxWidth at given fontSize
   function wrapText(text, maxWidth, fontSize) {
     var charW = fontSize * 0.58;
     var maxChars = Math.floor(maxWidth / charW);
@@ -53,22 +51,12 @@
     return lines;
   }
 
-  // =========================================================
-  // ZOOMABLE TREEMAP — for diagram 1 (research mind map)
-  // =========================================================
-  // =========================================================
-  // GRID TREEMAP — HTML grid with D3 drill-down
-  // =========================================================
   function createTreemap(containerId, data) {
     var el = document.getElementById(containerId);
     if (!el) return;
 
     if (data.children) data.children.forEach(function(c, i) { assignColors(c, i); });
 
-    // Grid layout: 3 columns, branches placed manually
-    // Row 1: Why rethink? | Advanced features | Stakeholder needs
-    // Row 2: Not working well | (continues) | Technical restrictions
-    // Row 3: Users like | Missing features (tall) | Timeline + Speed to testing
     var grid = document.createElement('div');
     grid.className = 'ct-grid';
     el.appendChild(grid);
@@ -82,7 +70,6 @@
     var branches = {};
     if (data.children) data.children.forEach(function(c) { branches[c.label] = c; });
 
-    // Separate branches with children from leaf-only
     var withKids = [];
     var leafOnly = [];
     order.forEach(function(label, idx) {
@@ -94,12 +81,10 @@
       }
     });
 
-    // Render branches with children first
     withKids.forEach(function(item) {
       grid.appendChild(makeCell(item.label, item.branch.children, item.idx, true));
     });
 
-    // Render leaf-only items in a compact row
     if (leafOnly.length) {
       var leafRow = document.createElement('div');
       leafRow.className = 'ct-leaf-row';
@@ -170,7 +155,6 @@
       return cell;
     }
 
-    // Scroll reveal
     scrollReveal(el);
   }
 
@@ -186,12 +170,11 @@
     var headerH = 38;
     var pad = 6;
 
-    // Custom leaf weight per branch to control cell widths
     var narrowBranches = ['Missing features', 'Users like'];
     var wideBranches = ['Not working well', 'Advanced features', 'Technical restrictions', 'Timeline', 'Speed to testing'];
 
     function leafWeight(d) {
-      // Walk up to find the depth-1 ancestor
+
       var node = d;
       while (node.parent && node.parent.parent) node = node.parent;
       var branchLabel = node.label || '';
@@ -200,14 +183,12 @@
       return 3;
     }
 
-    // Tag each leaf with its branch name before hierarchy
     function tagBranch(d, branch) {
       d._branch = branch || d.label;
       if (d.children) d.children.forEach(function(c) { tagBranch(c, d._branch === 'Design Re-work' ? c.label : d._branch); });
     }
     tagBranch(data, null);
 
-    // Leaf weight per branch — controls cell width
     var branchTotals = {
       'Missing features': 1,
       'Users like': 1,
@@ -223,20 +204,18 @@
     var root = d3.hierarchy(data)
       .sum(function(d) { return d.children ? 0 : 1; });
 
-    // Override depth-1 branch values with fixed totals
     if (root.children) {
       root.children.forEach(function(c) {
         var t = branchTotals[c.data.label];
         if (t !== undefined) c.value = t;
       });
-      // Recalculate root value
+
       root.value = 0;
       root.children.forEach(function(c) { root.value += c.value; });
     }
 
     root.sort(function(a, b) { return b.value - a.value; });
 
-    // Debug: log values
     console.log('[treemap] Branch values:');
     root.children.forEach(function(c) { console.log('  ' + c.data.label + ': ' + c.value); });
 
@@ -256,7 +235,6 @@
       .style('display', 'block')
       .style('margin', '0 auto');
 
-    // Hand-drawn filter
     var defs = svg.append('defs');
     var filter = defs.append('filter').attr('id', 'sketchy-' + containerId);
     filter.append('feTurbulence')
@@ -284,10 +262,8 @@
     function render(focus) {
       var nodes = focus.children || [];
 
-      // Clear
       group.selectAll('*').remove();
 
-      // Background
       if (focus !== root) {
         group.append('rect')
           .attr('x', 0).attr('y', 0)
@@ -300,7 +276,6 @@
             render(currentFocus);
           });
 
-        // Back button
         group.append('text')
           .attr('x', 14).attr('y', 20)
           .attr('font-size', '14px')
@@ -314,16 +289,14 @@
           });
       }
 
-      // Recompute treemap layout using the focus node directly
       var layoutNode = focus;
 
-      // For zoomed-in views, rebuild with overrides
       if (focus !== root) {
         layoutNode = d3.hierarchy(focus.data)
           .sum(function(d) { return d.children ? 0 : 1; })
           .sort(function(a, b) { return b.value - a.value; });
       } else {
-        // Root — use the overridden values
+
         layoutNode = root;
       }
 
@@ -349,7 +322,6 @@
           .attr('transform', 'translate(' + cell.x0 + ',' + (cell.y0 + yOff) + ')')
           .style('cursor', hasKids ? 'pointer' : 'default');
 
-        // Cell rect — hand-drawn style
         g.append('rect')
           .attr('width', cellW)
           .attr('height', cellH)
@@ -362,7 +334,6 @@
           .on('mouseenter', function() { d3.select(this).attr('stroke-width', 2); })
           .on('mouseleave', function() { d3.select(this).attr('stroke-width', 1.2); });
 
-        // Header label — wrapped
         var headerFont = 17;
         var headerLineH = headerFont + 6;
         var headerLines = wrapText(cell.data.label, cellW - 28, headerFont);
@@ -377,7 +348,6 @@
         });
         var headerUsed = headerLines.length * headerLineH + 12;
 
-        // Count badge
         if (hasKids) {
           g.append('text')
             .attr('x', cellW - 14)
@@ -388,7 +358,6 @@
             .text(cell.children.length);
         }
 
-        // Child labels inside cell — wrapped
         if (cell.children) {
           var childFont = 17;
           var lineH = childFont + 6;
@@ -421,10 +390,9 @@
           }
         }
 
-        // Click to zoom
         if (hasKids) {
           g.on('click', function() {
-            // Find matching node in original hierarchy
+
             var target = findNode(root, cell.data.label);
             if (target) {
               currentFocus = target;
@@ -447,9 +415,6 @@
     }
   }
 
-  // =========================================================
-  // HORIZONTAL TREE — for diagrams 2 & 3
-  // =========================================================
   function createTree(containerId, data, opts) {
     var el = document.getElementById(containerId);
     if (!el) return;
@@ -505,7 +470,6 @@
       svg.transition().duration(duration).attr('height', h);
       g.transition().duration(duration).attr('transform', 'translate(40,' + (-minY + nodeH + 10) + ')');
 
-      // NODES
       var node = g.selectAll('g.ct-node').data(nodes, function(d) { return d.id || (d.id = ++i); });
 
       var nodeEnter = node.enter().append('g')
@@ -584,7 +548,6 @@
         .attr('transform', function() { return 'translate(' + source.y + ',' + source.x + ')'; })
         .style('opacity', 0).remove();
 
-      // LINKS
       var link = g.selectAll('path.ct-link').data(links, function(d) { return d.target.id; });
 
       link.enter().insert('path', 'g')
@@ -627,7 +590,6 @@
     }
   }
 
-  // === DATA ===
   var D1 = { label: 'Design Re-work', children: [
     { label: 'Why rethink?', children: [
       { label: 'Wider use cases' },

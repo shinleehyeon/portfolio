@@ -1,5 +1,5 @@
 (function () {
-// 0. Mobile header: hide on scroll down, show on scroll up
+
     (function() {
       var header = document.querySelector('.mobile-header');
       if (!header) return;
@@ -18,7 +18,6 @@
       }, { passive: true });
     })();
 
-    // 1. Scroll-based active nav highlighting
     const sections = document.querySelectorAll('.section[id]');
     const navLinks = document.querySelectorAll('.nav-link[data-section], .top-nav__link[data-section]');
     const mobileNavLinks = document.querySelectorAll('.mobile-header__link[data-section]');
@@ -27,8 +26,6 @@
       var scrollY = window.scrollY + window.innerHeight * 0.3;
       var active = null;
 
-      // Find the last section whose top is above the scroll threshold
-      // Reverse order so deeper/later sections take priority
       sections.forEach(function(section) {
         if (section.offsetTop <= scrollY) {
           active = section.id;
@@ -44,12 +41,11 @@
     window.addEventListener('scroll', updateActiveNav, { passive: true });
     updateActiveNav();
 
-    // Globe spin on hover over location line + on page load
     var globeSvg = document.querySelector('.globe-svg');
     var locationLine = document.querySelector('.hero-bio--location');
     if (globeSvg && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       function spinGlobe() {
-        // Clone each meridian to force animation restart
+
         var meridians = globeSvg.querySelectorAll('.globe-meridian');
         meridians.forEach(function(m) {
           var clone = m.cloneNode(true);
@@ -57,19 +53,14 @@
         });
         globeSvg.classList.add('globe-spinning');
       }
-      // On page load
+
       setTimeout(spinGlobe, 600);
-      // On hover
+
       if (locationLine) {
         locationLine.addEventListener('mouseenter', spinGlobe);
       }
     }
 
-    // Per-letter rotation on "Berlin. Available remotely." tracks the cursor:
-    //  - Rotation magnitude peaks at 90° when the cursor is exactly over the
-    //    letter's center and falls off with distance.
-    //  - Rotation direction follows cursor movement direction (left/right).
-    //  - Letters ease back to 0° when the cursor stops or moves away.
     if (locationLine && window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       var textSpan = locationLine.querySelector('span:not(.globe-wrap)');
       if (textSpan && !textSpan.dataset.flipInit) {
@@ -87,9 +78,8 @@
         }
 
         var chars = textSpan.querySelectorAll('.flip-char:not(.flip-char--space)');
-        var INFLUENCE_RADIUS = 34; // px — how far the cursor influences a letter
+        var INFLUENCE_RADIUS = 34;
 
-        // Cache each letter's center + a quickTo setter for responsive tweens
         var letterData = Array.prototype.map.call(chars, function(el) {
           var r = el.getBoundingClientRect();
           return {
@@ -111,15 +101,14 @@
         window.addEventListener('resize', updatePositions);
 
         var lastX = 0, lastT = 0;
-        var lastDir = 1; // persisted movement direction — preserved when cursor stops
+        var lastDir = 1;
 
         document.addEventListener('pointermove', function(e) {
           var now = performance.now();
           var dt = Math.max(1, now - lastT);
-          var vx = (e.clientX - lastX) / dt; // px per ms — signed horizontal velocity
+          var vx = (e.clientX - lastX) / dt;
           var instantDir = Math.max(-1, Math.min(1, vx * 3));
-          // Only update direction when velocity is meaningful — so a held cursor
-          // keeps the last known direction instead of snapping back to 0.
+
           if (Math.abs(instantDir) > 0.3) {
             lastDir = instantDir;
           }
@@ -137,7 +126,6 @@
       }
     }
 
-    // 2. Mobile menu toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const mobileMenu = document.querySelector('.mobile-menu');
     const mobileLinks = document.querySelectorAll('.mobile-menu-link');
@@ -158,7 +146,6 @@
       });
     });
 
-    // 4. Signature draw animation on hover — virtual pen approach
     (function() {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -171,7 +158,6 @@
       var animFrame = 0;
       var svgEl = null;
 
-      // Parse all x,y coordinates from a path d attribute to get bounding box
       function getPathBounds(d) {
         var xs = [], ys = [];
         var parts = d.match(/[MLCQSTAZHVmlcqstahvz][^MLCQSTAZHVmlcqstahvz]*/g) || [];
@@ -196,7 +182,6 @@
         return { minX: minX, maxX: maxX, centerX: (minX + maxX) / 2, midY: (minY + maxY) / 2 };
       }
 
-      // Load and parse the SVG
       fetch('images/signature.svg')
         .then(function(r) { return r.text(); })
         .then(function(svgText) {
@@ -217,14 +202,12 @@
             var bounds = getPathBounds(p.getAttribute('d') || '');
             if (bounds) {
               var item = { el: p, centerX: bounds.centerX, maxX: bounds.maxX };
-              // "Gregory" is on the top line: midY < 24 AND centerX <= 70
-              // Everything else (including ascenders of bottom-line letters) is bottom
+
               if (bounds.midY < 24 && bounds.centerX <= 70) top.push(item);
               else bot.push(item);
             }
           });
 
-          // Store paths with their centerX for the pen-based reveal
           topPaths = top;
           botPaths = bot;
 
@@ -247,30 +230,25 @@
         sigImg.style.display = 'none';
         svgEl.style.display = 'block';
 
-        // Hide all paths
         topPaths.forEach(function(p) { p.el.style.opacity = '0'; });
         botPaths.forEach(function(p) { p.el.style.opacity = '0'; });
 
-        // Virtual pen settings
-        var topDuration = 1800;  // ms for top line "Gregory"
-        var botDuration = 2200;  // ms for bottom line "Muryn-Mukha" (longer word)
-        var pauseBetween = 200;  // pause between lines
+        var topDuration = 1800;
+        var botDuration = 2200;
+        var pauseBetween = 200;
         var totalDuration = topDuration + pauseBetween + botDuration;
         var startTime = null;
 
-        // The pen position at time t determines which paths are visible
-        // A path becomes visible when the pen passes its centerX
-        // We add a small "ink spread" margin so nearby paths appear together
-        var inkSpread = 3; // px ahead of pen that also gets revealed
+        var inkSpread = 3;
 
         function tick(timestamp) {
           if (!startTime) startTime = timestamp;
           var elapsed = timestamp - startTime;
 
           if (elapsed < topDuration) {
-            // Drawing top line: pen moves from x=0 to x=123
+
             var progress = elapsed / topDuration;
-            // Ease: slow start, steady middle, slow end
+
             var eased = progress < 0.1 ? progress * 5 * progress :
                         progress > 0.9 ? 1 - (1 - progress) * 5 * (1 - progress) :
                         progress;
@@ -281,10 +259,10 @@
               }
             });
           } else if (elapsed < topDuration + pauseBetween) {
-            // Pause between lines — all top visible, bottom still hidden
+
             topPaths.forEach(function(p) { p.el.style.opacity = '1'; });
           } else if (elapsed < totalDuration) {
-            // Drawing bottom line
+
             topPaths.forEach(function(p) { p.el.style.opacity = '1'; });
             var botElapsed = elapsed - topDuration - pauseBetween;
             var progress = botElapsed / botDuration;
@@ -298,7 +276,7 @@
               }
             });
           } else {
-            // Done — ensure everything is visible
+
             topPaths.forEach(function(p) { p.el.style.opacity = '1'; });
             botPaths.forEach(function(p) { p.el.style.opacity = '1'; });
             animating = false;
@@ -311,8 +289,6 @@
         animFrame = requestAnimationFrame(tick);
       });
 
-      // --- Cat Face Cursor Easter Egg ---
-      // Pre-create the cursor element on page load (hidden)
       var catCursorEl = document.createElement('div');
       catCursorEl.className = 'cat-cursor';
       catCursorEl.innerHTML = '<canvas class="blob-canvas" width="192" height="192"></canvas><div class="cat"><div class="ear ear--left"></div><div class="ear ear--right"></div><div class="face"><div class="eye eye--left"><div class="eye-pupil"></div></div><div class="eye eye--right"><div class="eye-pupil"></div></div><div class="muzzle"></div></div></div>';
@@ -327,10 +303,9 @@
         catCursorEl.style.top = e.clientY + 'px';
       }
 
-      // Track mouse position always so cursor appears at the right spot instantly
       document.addEventListener('mousemove', moveCatCursor);
 
-      var catTriggerEl = null; // tracks which element triggered the cat
+      var catTriggerEl = null;
 
       function showCatCursor(triggerEl) {
         if (catActive) return;
@@ -345,17 +320,16 @@
         catCursorEl.classList.remove('cat-cursor--cat-visible');
         catCursorEl.classList.add('cat-cursor--visible');
 
-        // Helper: draw a rough brush stroke (jagged ellipse with uneven edges)
         function drawBrushStroke(ctx, cx, cy, rx, ry, rot) {
           ctx.save();
           ctx.translate(cx, cy);
           ctx.rotate(rot);
           ctx.beginPath();
-          // Jagged ellipse: vary the radius at each point for rough brush edges
+
           var steps = 24;
           for (var j = 0; j <= steps; j++) {
             var a = (j / steps) * Math.PI * 2;
-            var jitter = 0.75 + Math.random() * 0.5; // 0.75-1.25 variance
+            var jitter = 0.75 + Math.random() * 0.5;
             var x = Math.cos(a) * rx * jitter;
             var y = Math.sin(a) * ry * jitter;
             if (j === 0) ctx.moveTo(x, y);
@@ -366,10 +340,8 @@
           ctx.restore();
         }
 
-        // Generate brush strokes that build up a blob/ink blot shape
         var strokes = [];
 
-        // Phase 1: big sweeping brush strokes (core mass)
         for (var i = 0; i < 5; i++) {
           var angle = Math.random() * Math.PI * 2;
           var dist = Math.random() * 12;
@@ -383,16 +355,15 @@
           });
         }
 
-        // Phase 2: medium strokes extending outward (especially upward for ears)
         var directions = [
-          { a: -Math.PI * 0.6, d: 30 }, // upper-left (left ear)
-          { a: -Math.PI * 0.4, d: 30 }, // upper-right (right ear)
-          { a: -Math.PI * 0.5, d: 20 }, // top center
-          { a: 0, d: 25 },              // right
-          { a: Math.PI, d: 25 },         // left
-          { a: Math.PI * 0.5, d: 15 },   // bottom
-          { a: Math.PI * 0.7, d: 20 },   // bottom-left
-          { a: -Math.PI * 0.2, d: 25 },  // right-upper
+          { a: -Math.PI * 0.6, d: 30 },
+          { a: -Math.PI * 0.4, d: 30 },
+          { a: -Math.PI * 0.5, d: 20 },
+          { a: 0, d: 25 },
+          { a: Math.PI, d: 25 },
+          { a: Math.PI * 0.5, d: 15 },
+          { a: Math.PI * 0.7, d: 20 },
+          { a: -Math.PI * 0.2, d: 25 },
         ];
         for (var i = 0; i < directions.length; i++) {
           var dir = directions[i];
@@ -406,7 +377,6 @@
           });
         }
 
-        // Phase 3: ragged edge splatters (torn brush edges)
         for (var i = 0; i < 14; i++) {
           var angle = Math.random() * Math.PI * 2;
           var dist = 38 + Math.random() * 28;
@@ -420,7 +390,6 @@
           });
         }
 
-        // Phase 4: tiny ink specks / spray
         for (var i = 0; i < 16; i++) {
           var angle = Math.random() * Math.PI * 2;
           var dist = 45 + Math.random() * 40;
@@ -438,9 +407,9 @@
 
         var strokeIndex = 0;
         var revealStart = null;
-        var strokeInterval = 30; // ms between brush strokes
+        var strokeInterval = 30;
         var totalDuration = numStrokes * strokeInterval;
-        var catShowTime = totalDuration * 0.7; // cat appears at 70%
+        var catShowTime = totalDuration * 0.7;
         var catShown = false;
 
         function drawBlob(ts) {
@@ -449,14 +418,13 @@
           var elapsed = ts - revealStart;
           var targetIndex = Math.min(Math.floor(elapsed / strokeInterval), strokes.length);
 
-          // Paint new brush strokes
           ctx.fillStyle = '#161616';
           while (strokeIndex < targetIndex) {
             var s = strokes[strokeIndex];
             if (s.type === 'brush') {
               drawBrushStroke(ctx, s.cx, s.cy, s.rx, s.ry, s.rot);
             } else {
-              // Dot/speck — simple circle
+
               ctx.beginPath();
               ctx.arc(s.cx, s.cy, s.rx, 0, Math.PI * 2);
               ctx.fill();
@@ -464,7 +432,6 @@
             strokeIndex++;
           }
 
-          // Show cat face at 70% of the animation
           if (!catShown && elapsed >= catShowTime) {
             catShown = true;
             catCursorEl.classList.add('cat-cursor--cat-visible');
@@ -488,11 +455,9 @@
         catTriggerEl = null;
       }
 
-      // Expose for other elements
       window._showCatCursor = showCatCursor;
       window._hideCatCursor = hideCatCursor;
 
-      // Poll for animation completion, then start 1s idle timer
       sigLink.addEventListener('mouseenter', function() {
         clearTimeout(catTimer);
         clearInterval(checkInterval);
@@ -522,7 +487,6 @@
       });
     }());
 
-    // 3. Copy email button
     const copyBtn = document.getElementById('copyEmailBtn');
     if (copyBtn) {
       copyBtn.addEventListener('click', () => {
@@ -535,7 +499,7 @@
       });
     }
 ;
-// Testimonial slider
+
     (function() {
       var testimonials = [
         {
@@ -585,7 +549,6 @@
         nextBtn.disabled = idx === testimonials.length - 1;
       }
 
-      // --- Pixel transition for avatar ---
       var avatarWrap = document.querySelector('.sp-testimonial__avatar');
       var pixelGrid = null;
       var GRID = 8;
@@ -617,32 +580,27 @@
         var indices = [];
         for (var i = 0; i < total; i++) indices.push(i);
 
-        // Shuffle for random order
         for (var i = total - 1; i > 0; i--) {
           var j = Math.floor(Math.random() * (i + 1));
           var tmp = indices[i]; indices[i] = indices[j]; indices[j] = tmp;
         }
 
-        var stepDur = 300; // total time for pixels to appear
+        var stepDur = 300;
         var perPixel = stepDur / total;
 
-        // Phase 1: show pixels randomly (cover old image)
         indices.forEach(function(pi, i) {
           setTimeout(function() { pixels[pi].style.display = 'block'; }, i * perPixel);
         });
 
-        // Phase 2: swap image under the pixels
         setTimeout(function() {
           avatar.src = newSrc;
           avatar.alt = newAlt;
 
-          // Reshuffle for phase 3
           for (var i = total - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
             var tmp = indices[i]; indices[i] = indices[j]; indices[j] = tmp;
           }
 
-          // Phase 3: hide pixels randomly (reveal new image)
           indices.forEach(function(pi, i) {
             setTimeout(function() { pixels[pi].style.display = 'none'; }, i * perPixel);
           });
@@ -651,7 +609,6 @@
         }, stepDur);
       }
 
-      // --- Show testimonial with pixel transition ---
       var isTransitioning = false;
 
       function showTestimonial(newIdx, direction) {
@@ -661,7 +618,6 @@
         var t = testimonials[idx];
         updateButtons();
 
-        // Fade + slide out text content (direction-aware, spring-eased)
         var fadeEls = [nameEl, roleEl, quoteEl];
         var outShift = direction > 0 ? -8 : 8;
         var inShift = direction > 0 ? 8 : -8;
@@ -671,12 +627,10 @@
           el.style.transform = 'translateX(' + outShift + 'px)';
         });
 
-        // Start pixel transition on avatar
         pixelTransition(t.photo, t.name, function() {
           isTransitioning = false;
         });
 
-        // Swap text after fade out, then slide+fade in from the opposite side
         setTimeout(function() {
           nameEl.textContent = t.name;
           roleEl.textContent = t.role;
@@ -686,7 +640,7 @@
             el.style.transition = 'none';
             el.style.transform = 'translateX(' + inShift + 'px)';
             el.style.opacity = '0';
-            // Force reflow before applying the in-transition
+
             void el.offsetWidth;
             el.style.transition = 'opacity 0.32s cubic-bezier(0.25, 1, 0.5, 1), transform 0.45s cubic-bezier(0.32, 1.2, 0.5, 1)';
             el.style.opacity = '1';
@@ -703,8 +657,7 @@
         btn.addEventListener('mouseup', function() {
           if (btn.disabled) return;
           btn.classList.remove('sp-testimonial__btn--pressed');
-          // Trigger squash-and-stretch arrow on click — restart animation
-          // each click by toggling class with a forced reflow in between.
+
           btn.classList.remove('is-clicking');
           void btn.offsetWidth;
           btn.classList.add('is-clicking');
@@ -719,7 +672,6 @@
       setupButton(prevBtn, function() { return idx - 1; }, -1);
       setupButton(nextBtn, function() { return idx + 1; }, 1);
 
-      // --- Pagination dots ---
       var dotsContainer = document.getElementById('testimonialDots');
       var dots = [];
       for (var di = 0; di < testimonials.length; di++) {
@@ -744,14 +696,12 @@
         });
       }
 
-      // Patch updateButtons to also update dots
       var origUpdateButtons = updateButtons;
       updateButtons = function() {
         origUpdateButtons();
         updateDots();
       };
 
-      // --- Swipe support ---
       var card = document.getElementById('testimonialCard');
       var swipeStartX = 0;
       var swipeStartY = 0;
@@ -767,7 +717,7 @@
         if (!swiping) return;
         var dx = e.touches[0].clientX - swipeStartX;
         var dy = e.touches[0].clientY - swipeStartY;
-        // Only horizontal swipes
+
         if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
           e.preventDefault();
         }
@@ -790,7 +740,7 @@
       updateButtons();
     })();
 ;
-// Scroll stack: sticky cards with fade/blur
+
     (function() {
       var studies = document.querySelectorAll('.case-study');
       if (studies.length < 2) return;
@@ -799,18 +749,15 @@
         card.style.zIndex = i + 1;
       });
 
-      // Set sticky top: if card fits in viewport, stick at 56px.
-      // If card is taller, stick so bottom is visible first (bottom padding 24px).
       function setStickyTops() {
         var viewH = window.innerHeight;
         for (var i = 0; i < studies.length; i++) {
           var cardH = studies[i].offsetHeight;
           if (cardH <= viewH - 56 - 24) {
-            // Card fits: stick at 56px from top
+
             studies[i].style.top = '56px';
           } else {
-            // Card taller than viewport: stick when bottom is 24px from viewport bottom
-            // top = viewH - cardH - 24 (will be negative)
+
             studies[i].style.top = (viewH - cardH - 24) + 'px';
           }
         }
@@ -838,7 +785,6 @@
           card.style.filter = blur > 0.2 ? 'blur(' + blur.toFixed(1) + 'px)' : 'none';
           card.style.transform = 'scale(' + scale.toFixed(4) + ')';
 
-          // Reduce top padding of the overlapping card as it reaches the top
           var padTop = 72 - progress * 72;
           next.style.paddingTop = Math.max(0, padTop).toFixed(1) + 'px';
         }
@@ -847,7 +793,7 @@
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
     })();
-    // Make entire case study clickable on mobile
+
     document.querySelectorAll('.case-study').forEach(function(card) {
       card.addEventListener('click', function(e) {
         if (window.innerWidth >= 768) return;
@@ -858,7 +804,7 @@
       });
     });
 ;
-// Tilt effect on all case study cards
+
     (function() {
       var tilts = document.querySelectorAll('.case-study__tilt');
       var amp = 2;
@@ -907,7 +853,7 @@
       });
     })();
 ;
-// OLD wheel code — disabled
+
     (function() {
       return;
 
@@ -924,31 +870,23 @@
         'Business analysis'
       ];
 
-      // From Figma: wheel center relative to card, text left-edge positions
-      // Wheel 656x655, center at (-53.6, 85.3) relative to card
-      // Active item (0→1) text at (64.0, 74.1) → angle ≈ 0°
-      // Items spaced ~12° apart, 3 copies = 30 slots over 360°
       var N = services.length;
       var STEP_DEG = 12;
 
-      // Exact Figma positions for the 10 items closest to active (Frame 38→33)
-      // These define the arc: left, top, width (text container)
-      // Indexed by slot offset from active: -4, -3, -2, -1, 0, +1, +2, +3, +4, +5
       var slots = [
-        { left: 15.5, top: -67.9,  w: 72,  blur: 4 },  // -4 (Direction pos)
-        { left: 34.8, top: -93.3,  w: 153, blur: 4 },  // -3 (Fundraising pos)
-        { left: 48.6, top: -27.9,  w: 136, blur: 3 },  // -2
-        { left: 58.8, top:  20.3,  w: 148, blur: 2 },  // -1
-        { left: 64.0, top:  74.1,  w: 205, blur: 0 },  //  0 (active)
-        { left: 58.1, top:  98.8,  w: 169, blur: 2 },  // +1
-        { left: 47.6, top: 122.9,  w: 115, blur: 3 },  // +2
-        { left: 32.6, top: 145.3,  w: 130, blur: 4 },  // +3
-        { left: 13.8, top: 165.1,  w: 102, blur: 4 },  // +4
-        { left: -6.4, top: 180.8,  w: 79,  blur: 5 },  // +5
+        { left: 15.5, top: -67.9,  w: 72,  blur: 4 },
+        { left: 34.8, top: -93.3,  w: 153, blur: 4 },
+        { left: 48.6, top: -27.9,  w: 136, blur: 3 },
+        { left: 58.8, top:  20.3,  w: 148, blur: 2 },
+        { left: 64.0, top:  74.1,  w: 205, blur: 0 },
+        { left: 58.1, top:  98.8,  w: 169, blur: 2 },
+        { left: 47.6, top: 122.9,  w: 115, blur: 3 },
+        { left: 32.6, top: 145.3,  w: 130, blur: 4 },
+        { left: 13.8, top: 165.1,  w: 102, blur: 4 },
+        { left: -6.4, top: 180.8,  w: 79,  blur: 5 },
       ];
-      var ACTIVE_SLOT = 4; // index into slots[] for the active position
+      var ACTIVE_SLOT = 4;
 
-      // Create DOM elements — only need enough to fill visible arc
       var VISIBLE = slots.length;
       var items = [];
       for (var i = 0; i < VISIBLE; i++) {
@@ -958,22 +896,21 @@
         items.push(el);
       }
 
-      var currentServiceIdx = 0; // which service is currently active
+      var currentServiceIdx = 0;
 
       function render(serviceIdx, interpolation) {
-        // interpolation: 0 = current state, 1 = next state (serviceIdx+1 active)
+
         var t = interpolation || 0;
 
         for (var i = 0; i < VISIBLE; i++) {
           var el = items[i];
-          // Which service does this slot show?
+
           var offset = i - ACTIVE_SLOT;
           var svcIdx = ((serviceIdx + offset) % N + N) % N;
           el.textContent = services[svcIdx];
 
-          // Interpolate between current slot and slot-1 (shifting up)
           var fromSlot = slots[i];
-          var toSlot = slots[i - 1]; // shifting toward previous slot
+          var toSlot = slots[i - 1];
 
           var left, top, w, blur;
           if (toSlot && t > 0) {
@@ -993,7 +930,6 @@
           el.style.width = w.toFixed(0) + 'px';
           el.style.filter = blur > 0.3 ? 'blur(' + blur.toFixed(1) + 'px)' : 'none';
 
-          // Active slot: full opacity, bold
           var distFromActive = Math.abs(i - ACTIVE_SLOT + t);
           if (distFromActive < 0.5) {
             el.classList.add('sp-wheel__item--active');
@@ -1030,7 +966,7 @@
       setInterval(advance, 2000);
     })();
 ;
-// Sidebar email: copy to clipboard with spark effect
+
     (function() {
       var btn = document.getElementById('sidebarCopyEmail');
       if (!btn) return;
@@ -1049,7 +985,6 @@
           spark.style.cssText = 'position:fixed;left:' + x + 'px;top:' + y + 'px;width:' + size + 'px;height:2px;background:' + color + ';border-radius:1px;pointer-events:none;z-index:9999;transform-origin:left center;transform:rotate(' + (angle * 180 / Math.PI) + 'deg);opacity:1;transition:all ' + dur + 'ms cubic-bezier(0.25,0.1,0.25,1);';
           document.body.appendChild(spark);
 
-          // Force reflow
           spark.offsetWidth;
 
           spark.style.transform = 'rotate(' + (angle * 180 / Math.PI) + 'deg) translateX(' + radius + 'px)';
@@ -1076,7 +1011,7 @@
       });
     })();
 ;
-// Twain video border: show after 3s, hide on loop
+
     (function() {
       var wrap = document.querySelector('.case-study__video-border');
       if (!wrap) return;
@@ -1098,7 +1033,7 @@
       });
     })();
 ;
-// Article image tilt with rolling logo
+
     (function() {
       var articles = document.querySelectorAll('.pub-article');
       var amp = 4.25;
@@ -1112,12 +1047,12 @@
         var rx = 0, ry = 0, lx = 0, ly = 0, lr = 0;
         var trx = 0, try_ = 0, tlx = 0, tly = 0, tlr = 0;
         var raf = null, hov = false;
-        // Logo constraints: 148x148 square, 56x56 logo, starts at bottom-left (0,92)
+
         var squareSize = 148;
         var logoSize = 56;
-        var maxTravel = squareSize - logoSize; // 92px max in each axis
+        var maxTravel = squareSize - logoSize;
         var logoHomeX = 0;
-        var logoHomeY = maxTravel; // bottom = 92px from top
+        var logoHomeY = maxTravel;
         var logoRadius = logoSize / 2;
 
         function tick() {
@@ -1147,12 +1082,10 @@
           trx = -y * amp;
           try_ = x * amp;
 
-          // Logo slides along the bottom of the square based on tilt
           var rawX = x * maxTravel * 0.15;
           tlx = Math.max(-logoHomeX, Math.min(maxTravel - logoHomeX, rawX));
-          tly = 0; // always on bottom
+          tly = 0;
 
-          // Real rolling: rotation = distance / radius (in radians), convert to degrees
           tlr = (tlx / (logoSize / 2)) * (180 / Math.PI);
 
           if (!raf) raf = requestAnimationFrame(tick);
@@ -1171,9 +1104,9 @@
       });
     })();
 ;
-// Performance: pause off-screen videos and animations
+
     (function() {
-      // Pause/play videos based on visibility
+
       var videos = document.querySelectorAll('video');
       if (videos.length) {
         var videoObserver = new IntersectionObserver(function(entries) {
@@ -1188,7 +1121,6 @@
         videos.forEach(function(v) { videoObserver.observe(v); });
       }
 
-      // Pause CSS animations on off-screen elements
       var animated = document.querySelectorAll('.sp-card--services, .case-study__image-wrap');
       if (animated.length) {
         var animObserver = new IntersectionObserver(function(entries) {
@@ -1203,7 +1135,6 @@
         animated.forEach(function(el) { animObserver.observe(el); });
       }
 
-      // Pause wheel auto-advance when services section is off-screen
       var servicesCard = document.querySelector('.sp-card--services');
       if (servicesCard && window.wheelPause !== undefined) {
         var wheelObserver = new IntersectionObserver(function(entries) {
@@ -1217,7 +1148,7 @@
       }
     })();
 ;
-// About section: copy email to clipboard with spark + icon morph
+
     (function() {
       var btn = document.getElementById('aboutCopyEmail');
       if (!btn) return;
@@ -1228,7 +1159,6 @@
       var checkSrc = 'images/icon-check.svg';
       var copySrc = copyImg.src;
 
-      // Preload check icon
       var preload = new Image();
       preload.src = checkSrc;
 
@@ -1261,15 +1191,14 @@
         navigator.clipboard.writeText(email).then(function() {
           createSparks(e.clientX, e.clientY);
 
-          // Morph out: scale down + fade
           copyImg.style.transition = 'transform 0.2s cubic-bezier(0.4,0,0.2,1), opacity 0.15s ease';
           copyImg.style.transform = 'scale(0.3) rotate(-90deg)';
           copyImg.style.opacity = '0';
 
           setTimeout(function() {
-            // Swap to check icon
+
             copyImg.src = checkSrc;
-            // Morph in: scale up from small
+
             copyImg.style.transition = 'none';
             copyImg.style.transform = 'scale(0.3) rotate(90deg)';
             copyImg.style.opacity = '0';
@@ -1279,7 +1208,6 @@
             copyImg.style.opacity = '1';
           }, 200);
 
-          // After 2s, morph back to copy icon
           setTimeout(function() {
             copyImg.style.transition = 'transform 0.2s cubic-bezier(0.4,0,0.2,1), opacity 0.15s ease';
             copyImg.style.transform = 'scale(0.3) rotate(-90deg)';
@@ -1304,17 +1232,16 @@
 var footerYear = document.getElementById('footerYear');
 if (footerYear) footerYear.textContent = new Date().getFullYear();
 ;
-// Page load + scroll reveal animations
+
     (function() {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        // Show everything instantly
+
         document.querySelectorAll('.reveal-load, .reveal-scroll').forEach(function(el) {
           el.classList.remove('reveal-load', 'reveal-scroll');
         });
         return;
       }
 
-      // Page load: staggered reveal for hero elements + sidebar
       var loadEls = document.querySelectorAll('.reveal-load');
       loadEls.forEach(function(el) {
         var delay = parseInt(el.getAttribute('data-reveal-delay') || '0', 10);
@@ -1323,7 +1250,6 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
         }, delay);
       });
 
-      // Scroll reveal: observe each element individually
       var scrollEls = document.querySelectorAll('.reveal-scroll');
       var scrollObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
@@ -1337,11 +1263,6 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
       scrollEls.forEach(function(el) { scrollObserver.observe(el); });
     })();
 
-    // Logos section animation — three synchronized reveals over the same duration:
-    //  • Left divider draws right→left, right divider draws left→right
-    //  • Title wipes in smoothly left→right via clip-path
-    //  • Logo paths trace their outlines via DrawSVG, then fills bleed in
-    // Triggers once the whole block is visible in the viewport.
     (function() {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       if (!window.gsap || !window.DrawSVGPlugin || !window.CustomEase) return;
@@ -1358,11 +1279,6 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
 
       var DURATION = 1.2;
 
-      // Initial state:
-      //  - Left divider: collapsed at its RIGHT edge (drawSVG "100% 100%")
-      //  - Right divider: collapsed at its LEFT edge (drawSVG "0% 0%")
-      //  - Title: clipped away from the right, invisible until the wipe reveals it
-      //  - Logo paths: no fill, full stroke opacity, 0% drawn
       gsap.set(leftDivider, { drawSVG: '100% 100%' });
       gsap.set(rightDivider, { drawSVG: '0% 0%' });
       gsap.set(title, { clipPath: 'inset(0 100% 0 0)', opacity: 0 });
@@ -1372,8 +1288,6 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
         drawSVG: 0
       });
 
-      // Piecewise ease: first 40% of wallclock time covers 50% of the timeline
-      // (1.5x speed), remaining 60% covers the other 50% (unchanged speed).
       var splitEase = CustomEase.create('logosSplitEase', 'M0,0 L0.4,0.5 L1,1');
 
       var played = false;
@@ -1381,20 +1295,14 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
         if (played) return;
         played = true;
 
-        // Build the full animation on a PAUSED timeline, then drive its
-        // progress with an outer tween that uses the piecewise ease.
         var tl = gsap.timeline({ paused: true, defaults: { ease: 'power2.inOut' } });
 
-        // 1. Dividers — each draws from inner edge to outer edge
         tl.to(leftDivider, { drawSVG: '0% 100%', duration: DURATION }, 0);
         tl.to(rightDivider, { drawSVG: '0% 100%', duration: DURATION }, 0);
 
-        // 2. Title — smooth left-to-right wipe
         tl.to(title, { opacity: 1, duration: DURATION * 0.2, ease: 'power1.out' }, 0);
         tl.to(title, { clipPath: 'inset(0 0% 0 0)', duration: DURATION }, 0);
 
-        // 3. Logos — strokes trace over full duration; fills fade in over the
-        // second half; strokes fade out at the very end. All end at DURATION.
         tl.to(logoPaths, {
           drawSVG: '0% 100%',
           duration: DURATION,
@@ -1412,8 +1320,6 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
           ease: 'power1.out'
         }, DURATION * 0.65);
 
-        // Drive the paused timeline via a proxy tween with the piecewise ease.
-        // Wallclock duration = tl.duration() * 5/6 (half compressed 1.5x + half unchanged).
         var driver = { p: 0 };
         gsap.to(driver, {
           p: 1,
@@ -1423,7 +1329,6 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
         });
       };
 
-      // Trigger when at least 80% of the block is visible in the viewport
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.intersectionRatio >= 0.8) {
@@ -1436,9 +1341,6 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
       observer.observe(section);
     })();
 
-    // "Ask AI about Gregory" — circles roll in from left one-by-one with a
-    // physics-y push on the previous circle; circles are draggable and
-    // reorder with a Flip-based smooth settle on release.
     (function() {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       if (!window.gsap || !window.Draggable || !window.Flip) return;
@@ -1450,8 +1352,6 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
       var items = Array.prototype.slice.call(pill.querySelectorAll('.about__icon-btn'));
       if (!items.length) return;
 
-      // Opacity = proportion of the circle currently overlapping the pill's gray area.
-      // Used during entrance, drag, and release so circles are only visible inside the pill.
       var computeVisibility = function(c) {
         var cRect = c.getBoundingClientRect();
         var pRect = pill.getBoundingClientRect();
@@ -1462,9 +1362,6 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
       };
       var updateVisibility = function(c) { c.style.opacity = computeVisibility(c); };
 
-      // --- Entrance: short, fast roll in from left; rightmost arrives first ---
-      // Shorter travel (160px) and shorter duration — still smooth via power2.out,
-      // just less dramatic. Next ball starts when the previous is 70% home.
       var START_X = -160;
       var ROLL_ROTATION = -360;
       items.forEach(function(c) {
@@ -1476,9 +1373,9 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
         if (entrancePlayed) return;
         entrancePlayed = true;
         var tl = gsap.timeline();
-        var seq = items.slice().reverse(); // rightmost first
+        var seq = items.slice().reverse();
         var DURATION = 0.7;
-        var STAGGER = 0.32; // power2.out hits 70% position at t ≈ 0.45*DURATION
+        var STAGGER = 0.32;
         seq.forEach(function(c, i) {
           var startT = i * STAGGER;
           tl.to(c, {
@@ -1488,7 +1385,7 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
             ease: 'power2.out',
             onUpdate: function() { updateVisibility(c); }
           }, startT);
-          // Subtle collision nudge on arrival — no shake
+
           if (i > 0) {
             var rightNeighbor = seq[i - 1];
             var arrivalT = startT + DURATION * 0.9;
@@ -1518,18 +1415,13 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
       }, { threshold: 0.5 });
       obs.observe(pill);
 
-      // --- Draggable: visual sibling shifts during drag, DOM reorder only on release ---
-      // During drag, siblings that need to move out of the way are visually shifted
-      // via CSS transforms. The dragged element's DOM position stays the same, so
-      // Draggable tracks the cursor perfectly. On release, the DOM is reordered to
-      // match the visual preview, and Flip animates any leftover gap smoothly.
-      var SLOT_SHIFT = 52; // 48px circle + 4px flex gap
-      var siblingShifts = new Map(); // visual shift currently applied to each sibling
+      var SLOT_SHIFT = 52;
+      var siblingShifts = new Map();
 
       items.forEach(function(item) {
         Draggable.create(item, {
           type: 'x,y',
-          inertia: false, // no inertia — cleaner snap-to-slot on release
+          inertia: false,
           cursor: 'grab',
           activeCursor: 'grabbing',
           minimumMovement: 4,
@@ -1547,7 +1439,6 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
             var allChildren = Array.prototype.slice.call(pill.children);
             var myIdx = allChildren.indexOf(me);
 
-            // Determine target slot based on cursor position vs visual sibling centers
             var targetSlot = myIdx;
             allChildren.forEach(function(sib, idx) {
               if (sib === me) return;
@@ -1562,7 +1453,6 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
             });
             this._targetSlot = targetSlot;
 
-            // Shift siblings between myIdx and targetSlot to open up a slot
             allChildren.forEach(function(sib, idx) {
               if (sib === me) return;
               var wantShift = 0;
@@ -1592,23 +1482,20 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
             var targetSlot = (typeof this._targetSlot === 'number') ? this._targetSlot : myIdx;
 
             if (targetSlot !== myIdx) {
-              // Capture visual state (with siblings still shifted) before DOM reorder
+
               var state = Flip.getState(allChildren);
 
-              // Reorder DOM: move me into targetSlot
               var orderWithoutMe = allChildren.slice();
               orderWithoutMe.splice(myIdx, 1);
               orderWithoutMe.splice(targetSlot, 0, me);
               orderWithoutMe.forEach(function(el) { pill.appendChild(el); });
 
-              // Clear all transforms — both the dragged item and the shifted siblings
               allChildren.forEach(function(el) {
                 gsap.killTweensOf(el);
                 gsap.set(el, { x: 0, y: 0 });
                 siblingShifts.set(el, 0);
               });
 
-              // Flip animates from previous visual state to new natural slots
               Flip.from(state, {
                 duration: 0.42,
                 ease: 'power2.out',
@@ -1621,7 +1508,7 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
                 }
               });
             } else {
-              // No reorder — just ease me back to x=0 and clear any lingering sibling shifts
+
               gsap.to(me, {
                 x: 0, y: 0,
                 duration: 0.38,
@@ -1684,17 +1571,15 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
       });
     })();
 ;
-// About photos: staggered reveal + tilt on hover
+
     (function() {
       var container = document.getElementById('aboutPhotos');
       var photos = container ? container.querySelectorAll('.about__photo') : [];
 
-      // Set up animation classes
       photos.forEach(function(photo) {
         photo.classList.add('about__photo--animated');
       });
 
-      // Hero photo reveal + tilt (desktop)
       var heroPhoto = document.getElementById('aboutHeroPhoto');
       if (heroPhoto) {
         var heroObserver = new IntersectionObserver(function(entries) {
@@ -1705,7 +1590,6 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
         }, { threshold: 0.2 });
         heroObserver.observe(heroPhoto);
 
-        // Tilt + glare
         var heroGlare = heroPhoto.querySelector('.about__hero-glare');
         var hAmp = 5;
         var hrx = 0, hry = 0, htrx = 0, htry = 0;
@@ -1746,7 +1630,6 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
         });
       }
 
-      // Observe each photo individually (mobile)
       var photoObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
@@ -1758,7 +1641,6 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
 
       photos.forEach(function(photo) { photoObserver.observe(photo); });
 
-      // Tilt effect per photo (desktop only)
       var amp = 7;
       function lerp(a, b, t) { return a + (b - a) * t; }
 
@@ -1794,7 +1676,6 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
         });
       });
 
-      // Cat cursor on 3rd photo after 1s hover (mobile)
       var catPhoto = photos[2];
       if (catPhoto) {
         var catPhotoTimer = null;
@@ -1817,7 +1698,7 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
       }
     })();
 ;
-// Scroll restore is handled by PathScroll / ClientNav.
+
 ;
 (function(){function r(){document.body.classList.add('fonts-ready')}if(document.fonts&&document.fonts.ready){document.fonts.ready.then(r)}else{setTimeout(r,500)}setTimeout(r,3000)})();
 

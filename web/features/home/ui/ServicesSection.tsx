@@ -5,7 +5,6 @@ export function ServicesSection() {
   return (
     <>
 
-          {/* Services / Hero Section */}
           <section id="hero" className="section section--hero">
             <div className="centered">
               <h1 className="hero-name shiny-hover reveal-load" data-reveal-delay="100">A developer growing through constant challenge.</h1>
@@ -21,10 +20,9 @@ export function ServicesSection() {
                 </p>
               </div>
 
-              {/* Social Proof */}
               <div className="social-proof reveal-load" data-reveal-delay="320">
                 <div className="social-proof__left">
-                  {/* Services Card */}
+
                   <div className="sp-card sp-card--services">
                     <div className="sp-services__wheel" aria-hidden="true">
                       <div className="sp-wheel__track"></div>

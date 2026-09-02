@@ -1,6 +1,3 @@
-/* Outcome, UEQ, summarize */
-
-/* ---------- Outcome Cards ---------- */
 .cs-outcome-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -49,7 +46,6 @@
   margin: 0;
 }
 
-/* ---------- UEQ Radar Chart ---------- */
 .cs-ueq-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -84,7 +80,6 @@
   flex-direction: column;
   align-items: center;
 }
-
 
 @media (max-width: 900px) {
   .cs-ueq-layout {
@@ -140,7 +135,7 @@
 }
 
 .ueq-poly:not(:hover):not(.ueq-poly--active) ~ .ueq-poly:not(:hover):not(.ueq-poly--active) {
-  /* both idle — no dimming */
+
 }
 
 .ueq-tooltip {
@@ -164,8 +159,6 @@
   opacity: 1;
 }
 
-
-/* ---------- Summarize Button ---------- */
 .cs-summarize__btn {
   font-family: 'UCity Pro', system-ui, sans-serif;
   font-size: 17px;

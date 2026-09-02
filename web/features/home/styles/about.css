@@ -1,19 +1,13 @@
-/* About section */
-
-/* ---------- About Section ---------- */
 .about-section {
   padding-top: 77px;
   padding-bottom: 0;
 }
 
-/* About Body: text left, photos right on desktop */
-/* About Body: text + photos side by side on desktop */
 .about__body {
   display: flex;
   gap: 48px;
 }
 
-/* About Hero Photo — single portrait, desktop only */
 .about__hero-photo {
   flex-shrink: 0;
   width: 300px;
@@ -365,7 +359,6 @@
   opacity: 0.56;
 }
 
-/* While being dragged, suppress the :active pressed state and force full opacity */
 .about__icon-btn.is-dragging,
 .about__icon-btn.is-dragging:active {
   background: rgba(255, 255, 255, 0.68) !important;
@@ -389,7 +382,6 @@
   flex-shrink: 0;
 }
 
-/* Ask AI block */
 .about__ask-ai {
   flex: 1;
   display: flex;

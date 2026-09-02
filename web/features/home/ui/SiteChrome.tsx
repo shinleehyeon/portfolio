@@ -5,7 +5,6 @@ export function SiteChrome() {
     <>
       <TopNav />
 
-      {/* Mobile Header */}
         <header className="mobile-header">
           <nav className="mobile-header__nav">
             <a href="#hero" className="mobile-header__link active" data-section="hero">Hero</a>
@@ -21,7 +20,6 @@ export function SiteChrome() {
           </button>
         </header>
 
-        {/* Mobile Menu Overlay */}
         <div className="mobile-menu" aria-hidden="true">
           <a href="#hero" className="mobile-menu-link">Hero</a>
           <a href="#about" className="mobile-menu-link">About</a>

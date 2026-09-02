@@ -1,6 +1,3 @@
-/* Mobile header, menu, sidebar, layout */
-
-/* ---------- Mobile Header ---------- */
 .mobile-header {
   position: fixed;
   top: 0;
@@ -26,7 +23,6 @@
   width: auto;
 }
 
-/* Inline nav in mobile header — hidden by default */
 .mobile-header__nav {
   display: none;
 }
@@ -46,7 +42,6 @@
   color: var(--text);
 }
 
-/* Show inline nav and hide hamburger at 800px+ (still mobile header) */
 @media (min-width: 800px) and (max-width: 1295px) {
   .mobile-header__nav {
     display: flex;
@@ -93,7 +88,6 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* ---------- Mobile Menu Overlay ---------- */
 .mobile-menu {
   position: fixed;
   inset: 0;
@@ -147,24 +141,20 @@
   color: var(--neutral-550);
 }
 
-/* ---------- Sidebar (Desktop — hidden on mobile) ---------- */
 .sidebar {
   display: none;
 }
 
-/* ---------- Main Content ---------- */
 .content {
   padding: 0 24px 48px;
 }
 
-/* ---------- Centered Block ---------- */
 .centered {
   max-width: var(--content-max);
   margin-left: auto;
   margin-right: auto;
 }
 
-/* ---------- Sections ---------- */
 .section {
   padding-top: 128px;
 }

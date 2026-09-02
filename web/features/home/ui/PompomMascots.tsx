@@ -30,8 +30,7 @@ export function PompomMascots({
         const trackRect = track.getBoundingClientRect();
         const nameEl = document.querySelector(".taped-footer__name");
         const minX = nameEl ? nameEl.getBoundingClientRect().left - trackRect.left : 0;
-        // Character's x must always match the mouse's x exactly (centered on cursor),
-        // but only between the "신이현" name's x and 40% of the footer's width.
+
         const rawX = t.clientX - trackRect.left - width / 2;
         const maxX = trackRect.width * 0.4 - width / 2;
         const x = Math.max(minX, Math.min(rawX, maxX));

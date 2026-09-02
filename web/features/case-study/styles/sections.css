@@ -1,6 +1,3 @@
-/* Case study sections and lists */
-
-/* ---------- Case Study Sections ---------- */
 .cs-section {
   padding-top: 117px;
 }
@@ -28,7 +25,6 @@
   margin-right: auto;
 }
 
-/* Intro and outcome keep 24px, full width */
 .cs-hero__intro,
 #outcome .cs-body {
   font-size: 24px;
@@ -59,7 +55,6 @@
   margin-bottom: 0;
 }
 
-/* Challenge / Solution / Impact labels */
 .cs-label {
   display: block;
   font-size: 20px;
@@ -102,7 +97,6 @@
   color: var(--text);
 }
 
-/* ---------- Body Note (scope callout) ---------- */
 .cs-body--note {
   padding: 24px 28px;
   background: var(--neutral-25);
@@ -120,7 +114,6 @@
   margin: 0;
 }
 
-/* ---------- Focus Items ---------- */
 .cs-focus-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -180,7 +173,6 @@
   margin: 0;
 }
 
-/* ---------- Process Steps ---------- */
 .cs-process {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -211,7 +203,6 @@
   color: var(--neutral-600);
 }
 
-/* ---------- Spaced List ---------- */
 .cs-list--spaced {
   margin-top: 12px;
   margin-bottom: 20px;

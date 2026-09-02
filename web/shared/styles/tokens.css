@@ -1,12 +1,5 @@
-/* Design tokens */
-
-/* ---------- Design Tokens ---------- */
 :root {
-  /* Motion: spring-inspired easing curves
-     - --ease-out-spring: gentle settle, no overshoot, for hover lifts and reveals
-     - --ease-out-back: small overshoot for tactile responses (icons, scale)
-     - --ease-out-back-soft: very subtle overshoot for sub-pixel tactility
-     - --ease-out-quart: smooth, fast ramp to rest, for fades and opacity */
+
   --ease-out-spring: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-out-back-soft: cubic-bezier(0.32, 1.2, 0.5, 1);
@@ -18,7 +11,7 @@
   --text-body: #211B1C;
   --text-muted: #837D7D;
   --border: #E5E5E5;
-  /* Accent (OKLAB perceptually uniform) */
+
   --accent-900: #3C000A;
   --accent-800: #61091C;
   --accent-700: #891D30;
@@ -33,7 +26,6 @@
   --accent: #E0465C;
   --accent-hover: #B43145;
 
-  /* Neutral — warm gray, OKLAB perceptually uniform */
   --neutral-950: #0F0A0A;
   --neutral-900: #181212;
   --neutral-850: #211B1C;

@@ -1,6 +1,5 @@
 document.getElementById('footerYear').textContent = new Date().getFullYear();
 
-    // Mobile header: hide on scroll down, show on scroll up
     (function() {
       var header = document.querySelector('.mobile-header');
       if (!header) return;
@@ -23,7 +22,6 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
       }, { passive: true });
     })();
 
-    // Mobile menu toggle
     (function() {
       var toggle = document.querySelector('.menu-toggle');
       var menu = document.querySelector('.mobile-menu');
@@ -44,7 +42,6 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
       });
     })();
 
-    // Mobile menu: copy email
     (function() {
       var btn = document.getElementById('mobileMenuCopyEmail');
       if (!btn) return;
@@ -58,7 +55,6 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
       });
     })();
 
-    // Sidebar + mobile header scroll spy (position-based, always one active)
     (function() {
       var sidebarLinks = document.querySelectorAll('.sidebar-nav .nav-link[data-section]');
       var mobileLinks = document.querySelectorAll('.mobile-header__link[data-section]');
@@ -97,14 +93,12 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
       update();
     })();
 
-    // Gallery carousel + lightbox + single image zoom
     (function() {
       var prevSvg = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.25 11C18.6642 11 19 11.3358 19 11.75C19 12.1642 18.6642 12.5 18.25 12.5L7.35127 12.5L10.8262 16.2698C11.0913 16.5881 11.0483 17.061 10.7301 17.3261C10.4119 17.5913 9.939 17.5483 9.67383 17.2301L5.17383 12.2301C4.94205 11.952 4.94205 11.548 5.17383 11.2698L9.67383 6.26984C9.939 5.95163 10.4119 5.90864 10.7301 6.17382C11.0483 6.43899 11.0913 6.91191 10.8262 7.23012L7.35129 11L18.25 11Z" fill="#002E71"/></svg>';
       var nextSvg = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.75 11C5.33579 11 5 11.3358 5 11.75C5 12.1642 5.33579 12.5 5.75 12.5L16.6487 12.5L13.1738 16.2698C12.9087 16.5881 12.9517 17.061 13.2699 17.3261C13.5881 17.5913 14.061 17.5483 14.3262 17.2301L18.8262 12.2301C19.0579 11.952 19.0579 11.548 18.8262 11.2698L14.3262 6.26984C14.061 5.95163 13.5881 5.90864 13.2699 6.17382C12.9517 6.43899 12.9087 6.91191 13.1738 7.23012L16.6487 11L5.75 11Z" fill="#002E71"/></svg>';
       var prevSvgWhite = prevSvg.replace('#002E71', '#FFFFFF');
       var nextSvgWhite = nextSvg.replace('#002E71', '#FFFFFF');
 
-      // Pixel transition grid
       function createPixelGrid(container) {
         var grid = document.createElement('div');
         grid.style.cssText = 'position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2;border-radius:10px;';
@@ -151,7 +145,6 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
         }, stepDur + 30);
       }
 
-      // === Lightbox ===
       var lb = document.createElement('div');
       lb.className = 'cs-lightbox';
       lb.innerHTML = '<button class="cs-lightbox__close">&times;</button><button class="cs-lightbox__nav cs-lightbox__nav--prev">' + prevSvgWhite + '</button><div class="cs-lightbox__img-wrap"><img src="" alt=""></div><button class="cs-lightbox__nav cs-lightbox__nav--next">' + nextSvgWhite + '</button>';
@@ -206,7 +199,6 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
         }
       });
 
-      // Pan when zoomed
       lbWrap.addEventListener('mousedown', function(e) {
         if (!zoomed) return;
         isDragging = true;
@@ -220,7 +212,6 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
         var rawX = startPanX + (e.clientX - dragStartX);
         var rawY = startPanY + (e.clientY - dragStartY);
 
-        // Clamp pan so image doesn't go beyond its edges
         var rect = lbImg.getBoundingClientRect();
         var imgW = lbImg.naturalWidth ? Math.min(lbImg.naturalWidth, lbWrap.clientWidth) : lbWrap.clientWidth;
         var imgH = lbImg.naturalHeight ? Math.min(lbImg.naturalHeight, lbWrap.clientHeight) : lbWrap.clientHeight;
@@ -246,7 +237,6 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
         if (e.key === 'ArrowRight') lbGo(1);
       });
 
-      // === Transform galleries into carousels ===
       document.querySelectorAll('.cs-gallery').forEach(function(gallery) {
         if (gallery.classList.contains('cs-gallery--react')) return;
         var items = gallery.querySelectorAll('.cs-gallery__item');
@@ -346,7 +336,6 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
         gallery.appendChild(dots);
       });
 
-      // === Single images clickable to zoom ===
       document.querySelectorAll('.cs-image__wrap img').forEach(function(img) {
         img.style.cursor = 'zoom-in';
         img.addEventListener('click', function() {
@@ -355,7 +344,6 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
       });
     })();
 
-    // Tilt effect on gallery main images (desktop only)
     (function() {
       if (window.innerWidth < 900) return;
       var amp = 2;
@@ -396,7 +384,6 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
       });
     })();
 
-    // Tag tooltips — follow cursor
     (function() {
       var tags = document.querySelectorAll('.cs-hero__tag[data-tip]');
       if (!tags.length) return;
@@ -422,7 +409,6 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
       });
     })();
 
-    // Tag spring-tension physics
     (function() {
       var container = document.querySelector('.cs-hero__contributions');
       if (!container) return;
@@ -519,7 +505,6 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
       });
     })();
 
-    // Target frame cursor on focus items
     (function() {
       var targets = document.querySelectorAll('.cs-focus-list .cs-focus-item, .cs-outcome-card');
       if (!targets.length) return;
@@ -547,7 +532,6 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
         });
       });
 
-      // Update position on scroll
       window.addEventListener('scroll', function() {
         if (!frame.classList.contains('tc-frame--visible')) return;
         var active = document.querySelector('.cs-focus-item:hover, .cs-outcome-card:hover');
@@ -559,8 +543,6 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
       }, { passive: true });
     })();
 
-
-    // About CTA: copy email with spark + icon morph
     (function() {
       var btn = document.getElementById('aboutCopyEmail');
       if (!btn) return;
@@ -629,8 +611,6 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
       });
     })();
 
-
-    // Summarize button
     (function() {
       var btn = document.getElementById('summarizeBtn');
       var panel = document.getElementById('summarizePanel');
@@ -674,7 +654,6 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
       });
     })();
 
-    // Scroll reveal
     (function() {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       var els = document.querySelectorAll('.cs-heading, .cs-body, .cs-focus-list, .cs-process, .cs-two-col, .cs-image__wrap, .cs-gallery, .cs-hero__contributions, .cs-next__link');
@@ -690,7 +669,7 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
       els.forEach(function(el) { observer.observe(el); });
     })();
 ;
-// Staggered sidebar + hero reveal on page load
+
     (function() {
       var els = document.querySelectorAll('.reveal-load');
       if (!els.length) return;
@@ -700,7 +679,7 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
           el.classList.add('reveal-load--active');
         }, delay);
       });
-      // Nudge summarize button after it appears
+
       var sumBtn = document.getElementById('summarizeBtn');
       if (sumBtn) {
         setTimeout(function() {
@@ -712,30 +691,28 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
       }
     })();
 
-    // Auto-apply reveal-scroll to content elements
     (function() {
-      // Section headings and body text (labels animate with their parent .cs-body)
+
       document.querySelectorAll('.cs-heading, .cs-body').forEach(function(el) {
         el.classList.add('reveal-scroll');
       });
-      // Image sections (skip ones already reveal-load)
+
       document.querySelectorAll('.cs-image__wrap, .cs-gallery').forEach(function(el) {
         if (!el.classList.contains('reveal-load')) el.classList.add('reveal-scroll');
       });
-      // Individual cards (staggered via CSS nth-child)
+
       document.querySelectorAll('.cs-focus-item, .cs-outcome-card').forEach(function(el) {
         el.classList.add('reveal-scroll');
       });
-      // Diagrams
+
       document.querySelectorAll('.cs-tree').forEach(function(el) {
         el.classList.add('reveal-scroll');
       });
-      // CTA footer
+
       document.querySelectorAll('.cs-cta-footer .about__footer').forEach(function(el) {
         el.classList.add('reveal-scroll');
       });
 
-      // Scroll reveal observer
       var scrollEls = document.querySelectorAll('.reveal-scroll');
       var scrollObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
@@ -749,7 +726,7 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
       scrollEls.forEach(function(el) { scrollObserver.observe(el); });
     })();
 ;
-// Make interactive tree diagrams scrollable on mobile
+
     (function() {
       if (window.innerWidth > 900) return;
       var isMobileSmall = window.innerWidth < 680;
@@ -763,7 +740,7 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
         var svg = el.querySelector('svg');
         if (!svg) return;
         svg.style.overflow = 'visible';
-        // Wait for tree to render then size SVG to actual content
+
         setTimeout(function() {
           var g = svg.querySelector('g');
           if (!g) return;
@@ -775,7 +752,6 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
           }
           el.scrollLeft = 0;
 
-          // On small mobile: auto-scroll right when diagram enters viewport
           if (isMobileSmall) {
             var revealed = false;
             var observer = new IntersectionObserver(function(entries) {

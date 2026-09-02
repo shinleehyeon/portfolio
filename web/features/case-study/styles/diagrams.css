@@ -1,6 +1,3 @@
-/* Next case, diagrams, CTA */
-
-/* ---------- Next Case Study ---------- */
 .cs-next {
   padding-top: 120px;
   padding-bottom: 40px;
@@ -35,8 +32,6 @@
   color: var(--text);
 }
 
-/* ---------- Interactive Diagrams ---------- */
-/* === Grid Treemap === */
 .ct-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -174,7 +169,6 @@
   }
 }
 
-/* === D3 Collapsible Tree === */
 .cs-tree {
   overflow: visible;
   margin-left: auto;
@@ -224,7 +218,6 @@
   pointer-events: none;
 }
 
-/* ---------- Case Study CTA Footer ---------- */
 .cs-cta-footer {
   padding-top: 11px;
 }

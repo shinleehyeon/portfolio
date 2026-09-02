@@ -350,19 +350,16 @@ const STACK = [
 export function PublicationsSection() {
   return (
     <>
-          {/* Publications */}
           <section id="highlights" className="section publications-section">
             <div className="centered">
               <h2 className="publications__heading shiny-hover reveal-scroll">Highlights</h2>
               <div className="publications__content">
 
-                {/* Awards & Activity */}
                 <div className="publications__awards-column">
                   <AwardHoverGroup items={AWARDS} />
                   <ActivitySection />
                 </div>
 
-                {/* Tools */}
                 <div className="publications__tools reveal-scroll">
                   {STACK.map((item) => (
                     <div className="pub-tool" key={item.name}>

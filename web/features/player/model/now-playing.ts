@@ -15,13 +15,11 @@ export function parsePlaylistId(input: string): string | null {
     const list = url.searchParams.get("list");
     if (list && list !== "WL" && list !== "LL") return list;
   } catch {
-    /* bare id */
   }
   if (/^(PL|OL|UU|FL|RD)[\w-]+$/.test(raw)) return raw;
   return null;
 }
 
-/** YouTube Music playlist PLRz1AQjOKrFmEpurQigk029b53Y9t_Gaj */
 export const NOW_PLAYING = {
   tracks: [
     { youtubeId: "Snyan1_jGWc", title: "사랑하게 될 거야", artist: "한로로 HANRORO" },
@@ -135,7 +133,6 @@ export function youtubeThumb(id: string): string {
   return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 }
 
-/** 16:9 crop without hqdefault letterbox bars */
 export function youtubeThumbFill(id: string): string {
   return `https://i.ytimg.com/vi/${id}/mqdefault.jpg`;
 }

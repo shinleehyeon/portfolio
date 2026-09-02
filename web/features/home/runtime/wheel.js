@@ -1,4 +1,3 @@
-// Services skill-wheel — circular arc with tangent rotation
 (function() {
   var track = document.querySelector('.sp-wheel__track');
   var arrow = document.querySelector('.sp-services__arrow');
@@ -27,9 +26,6 @@
     '배포에서 끝나지 않습니다. 연동과 운영이 끊기면 제품이 아닙니다.'
   ];
 
-  // pill/pillText now managed by stack system (elActive/elActiveText)
-
-  // --- Card stack ---
   var pillStack = document.getElementById('pillStack');
   var stackAnimating = false;
   var ANIM_DUR = 450;
@@ -43,7 +39,6 @@
   var elBot2 = document.getElementById('stackBot2');
   var elActiveText = elActive.querySelector('span');
 
-  // Default specs from Figma
   var S = {
     top2:   { w: 134, h: 20, bg: 0.24, r: '14px 14px 0 0', shadow: '0 -12px 8px 0 rgba(241,247,255,0.35)', stroke: 'none', pad: '0', scale: 1, opacity: 1, yOff: 0 },
     top1:   { w: 184, h: 28, bg: 0.44, r: '18px 18px 0 0', shadow: '0 -12px 8px 0 rgba(241,247,255,0.35)', stroke: 'none', pad: '0', scale: 1, opacity: 1, yOff: 0 },
@@ -64,7 +59,6 @@
     el.style.opacity = s.opacity;
   }
 
-  // Set initial resting state
   applyState(elTop2, S.top2, false);
   applyState(elTop1, S.top1, false);
   applyState(elActive, S.active, false);
@@ -78,45 +72,39 @@
 
     var nextText = descriptions[idx];
 
-    // Move elTop2 (will exit upward) to the end of the DOM as the incoming bottom card
-    // First set it to the enter-from-bottom state BEFORE moving
     applyState(elTop2, Object.assign({}, S.bot2, { scale: 0.5, opacity: 0, yOff: 20 }), false);
-    // Move to end of flex container
+
     pillStack.appendChild(elTop2);
 
-    // Pre-create text in bot1 (hidden), so it's there when it expands
     var newSpan = document.createElement('span');
     newSpan.style.opacity = '0';
     newSpan.textContent = nextText;
     elBot1.appendChild(newSpan);
     elBot1.classList.add('sp-stack__card--active');
 
-    // Hide active text
     elActiveText.style.transition = 'opacity 0.15s ease-out';
     elActiveText.style.opacity = '0';
 
     pillStack.offsetHeight;
 
     requestAnimationFrame(function() {
-      // top1 → top2 specs
+
       applyState(elTop1, S.top2, true);
-      // active → top1 specs (collapse)
+
       applyState(elActive, Object.assign({}, S.top1, { pad: '0' }), true);
-      // bot1 → active specs (expand)
+
       applyState(elBot1, S.active, true);
-      // bot2 → bot1 specs
+
       applyState(elBot2, S.bot1, true);
-      // elTop2 (now at bottom) → bot2 specs (appear from nothing)
+
       applyState(elTop2, S.bot2, true);
     });
 
-    // After animation: reassign roles
     setTimeout(function() {
-      // Clean old active
+
       elActive.classList.remove('sp-stack__card--active');
       if (elActiveText.parentNode) elActiveText.parentNode.removeChild(elActiveText);
 
-      // Rotate references: top2 went to bottom, everything shifts up
       var oldTop2 = elTop2;
       elTop2 = elTop1;
       elTop1 = elActive;
@@ -127,7 +115,6 @@
 
       pillStack.offsetHeight;
 
-      // Fade text in
       elActiveText.style.transition = 'opacity 0.2s ease-in';
       elActiveText.style.opacity = '1';
 
@@ -143,7 +130,6 @@
   var CARD_H = wheelEl ? wheelEl.offsetHeight : 364;
   var CENTER_Y = CARD_H / 2;
 
-  // Recalculate on resize
   window.addEventListener('resize', function() {
     if (wheelEl) {
       CARD_H = wheelEl.offsetHeight;
@@ -241,10 +227,8 @@
     }
 
     if (arrow) {
-      // Squash-and-stretch tied to nudge: as the arrow pushes forward it
-      // elongates horizontally and thins vertically (tips pulled in), preserving
-      // visual volume — exaggerates the sense of motion.
-      var stretchAmt = Math.abs(arrowNudge) / 16; // normalize against max nudge
+
+      var stretchAmt = Math.abs(arrowNudge) / 16;
       var sx = 1 + stretchAmt * 0.22;
       var sy = 1 - stretchAmt * 0.16;
       arrow.style.transform = 'translateY(-50%) translateX(' + arrowNudge.toFixed(1) + 'px) scale(' + sx.toFixed(3) + ', ' + sy.toFixed(3) + ')';
@@ -254,7 +238,6 @@
   render();
   updateDescription(currentIdx);
 
-  // --- Hover ---
   wheelContainer.style.pointerEvents = 'auto';
 
   track.addEventListener('mouseover', function(e) {
@@ -272,7 +255,6 @@
     }
   });
 
-  // --- Click to scroll ---
   track.addEventListener('click', function(e) {
     if (dragging) return;
     var target = e.target.closest('.sp-wheel__item');
@@ -285,9 +267,9 @@
   });
 
   function scrollToService(targetIdx) {
-    // Calculate shortest path (how many steps forward)
+
     var diff = targetIdx - currentIdx;
-    // Normalize to shortest direction
+
     if (diff > N / 2) diff -= N;
     if (diff < -N / 2) diff += N;
     if (diff === 0) return;
@@ -300,7 +282,7 @@
     var from = 0;
     var to = totalDeg;
     var start = performance.now();
-    // Duration scales with steps but caps out
+
     var dur = Math.min(300 + steps * 150, 900);
     var nudgeStarted = false;
 
@@ -326,7 +308,6 @@
     requestAnimationFrame(tick);
   }
 
-  // --- Spring nudge ---
   function springPushReturn(t) {
     if (t < 0.2) {
       var p = t / 0.2;
@@ -441,7 +422,6 @@
       var textT = Math.min(textElapsed / (NUDGE_DUR - arrowLead), 1);
       activeNudge = distance * springPushReturn(textT);
 
-      // Trigger sweep + card switch at arrow peak (~120ms)
       if (!sweepTriggered && elapsed >= 120) {
         sweepTriggered = true;
         updateDescription(currentIdx);
@@ -461,11 +441,9 @@
     requestAnimationFrame(tick);
   }
 
-  // --- Auto-advance with pausable timer ---
   var paused = false;
   var offScreen = false;
 
-  // Expose global control for visibility observer
   window.wheelSetPaused = function(val) {
     offScreen = val;
     if (val) pauseSweep();
@@ -531,7 +509,6 @@
     timerRAF = requestAnimationFrame(timerTick);
   }
 
-  // Reset timer when wheel changes (click, drag)
   function resetTimer() {
     timerElapsed = 0;
     timerLastTime = performance.now();
@@ -540,7 +517,6 @@
   timerTick();
   triggerSweep();
 
-  // --- Drag to spin ---
   var pointerDown = false;
   var dragging = false;
   var dragStartY = 0;
@@ -562,7 +538,6 @@
   function onPointerMove(y) {
     if (!pointerDown) return;
 
-    // Only enter drag mode after threshold
     if (!dragging) {
       if (Math.abs(y - dragStartY) < DRAG_THRESHOLD) return;
       dragging = true;
@@ -584,10 +559,9 @@
     if (!pointerDown) return;
     pointerDown = false;
 
-    if (!dragging) return; // was a click, not a drag
+    if (!dragging) return;
     dragging = false;
 
-    // Snap to nearest item based on current scroll position
     var stepsOffset = Math.round(scrollAngle / STEP_DEG);
     if (stepsOffset === 0) {
       animateSnapBack();
@@ -595,11 +569,10 @@
     }
 
     var targetIdx = ((currentIdx + stepsOffset) % N + N) % N;
-    // Commit immediately and animate the remainder
-    currentIdx = targetIdx;
-    scrollAngle = scrollAngle - stepsOffset * STEP_DEG; // leftover fractional offset
 
-    // Animate snap to exact position
+    currentIdx = targetIdx;
+    scrollAngle = scrollAngle - stepsOffset * STEP_DEG;
+
     var from = scrollAngle;
     var start = performance.now();
     var dur = 200;
@@ -642,7 +615,6 @@
     requestAnimationFrame(tick);
   }
 
-  // Mouse events
   wheelContainer.addEventListener('mousedown', function(e) {
     e.preventDefault();
     onPointerDown(e.clientY);
@@ -652,7 +624,6 @@
   });
   window.addEventListener('mouseup', function() { onPointerUp(); });
 
-  // Touch events
   wheelContainer.addEventListener('touchstart', function(e) {
     onPointerDown(e.touches[0].clientY);
   }, { passive: true });
@@ -661,7 +632,6 @@
   }, { passive: true });
   window.addEventListener('touchend', function() { onPointerUp(); });
 
-  // Change cursor on wheel
   wheelContainer.style.cursor = 'grab';
   wheelContainer.addEventListener('mousedown', function() {
     wheelContainer.style.cursor = 'grabbing';
