@@ -61,8 +61,7 @@ export const SLOP_COPY: CaseStudyCopy = {
       },
       {
         type: "scopeList",
-        heading: "범위",
-        body: "크롬 확장과 Next.js 웹 프론트를 맡았습니다. 쇼츠 생성과 인증은 NestJS API에 맡기고, UI가 빈 목업이 아니게 맞췄습니다.",
+        heading: "구성",
         groups: [
           { title: "확장", items: ["플로팅 버튼", "페이지 파싱", "텍스트 선택 팝업", "인라인 재해석"] },
           { title: "웹", items: ["구글 OAuth 로그인", "온보딩", "릴스 피드", "검색과 프로필"] },
@@ -151,8 +150,7 @@ export const SLOP_COPY: CaseStudyCopy = {
       },
       {
         type: "scopeList",
-        heading: "Scope",
-        body: "I owned the Chrome extension and the Next.js frontend. Shorts generation and auth sit on the NestJS API, wired so the UI is not a mock.",
+        heading: "Breakdown",
         groups: [
           { title: "Extension", items: ["Floating button", "Page parse", "Text-select popup", "Inline rewrite"] },
           { title: "Web", items: ["Google OAuth", "Onboarding", "Reels feed", "Search and profile"] },

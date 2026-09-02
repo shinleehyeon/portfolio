@@ -12,7 +12,7 @@ function loadScript(src: string, force: boolean) {
     }
     if (force) existing.forEach((el) => el.remove());
     const el = document.createElement("script");
-    el.src = force ? `${src}?t=${Date.now()}` : src;
+    el.src = src;
     el.async = false;
     el.dataset.siteSrc = src;
     el.onload = () => resolve();

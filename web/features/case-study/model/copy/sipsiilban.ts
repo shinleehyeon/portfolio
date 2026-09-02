@@ -68,8 +68,7 @@ export const SIPSIILBAN_COPY: CaseStudyCopy = {
       },
       {
         type: "scopeList",
-        heading: "범위",
-        body: "화면 흐름과 모바일 앱을 맡았습니다. 결제 API와 가맹점 POS는 팀과 맞춰, UI가 빈 목업이 아니게 했습니다.",
+        heading: "구성",
         groups: [
           { title: "앱", items: ["구글 로그인", "온보딩 · 서류 업로드", "홈 · 지도 · 검색", "QR 결제 · 주문 상태"] },
           { title: "POS", items: ["QR 수신", "주문 처리", "가맹점 온보딩"] },
@@ -147,8 +146,7 @@ export const SIPSIILBAN_COPY: CaseStudyCopy = {
       },
       {
         type: "scopeList",
-        heading: "Scope",
-        body: "I owned the screen flow and the mobile app. Payment APIs and merchant POS were aligned with the team so the UI was not a mock on empty endpoints.",
+        heading: "Breakdown",
         groups: [
           { title: "App", items: ["Google login", "Onboarding · document upload", "Home · map · search", "QR pay · order status"] },
           { title: "POS", items: ["QR receive", "Order handling", "Merchant onboarding"] },

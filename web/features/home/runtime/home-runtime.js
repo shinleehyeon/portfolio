@@ -1,11 +1,22 @@
 (function () {
 
+    if (window.__homeRuntimeCleanup) window.__homeRuntimeCleanup();
+    var __cleanupFns = [];
+    function __track(target, type, fn, opts) {
+      target.addEventListener(type, fn, opts);
+      __cleanupFns.push(function() { target.removeEventListener(type, fn, opts); });
+    }
+    window.__homeRuntimeCleanup = function() {
+      __cleanupFns.forEach(function(fn) { fn(); });
+      __cleanupFns = [];
+    };
+
     (function() {
       var header = document.querySelector('.mobile-header');
       if (!header) return;
       var lastY = 0;
       var hidden = false;
-      window.addEventListener('scroll', function() {
+      __track(window, 'scroll', function() {
         var y = window.scrollY;
         if (y > lastY && y > 60 && !hidden) {
           header.style.transform = 'translateY(-100%)';
@@ -38,7 +49,7 @@
       }
     }
 
-    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    __track(window, 'scroll', updateActiveNav, { passive: true });
     updateActiveNav();
 
     var globeSvg = document.querySelector('.globe-svg');
@@ -97,13 +108,13 @@
             d.cy = r.top + r.height / 2;
           });
         };
-        window.addEventListener('scroll', updatePositions, { passive: true });
-        window.addEventListener('resize', updatePositions);
+        __track(window, 'scroll', updatePositions, { passive: true });
+        __track(window, 'resize', updatePositions);
 
         var lastX = 0, lastT = 0;
         var lastDir = 1;
 
-        document.addEventListener('pointermove', function(e) {
+        __track(document, 'pointermove', function(e) {
           var now = performance.now();
           var dt = Math.max(1, now - lastT);
           var vx = (e.clientX - lastX) / dt;
@@ -303,7 +314,7 @@
         catCursorEl.style.top = e.clientY + 'px';
       }
 
-      document.addEventListener('mousemove', moveCatCursor);
+      __track(document, 'mousemove', moveCatCursor);
 
       var catTriggerEl = null;
 
@@ -763,8 +774,8 @@
         }
       }
       setStickyTops();
-      window.addEventListener('load', setStickyTops);
-      window.addEventListener('resize', setStickyTops);
+      __track(window, 'load', setStickyTops);
+      __track(window, 'resize', setStickyTops);
 
       function onScroll() {
         for (var i = 0; i < studies.length - 1; i++) {
@@ -790,8 +801,9 @@
         }
       }
 
-      window.addEventListener('scroll', onScroll, { passive: true });
+      __track(window, 'scroll', onScroll, { passive: true });
       onScroll();
+      window.dispatchEvent(new Event('home-layout-ready'));
     })();
 
     document.querySelectorAll('.case-study').forEach(function(card) {
@@ -1691,7 +1703,7 @@ if (footerYear) footerYear.textContent = new Date().getFullYear();
           if (window._hideCatCursor) window._hideCatCursor();
         });
 
-        window.addEventListener('scroll', function() {
+        __track(window, 'scroll', function() {
           clearTimeout(catPhotoTimer);
           if (window._hideCatCursor) window._hideCatCursor();
         }, { passive: true });

@@ -126,25 +126,15 @@ function GraduationCapIcon() {
   );
 }
 
-function YoutubeIcon() {
-  return (
-    <svg className="activity-item__icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
-      <path d="m10 15 5-3-5-3z" />
-    </svg>
-  );
-}
-
 const ACTIVITY_ICONS = {
   newspaper: NewspaperIcon,
   "graduation-cap": GraduationCapIcon,
-  youtube: YoutubeIcon,
 } as const;
 
 const ACTIVITIES = [
   {
     title: "엔지니어를 넘어 '빌더'로, 당근 Builder's Camp 해커톤",
-    description: "지역 사회의 단절 문제를 해결하는 제품을 만들며 진정한 빌더로 성장한 경험을 당근 커리어 블로그에서 소개했습니다.",
+    description: "당근 빌더스 캠프 해커톤에서 우승한 경험을 소개한 당근 블로그입니다.",
     date: "2025",
     icon: "newspaper",
     href: "https://careers.daangn.com/blog/post/%EB%8B%B9%EA%B7%BC-%ED%95%B4%EC%BB%A4%ED%86%A4-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4-%EC%B1%84%EC%9A%A9/",
@@ -155,13 +145,6 @@ const ACTIVITIES = [
     date: "2025",
     icon: "newspaper",
     href: "https://www.uslash.org/projects/uthon25",
-  },
-  {
-    title: "제15회 e-ICON 세계대회 홍보영상",
-    description: "세계대회 홍보영상 제작에 참여했습니다.",
-    date: "2025",
-    icon: "youtube",
-    href: "https://youtu.be/vj_PzdfkFlc",
   },
 ] as const;
 

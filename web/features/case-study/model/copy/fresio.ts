@@ -78,8 +78,7 @@ export const FRESIO_COPY: CaseStudyCopy = {
       },
       {
         type: "scopeList",
-        heading: "범위",
-        body: "앱 흐름과 기기 연동을 맡았습니다. FastAPI와 디스플레이가 같은 재료·타이머를 보게 맞춰, UI가 빈 목업이 아니게 했습니다.",
+        heading: "구성",
         groups: [
           { title: "앱", items: ["구글 로그인 · 온보딩", "식단 선택", "카메라 Wi-Fi", "홈 · 냉장고 · 타이머 · 설정"] },
           { title: "기기", items: ["부팅 QR · 인증 코드", "메인 대시보드", "레시피 응답", "요리 타이머"] },
@@ -157,8 +156,7 @@ export const FRESIO_COPY: CaseStudyCopy = {
       },
       {
         type: "scopeList",
-        heading: "Scope",
-        body: "I owned the app flow and device pairing. FastAPI and the display were aligned so the UI was not a mock on empty food and empty timers.",
+        heading: "Breakdown",
         groups: [
           { title: "App", items: ["Google login · onboarding", "Diet pick", "Camera Wi-Fi", "Home · fridge · timer · settings"] },
           { title: "Device", items: ["Boot QR · auth code", "Home dashboard", "Recipe answer", "Cook timer"] },

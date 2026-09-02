@@ -83,10 +83,12 @@ export function CaseStudyBlockRenderer({ block }: { block: CaseStudyBlock }) {
         <section className="cs-section">
           <div className="centered">
             <h2 className="cs-heading shiny-hover">{block.heading}</h2>
-            <div className="cs-body">
-              <p>{block.body}</p>
-            </div>
-            <div className="cs-focus-list cs-focus-list--outline" style={{ marginTop: "24px" }}>
+            {block.body ? (
+              <div className="cs-body">
+                <p>{block.body}</p>
+              </div>
+            ) : null}
+            <div className="cs-focus-list cs-focus-list--outline" style={{ marginTop: block.body ? "24px" : undefined }}>
               {block.groups.map((group) => (
                 <div className="cs-focus-item" key={group.title}>
                   <h3 className="cs-focus-item__title">{group.title}</h3>

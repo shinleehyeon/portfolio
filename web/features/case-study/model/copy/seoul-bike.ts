@@ -68,8 +68,7 @@ export const SEOUL_BIKE_COPY: CaseStudyCopy = {
       },
       {
         type: "scopeList",
-        heading: "범위",
-        body: "화면과 데이터 파이프라인을 같이 만들었습니다. 프론트는 정적 JSON을 읽고, 백엔드는 매일 다시 돌릴 수 있는 스크립트입니다.",
+        heading: "구성",
         groups: [
           { title: "화면", items: ["구·기간 KPI 대시보드", "사고·전용도로 지도", "블랙스팟 순위", "AI 개입 채팅"] },
           { title: "파이프라인", items: ["TAAS 자전거 사고 수집", "좌표 변환과 구 매칭", "전용도로 폴리곤 생성", "인사이트 JSON 발행"] },
@@ -152,8 +151,7 @@ export const SEOUL_BIKE_COPY: CaseStudyCopy = {
       },
       {
         type: "scopeList",
-        heading: "Scope",
-        body: "I built the interface and the data path together. The frontend reads static JSON. The backend is a set of scripts you can run again.",
+        heading: "Breakdown",
         groups: [
           { title: "Interface", items: ["District and period KPI dashboard", "Crash and lane map", "Blackspot ranking", "AI intervention chat"] },
           { title: "Pipeline", items: ["TAAS bike-accident fetch", "Coordinate convert and district match", "Dedicated-lane polygons", "Insights JSON publish"] },

@@ -22,7 +22,7 @@ export type CaseStudyBlock =
   | {
       type: "scopeList";
       heading: string;
-      body: string;
+      body?: string;
       groups: { title: string; items: string[] }[];
     }
   | { type: "textSection"; id: string; heading: string; body: string[] }

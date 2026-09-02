@@ -75,8 +75,7 @@ export const SAVEQUEST_COPY: CaseStudyCopy = {
       },
       {
         type: "scopeList",
-        heading: "범위",
-        body: "앱 화면과 챌린지 흐름을 맡았습니다. 결제 내역 분석과 보상 규칙은 한 파이프라인으로 맞춰, UI가 빈 숫자가 아니게 했습니다.",
+        heading: "구성",
         groups: [
           { title: "화면", items: ["홈 요약과 일일 도전", "챌린지와 랭킹", "캐릭터 상점", "알림과 설정"] },
           { title: "파이프라인", items: ["카드 결제 수집", "가맹점 매칭", "한도 대비 사용액", "상태·보상 발행"] },
@@ -160,8 +159,7 @@ export const SAVEQUEST_COPY: CaseStudyCopy = {
       },
       {
         type: "scopeList",
-        heading: "Scope",
-        body: "I owned the app surface and the challenge flow. Payment analysis and reward rules were wired as one pipeline so the UI was not empty numbers.",
+        heading: "Breakdown",
         groups: [
           { title: "Interface", items: ["Home summary and daily quests", "Challenges and ranking", "Character shop", "Alerts and settings"] },
           { title: "Pipeline", items: ["Card payment ingest", "Merchant match", "Spend vs cap", "Status and reward"] },

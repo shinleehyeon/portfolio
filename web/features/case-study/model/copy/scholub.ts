@@ -70,8 +70,7 @@ export const SCHOLUB_COPY: CaseStudyCopy = {
       },
       {
         type: "scopeList",
-        heading: "범위",
-        body: "프론트엔드와 제품 화면을 맡았습니다. 크롤러, NestJS API, LLM 서버는 팀과 같이 짜서 UI가 빈 엔드포인트 위 목업이 아니게 했습니다.",
+        heading: "구성",
         groups: [
           { title: "화면", items: ["논문 피드와 읽기 화면", "AI 검색", "토론 커뮤니티", "프로필과 선호"] },
           { title: "파이프라인", items: ["arXiv 수집과 PDF 추출", "리뷰어 선별", "요약, 번역, 태그", "썸네일 생성"] },
@@ -155,8 +154,7 @@ export const SCHOLUB_COPY: CaseStudyCopy = {
       },
       {
         type: "scopeList",
-        heading: "Scope",
-        body: "I owned the frontend and the product surface. The crawler, NestJS API, and LLM server were designed with the team so the UI was not a mock on empty endpoints.",
+        heading: "Breakdown",
         groups: [
           { title: "Interface", items: ["Paper feed and reading view", "AI search", "Discussion community", "Profiles and preferences"] },
           { title: "Pipeline", items: ["arXiv crawl and PDF extract", "Reviewer screening", "Summary, translation, tags", "Thumbnail generation"] },

@@ -1,3 +1,15 @@
+html.home-return .page-home {
+  opacity: 0;
+  transform: translateY(16px) scale(0.985);
+}
+
+html.home-return-play .page-home {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.45s var(--ease-out-quart),
+              transform 0.7s var(--ease-out-back-soft);
+}
+
 .reveal-load {
   opacity: 0;
   transform: translateY(16px) scale(0.985);
@@ -84,6 +96,13 @@
 
   html {
     scroll-behavior: auto;
+  }
+
+  html.home-return .page-home,
+  html.home-return-play .page-home {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   *, *::before, *::after {

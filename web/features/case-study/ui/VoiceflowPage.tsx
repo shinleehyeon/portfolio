@@ -131,11 +131,8 @@ export function VoiceflowPage() {
 
           <section className="cs-section">
             <div className="centered">
-              <h2 className="cs-heading shiny-hover">Scope</h2>
-              <div className="cs-body">
-                <p>Most of the work went into rethinking features, improving usability, testing, and visual design. This case study covers only the conversation design tool — signup, dashboards, and other flows are left out.</p>
-              </div>
-              <div className="cs-focus-list cs-focus-list--outline" style={{marginTop: "24px"}}>
+              <h2 className="cs-heading shiny-hover">Breakdown</h2>
+              <div className="cs-focus-list cs-focus-list--outline">
                 <div className="cs-focus-item">
                   <h3 className="cs-focus-item__title">Observation</h3>
                   <ul className="cs-list">
