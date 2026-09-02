@@ -1,10 +1,9 @@
 # dependencies
 node_modules/
-web/node_modules/
 
 # next
-web/.next/
-web/out/
+.next/
+out/
 
 # env / secrets
 .env
