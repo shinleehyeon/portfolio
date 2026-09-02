@@ -1,10 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, type ReactNode } from "react";
-
-function isRuntimeSrc(src: string) {
-  return /\/(js\/home-runtime|js\/voiceflow-runtime|wheel|trees)\.js(\?|$)/.test(src);
-}
+import type { SiteBoot } from "@/shared/lib/scripts";
 
 function loadScript(src: string, force: boolean) {
   return new Promise<void>((resolve, reject) => {
@@ -15,7 +12,7 @@ function loadScript(src: string, force: boolean) {
     }
     if (force) existing.forEach((el) => el.remove());
     const el = document.createElement("script");
-    el.src = src;
+    el.src = force ? `${src}?t=${Date.now()}` : src;
     el.async = false;
     el.dataset.siteSrc = src;
     el.onload = () => resolve();
@@ -33,32 +30,24 @@ function activateReveals() {
   });
 }
 
-export function SiteRuntime({
-  children,
-  scripts,
-}: {
-  children: ReactNode;
-  scripts: string[];
-}) {
-  const scriptKey = scripts.join("|");
+export function SiteRuntime({ children, boot }: { children: ReactNode; boot: SiteBoot }) {
+  const key = `${boot.cdn.join("|")}|${boot.run.join("|")}`;
 
   useLayoutEffect(() => {
     activateReveals();
-  }, [scriptKey]);
+  }, [key]);
 
   useEffect(() => {
     document.body.classList.add("fonts-ready");
     let cancelled = false;
     const timer = window.setTimeout(() => {
       void (async () => {
-        for (const src of scripts) {
+        for (const src of boot.cdn) {
           if (cancelled) return;
-          if (isRuntimeSrc(src)) continue;
           await loadScript(src, false);
         }
-        for (const src of scripts) {
+        for (const src of boot.run) {
           if (cancelled) return;
-          if (!isRuntimeSrc(src)) continue;
           await loadScript(src, true);
         }
       })();
@@ -67,7 +56,7 @@ export function SiteRuntime({
       cancelled = true;
       window.clearTimeout(timer);
     };
-  }, [scriptKey, scripts]);
+  }, [boot, key]);
 
   return <>{children}</>;
 }

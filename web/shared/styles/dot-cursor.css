@@ -1,0 +1,40 @@
+@media (hover: hover) and (pointer: fine) {
+  html.dot-cursor-on,
+  html.dot-cursor-on body,
+  html.dot-cursor-on * {
+    cursor: none !important;
+  }
+
+  .dot-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    margin: -6px 0 0 -6px;
+    border-radius: 50%;
+    background: #fff;
+    mix-blend-mode: difference;
+    pointer-events: none;
+    z-index: 2147483647;
+    opacity: 0;
+    will-change: transform;
+    transition: opacity 0.2s ease, width 0.16s ease, height 0.16s ease, margin 0.16s ease;
+  }
+
+  .dot-cursor.on {
+    opacity: 1;
+  }
+
+  .dot-cursor.hot {
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;
+  }
+
+  .dot-cursor.down {
+    width: 8px;
+    height: 8px;
+    margin: -4px 0 0 -4px;
+  }
+}

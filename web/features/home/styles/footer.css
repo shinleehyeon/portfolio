@@ -229,51 +229,6 @@
   }
 }
 
-/* ---------- Footer ---------- */
-.site-footer {
-  padding: 99px 0 0;
-  margin-bottom: -8px;
-}
-
-.footer__inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footer__copyright {
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 21.76px;
-  letter-spacing: -1px;
-  color: #2B2525;
-}
-
-.footer__copyright strong {
-  font-weight: 600;
-}
-
-.footer__socials {
-  display: flex;
-  gap: 32px;
-  align-items: center;
-}
-
-.footer__social {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.15s ease;
-}
-
-.footer__social:hover {
-  opacity: 0.7;
-}
-
-.footer__social img {
-  display: block;
-}
-
 /* ---------- About / Footer Responsive ---------- */
 @media (max-width: 1110px) {
   .about__body {
@@ -339,10 +294,6 @@
 
   .about__ask-ai-title {
     font-size: 24px;
-  }
-
-  .site-footer {
-    padding-top: 48px;
   }
 }
 
@@ -415,10 +366,6 @@
     font-size: 20px;
   }
 
-  .site-footer {
-    padding-top: 23px;
-  }
-
   .about__cta-card {
     padding: 20px 20px 24px;
     border-radius: 28px;
@@ -439,16 +386,5 @@
   .about__email-text {
     font-size: 17px;
     letter-spacing: -1px;
-  }
-
-  .footer__inner {
-    flex-direction: column;
-    gap: 24px;
-    text-align: center;
-  }
-
-  .footer__copyright {
-    font-size: 15px;
-    letter-spacing: -0.5px;
   }
 }

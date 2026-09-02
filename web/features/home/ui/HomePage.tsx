@@ -1,3 +1,4 @@
+import "@/features/home/styles/index.css";
 import { AboutSection } from "@/features/home/ui/AboutSection";
 import { ExperienceSection } from "@/features/home/ui/ExperienceSection";
 import { PublicationsSection } from "@/features/home/ui/PublicationsSection";

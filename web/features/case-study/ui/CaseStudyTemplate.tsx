@@ -1,5 +1,6 @@
 "use client";
 
+import "@/features/case-study/styles/index.css";
 import { useState } from "react";
 import { CaseStudyChrome } from "./CaseStudyChrome";
 import { CaseStudyBlockRenderer } from "./CaseStudyBlockRenderer";

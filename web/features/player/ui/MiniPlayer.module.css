@@ -1,15 +1,4 @@
-/* Mini player */
-
-.mini-player__yt {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.mini-player {
+.root {
   --mp-a: 168, 174, 184;
   --mp-b: 118, 126, 138;
   --mp-ink: 6, 6, 6;
@@ -43,12 +32,12 @@
     background-color 0.6s ease;
 }
 
-.mini-player.is-open {
+.root.open {
   width: 268px;
   border-radius: 22px;
 }
 
-.mini-player__liquid {
+.liquid {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -56,7 +45,7 @@
   pointer-events: none;
 }
 
-.mini-player__blob {
+.blob {
   position: absolute;
   width: 170%;
   height: 160%;
@@ -66,13 +55,13 @@
   animation: mini-player-blob 7.4s ease-in-out infinite alternate;
 }
 
-.mini-player__blob--a {
+.blobA {
   top: -48%;
   left: -42%;
   background: rgba(var(--mp-a), 0.95);
 }
 
-.mini-player__blob--b {
+.blobB {
   right: -50%;
   bottom: -56%;
   background: rgba(var(--mp-b), 0.88);
@@ -89,7 +78,7 @@
   }
 }
 
-.mini-player__hit {
+.hit {
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -99,7 +88,7 @@
   cursor: pointer;
 }
 
-.mini-player__row {
+.row {
   position: relative;
   z-index: 2;
   display: flex;
@@ -109,11 +98,11 @@
   pointer-events: none;
 }
 
-.mini-player__row > button {
+.row > button {
   pointer-events: auto;
 }
 
-.mini-player__disc {
+.disc {
   position: relative;
   width: 40px;
   height: 40px;
@@ -125,11 +114,11 @@
   animation-play-state: paused;
 }
 
-.mini-player__disc.is-spinning {
+.disc.spinning {
   animation-play-state: running;
 }
 
-.mini-player__cover {
+.cover {
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -139,7 +128,7 @@
   display: block;
 }
 
-.mini-player__disc::after {
+.disc::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -160,13 +149,13 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mini-player__disc,
-  .mini-player__blob {
+  .disc,
+  .blob {
     animation: none;
   }
 }
 
-.mini-player__meta {
+.meta {
   min-width: 0;
   flex: 1;
   display: flex;
@@ -174,14 +163,14 @@
   gap: 1px;
 }
 
-.mini-player__track,
-.mini-player__artist {
+.track,
+.artist {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.mini-player__track {
+.track {
   font-size: 14px;
   font-weight: 600;
   letter-spacing: -0.2px;
@@ -189,7 +178,7 @@
   color: rgb(var(--mp-ink));
 }
 
-.mini-player__artist {
+.artist {
   font-size: 13px;
   font-weight: 400;
   letter-spacing: -0.1px;
@@ -197,8 +186,8 @@
   color: rgba(var(--mp-muted), 0.62);
 }
 
-.mini-player__ctrl,
-.mini-player__close {
+.ctrl,
+.close {
   border: 0;
   background: transparent;
   color: rgb(var(--mp-ink));
@@ -210,22 +199,22 @@
   flex-shrink: 0;
 }
 
-.mini-player__ctrl {
+.ctrl {
   width: 32px;
   height: 32px;
 }
 
-.mini-player__close {
+.close {
   width: 30px;
   height: 30px;
   color: rgba(var(--mp-muted), 0.48);
 }
 
-.mini-player__close:hover {
+.close:hover {
   color: rgb(var(--mp-ink));
 }
 
-.mini-player__bar {
+.bar {
   position: relative;
   z-index: 2;
   display: grid;
@@ -233,21 +222,21 @@
   transition: grid-template-rows 0.36s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.mini-player.is-open .mini-player__bar {
+.root.open .bar {
   grid-template-rows: 1fr;
 }
 
-.mini-player__bar-inner {
+.barInner {
   overflow: hidden;
   min-height: 0;
   padding: 0 6px;
 }
 
-.mini-player.is-open .mini-player__bar-inner {
+.root.open .barInner {
   padding-top: 8px;
 }
 
-.mini-player__seek {
+.seek {
   position: relative;
   height: 18px;
   display: flex;
@@ -255,7 +244,7 @@
   cursor: pointer;
 }
 
-.mini-player__seek::before {
+.seek::before {
   content: "";
   display: block;
   width: 100%;
@@ -264,7 +253,7 @@
   background: rgba(var(--mp-ink), 0.18);
 }
 
-.mini-player__seek-fill {
+.seekFill {
   position: absolute;
   left: 0;
   height: 3px;
@@ -272,7 +261,7 @@
   background: rgb(var(--mp-ink));
 }
 
-.mini-player__seek-fill::after {
+.seekFill::after {
   content: "";
   position: absolute;
   right: -5px;
@@ -285,7 +274,7 @@
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.22);
 }
 
-.mini-player__times {
+.times {
   display: flex;
   justify-content: space-between;
   margin-top: 2px;
@@ -296,7 +285,7 @@
 }
 
 @media (max-width: 999px) {
-  .mini-player {
+  .root {
     top: auto;
     bottom: 16px;
     right: 16px;

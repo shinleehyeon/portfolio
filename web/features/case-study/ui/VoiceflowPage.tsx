@@ -1,3 +1,5 @@
+import "@/features/case-study/styles/index.css";
+
 export function VoiceflowPage() {
   return (
     <>

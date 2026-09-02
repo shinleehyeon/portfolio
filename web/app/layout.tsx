@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { SitePlayer } from "@/features/player";
+import { DotCursor } from "@/shared/ui/DotCursor";
 import "@/shared/styles/index.css";
-import "@/features/home/styles/index.css";
-import "@/features/case-study/styles/index.css";
-import "@/features/player/styles/index.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -32,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <SitePlayer>{children}</SitePlayer>
-        <script src="/js/dot-cursor.js" defer />
+        <DotCursor />
       </body>
     </html>
   );

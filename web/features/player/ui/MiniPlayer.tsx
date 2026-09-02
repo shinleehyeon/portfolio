@@ -4,6 +4,7 @@ import { useEffect, useState, type CSSProperties, type PointerEvent } from "reac
 import { FALLBACK_TONE, sampleArtwork, type ArtworkTone } from "@/features/player/model/artwork-tone";
 import { youtubeThumbFill } from "@/features/player/model/now-playing";
 import { usePlayer } from "./PlayerProvider";
+import styles from "./MiniPlayer.module.css";
 
 function fmt(seconds: number) {
   const safe = Number.isFinite(seconds) && seconds > 0 ? seconds : 0;
@@ -51,7 +52,7 @@ export function MiniPlayer() {
 
   return (
     <div
-      className={`mini-player${open ? " is-open" : ""}`}
+      className={`${styles.root}${open ? ` ${styles.open}` : ""}`}
       role="region"
       aria-label="Now playing"
       aria-expanded={open}
@@ -64,20 +65,20 @@ export function MiniPlayer() {
         } as CSSProperties
       }
     >
-      <div className="mini-player__liquid" aria-hidden="true">
-        <span className="mini-player__blob mini-player__blob--a" />
-        <span className="mini-player__blob mini-player__blob--b" />
+      <div className={styles.liquid} aria-hidden="true">
+        <span className={`${styles.blob} ${styles.blobA}`} />
+        <span className={`${styles.blob} ${styles.blobB}`} />
       </div>
-      <button type="button" className="mini-player__hit" aria-label={open ? "재생바 닫기" : "재생바 열기"} onClick={() => setOpen((v) => !v)} />
-      <div className="mini-player__row">
-        <span className={`mini-player__disc${playing ? " is-spinning" : ""}`}>
-          <img className="mini-player__cover" src={youtubeThumbFill(track.youtubeId)} alt="" />
+      <button type="button" className={styles.hit} aria-label={open ? "재생바 닫기" : "재생바 열기"} onClick={() => setOpen((v) => !v)} />
+      <div className={styles.row}>
+        <span className={`${styles.disc}${playing ? ` ${styles.spinning}` : ""}`}>
+          <img className={styles.cover} src={youtubeThumbFill(track.youtubeId)} alt="" />
         </span>
-        <div className="mini-player__meta">
-          <span className="mini-player__track">{track.title}</span>
-          <span className="mini-player__artist">{track.artist}</span>
+        <div className={styles.meta}>
+          <span className={styles.track}>{track.title}</span>
+          <span className={styles.artist}>{track.artist}</span>
         </div>
-        <button type="button" className="mini-player__ctrl" aria-label={playing ? "Pause" : "Play"} onClick={toggle}>
+        <button type="button" className={styles.ctrl} aria-label={playing ? "Pause" : "Play"} onClick={toggle}>
           {playing ? (
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <rect x="6" y="4" width="4" height="16" rx="1" />
@@ -89,16 +90,16 @@ export function MiniPlayer() {
             </svg>
           )}
         </button>
-        <button type="button" className="mini-player__close" aria-label="Close player" onClick={close}>
+        <button type="button" className={styles.close} aria-label="Close player" onClick={close}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
             <path d="M6 6l12 12M18 6L6 18" />
           </svg>
         </button>
       </div>
-      <div className="mini-player__bar">
-        <div className="mini-player__bar-inner">
+      <div className={styles.bar}>
+        <div className={styles.barInner}>
           <div
-            className="mini-player__seek"
+            className={styles.seek}
             role="slider"
             tabIndex={0}
             aria-label="Seek"
@@ -110,9 +111,9 @@ export function MiniPlayer() {
               if (e.currentTarget.hasPointerCapture(e.pointerId)) onSeek(e);
             }}
           >
-            <span className="mini-player__seek-fill" style={{ width: `${ratio * 100}%` }} />
+            <span className={styles.seekFill} style={{ width: `${ratio * 100}%` }} />
           </div>
-          <div className="mini-player__times">
+          <div className={styles.times}>
             <span>{fmt(currentTime)}</span>
             <span>{fmt(total)}</span>
           </div>

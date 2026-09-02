@@ -31,19 +31,6 @@
     flex-direction: column;
   }
 
-  .sidebar-name {
-    display: block;
-    margin-bottom: 27px;
-    position: relative;
-    width: 123px;
-    height: 48px;
-  }
-
-  .sidebar-name img {
-    width: 123px;
-    height: 48px;
-  }
-
   .sidebar-nav {
     display: flex;
     flex-direction: column;
@@ -77,54 +64,10 @@
     gap: 12px;
   }
 
-  .sidebar-divider {
-    border-top: 1px solid var(--border);
-    margin-bottom: 8px;
-  }
-
-  .sidebar-external {
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 21px;
-    color: var(--text-muted);
-    transition: color 0.2s ease;
-  }
-
-  .sidebar-external:hover {
-    color: var(--text);
-  }
-
   /* Content offset */
   .content {
     margin-left: var(--sidebar-width);
     padding: 0 40px 48px;
-  }
-
-
-  /* Work grid on desktop */
-  .work-grid {
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 16px;
-    row-gap: 64px;
-  }
-
-  /* Timeline grid on desktop */
-  .timeline-item {
-    grid-template-columns: 140px 1fr;
-    gap: 16px;
-  }
-
-  /* Case meta 4-col on desktop */
-  .case-meta {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .obj-outcome {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .card-grid {
-    grid-template-columns: repeat(3, 1fr);
   }
 }
 

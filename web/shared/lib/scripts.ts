@@ -13,16 +13,25 @@ export const GSAP_CASE = [
   "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js",
 ] as const;
 
-export const HOME_SCRIPTS = [...GSAP_CORE, "/wheel.js", "/js/home-runtime.js"];
-export const VOICEFLOW_SCRIPTS = [
-  "https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js",
-  "/trees.js",
-  ...GSAP_CASE,
-  "/js/voiceflow-runtime.js",
-];
-export const SCHOLUB_SCRIPTS = VOICEFLOW_SCRIPTS;
-export const SEOUL_BIKE_SCRIPTS = VOICEFLOW_SCRIPTS;
-export const SLOP_SCRIPTS = VOICEFLOW_SCRIPTS;
-export const SIPSIILBAN_SCRIPTS = SLOP_SCRIPTS;
-export const SAVEQUEST_SCRIPTS = VOICEFLOW_SCRIPTS;
-export const FRESIO_SCRIPTS = SIPSIILBAN_SCRIPTS;
+export type SiteBoot = {
+  cdn: readonly string[];
+  run: readonly string[];
+};
+
+export const HOME_BOOT: SiteBoot = {
+  cdn: GSAP_CORE,
+  run: ["/runtime/wheel.js", "/runtime/home-runtime.js"],
+};
+
+export const CASE_STUDY_BOOT: SiteBoot = {
+  cdn: ["https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js", ...GSAP_CASE],
+  run: ["/runtime/trees.js", "/runtime/voiceflow-runtime.js"],
+};
+
+export const VOICEFLOW_BOOT = CASE_STUDY_BOOT;
+export const SCHOLUB_BOOT = CASE_STUDY_BOOT;
+export const SEOUL_BIKE_BOOT = CASE_STUDY_BOOT;
+export const SLOP_BOOT = CASE_STUDY_BOOT;
+export const SIPSIILBAN_BOOT = CASE_STUDY_BOOT;
+export const SAVEQUEST_BOOT = CASE_STUDY_BOOT;
+export const FRESIO_BOOT = CASE_STUDY_BOOT;

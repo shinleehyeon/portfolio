@@ -2,7 +2,7 @@
 @import "./tokens.css";
 @import "./base.css";
 @import "./chrome.css";
-@import "./legacy.css";
-@import "./effects.css";
 @import "./desktop.css";
 @import "./motion.css";
+@import "./site-footer.css";
+@import "./dot-cursor.css";
