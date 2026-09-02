@@ -1,0 +1,102 @@
+/* Page load, scroll reveal, reduced motion */
+
+/* ---------- Page Load & Scroll Reveal ---------- */
+/* Spring-easing reveals: short opacity, slightly longer transform with soft overshoot */
+.reveal-load {
+  opacity: 0;
+  transform: translateY(16px) scale(0.985);
+}
+
+.reveal-load--active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.45s var(--ease-out-quart),
+              transform 0.7s var(--ease-out-back-soft);
+}
+
+.reveal-scroll {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.4s var(--ease-out-quart),
+              transform 0.65s var(--ease-out-back-soft);
+}
+
+/* Publications & About sections breathe slower */
+.publications__articles.reveal-scroll,
+.award-list.reveal-scroll,
+.publications__tools.reveal-scroll,
+.about__heading.reveal-scroll,
+.about__footer.reveal-scroll {
+  transition: opacity 0.5s var(--ease-out-quart),
+              transform 0.8s var(--ease-out-back-soft);
+}
+
+.publications__tools.reveal-scroll {
+  transition-delay: 120ms;
+}
+
+.reveal-scroll--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Sidebar load — container fades, children stagger */
+.sidebar.reveal-load {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.sidebar.reveal-load--active {
+  transform: translateY(0);
+}
+
+.sidebar .reveal-load {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.sidebar .reveal-load--active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s var(--ease-out-quart),
+              transform 0.55s var(--ease-out-back-soft);
+}
+
+/* Stagger experience rows */
+.experience__row.reveal-scroll:nth-child(1) { transition-delay: 0ms; }
+.experience__row.reveal-scroll:nth-child(2) { transition-delay: 40ms; }
+.experience__row.reveal-scroll:nth-child(3) { transition-delay: 80ms; }
+.experience__row.reveal-scroll:nth-child(4) { transition-delay: 120ms; }
+.experience__row.reveal-scroll:nth-child(5) { transition-delay: 160ms; }
+.experience__row.reveal-scroll:nth-child(6) { transition-delay: 200ms; }
+.experience__row.reveal-scroll:nth-child(7) { transition-delay: 240ms; }
+.experience__row.reveal-scroll:nth-child(8) { transition-delay: 280ms; }
+
+/* ---------- Reduced Motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .shiny-hover:hover {
+    animation: none;
+  }
+
+  .globe-spinning .globe-meridian {
+    animation: none !important;
+  }
+
+  .work-card {
+    transition: none;
+  }
+
+  a.work-card:hover {
+    transform: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,289 @@
+/* Older section styles still in use */
+
+/* ---------- Skills ---------- */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 12px;
+  row-gap: 12px;
+  margin-bottom: 0;
+}
+
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 22.5px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-body);
+  background: transparent;
+}
+
+/* ---------- Logo Bar ---------- */
+.logo-bar {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  margin-bottom: 79px;
+}
+
+.logo-bar__logo {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+  color: var(--text);
+  letter-spacing: -0.18px;
+}
+
+/* ---------- Work Grid ---------- */
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+.work-card {
+  display: block;
+  border-radius: 0;
+  overflow: visible;
+  text-decoration: none;
+  color: inherit;
+  border: none;
+  transition: transform 0.45s var(--ease-out-back-soft);
+  will-change: transform;
+}
+
+a.work-card {
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  a.work-card:hover {
+    transform: translateY(-4px);
+  }
+  a.work-card:active {
+    transform: translateY(-1px);
+    transition: transform 0.18s var(--ease-out-quart);
+  }
+}
+
+.work-card--static {
+  cursor: default;
+  opacity: 0.8;
+}
+
+.work-card--static:hover {
+  transform: none;
+}
+
+.work-card__image {
+  width: 100%;
+  aspect-ratio: 16 / 13;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.work-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.work-card__body {
+  padding: 16px 0 0;
+}
+
+.work-card__company {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--text);
+}
+
+.work-card__company em,
+.work-card__company i {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.work-card__role {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 24px;
+}
+
+/* ---------- Experience ---------- */
+.experience-group {
+  margin-bottom: 56px;
+}
+
+.experience-group-label {
+  font-family: var(--font);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 33.6px;
+  letter-spacing: -1.2px;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
+}
+
+.timeline-date {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--text-muted);
+}
+
+.timeline-role {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 25.5px;
+  color: var(--text);
+}
+
+.timeline-company {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--text-muted);
+}
+
+/* ---------- Testimonials ---------- */
+.testimonials {
+  margin-top: 16px;
+}
+
+.testimonial {
+  margin-bottom: 48px;
+}
+
+.testimonial__quote {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+  letter-spacing: -0.96px;
+  color: var(--text-body);
+  margin-bottom: 16px;
+}
+
+.testimonial__quote strong {
+  font-weight: 800;
+}
+
+.testimonial__name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.testimonial__role {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* ---------- Contact ---------- */
+.contact-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-body);
+  line-height: 30px;
+  margin-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 32px 0 32px;
+  align-items: center;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  height: 51px;
+  padding: 0 28px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background 0.2s ease;
+}
+
+.cta-button:hover {
+  background: var(--accent-hover);
+}
+
+.contact-link {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.contact-link:hover {
+  color: var(--accent);
+}
+
+.contact-link .arrow {
+  display: inline-block;
+  margin-left: 2px;
+  transition: transform 0.2s ease;
+}
+
+.contact-link:hover .arrow {
+  transform: translate(2px, -2px);
+}
+
+.contact-meta {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--text-muted);
+  margin-top: 0;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  margin-top: 128px;
+  padding: 32px 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  color: var(--text-muted);
+}

@@ -1,7 +1,7 @@
 import { Fragment } from "react";
-import { CaseStudyGallery } from "@/components/CaseStudyGallery";
-import { CaseStudyDemo } from "@/components/CaseStudyDemo";
-import type { CaseStudyBlock } from "@/lib/case-study/types";
+import { CaseStudyGallery } from "@/features/case-study/ui/CaseStudyGallery";
+import { CaseStudyDemo } from "@/features/case-study/ui/CaseStudyDemo";
+import type { CaseStudyBlock } from "@/features/case-study/model/types";
 
 export function CaseStudyBlockRenderer({ block }: { block: CaseStudyBlock }) {
   switch (block.type) {

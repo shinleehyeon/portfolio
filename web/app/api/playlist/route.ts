@@ -1,4 +1,4 @@
-import { parsePlaylistId, type PlaylistTrack } from "@/lib/now-playing";
+import { parsePlaylistId, type PlaylistTrack } from "@/features/player/model/now-playing";
 
 export async function GET(req: Request) {
   const raw = new URL(req.url).searchParams.get("id") || "";

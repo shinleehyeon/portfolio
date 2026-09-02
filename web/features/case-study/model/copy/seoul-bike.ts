@@ -1,4 +1,4 @@
-import type { CaseStudyCopy } from "@/lib/case-study/types";
+import type { CaseStudyCopy } from "@/features/case-study/model/types";
 
 const GALLERY = [
   { src: "/images/seoul-bike/dashboard.png", alt: "Seoul bike accident dashboard" },

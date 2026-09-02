@@ -1,0 +1,197 @@
+/* Floating top nav */
+
+/* ---------- Floating top nav (from /portfolio glass pill) ---------- */
+.top-nav {
+  display: none;
+  position: fixed;
+  top: 24px;
+  left: 0;
+  right: 0;
+  z-index: 120;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.top-nav__pill {
+  pointer-events: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 56px;
+  padding: 0 8px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: inset 0 4px 6px rgba(255, 255, 255, 0.25);
+}
+
+.top-nav__avatar {
+  display: block;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.top-nav__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+.top-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+
+.top-nav__link {
+  padding: 8px 10px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.358;
+  color: #060606;
+  text-decoration: none;
+  border-radius: 99px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  transition: border-color 0.18s ease, color 0.18s ease;
+}
+
+.top-nav__link:hover,
+.top-nav__link.active {
+  color: #060606;
+  border-color: #000;
+}
+
+.top-nav__cta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  background: #fff;
+  color: #000;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.358;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+}
+
+.top-nav__cta:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px -4px rgba(30, 58, 95, 0.4);
+}
+
+.page-home .about-section,
+.page-home .case-studies,
+.page-home .experience-section,
+.page-home .publications-section {
+  padding-top: 128px;
+  padding-bottom: 0;
+}
+
+.page-home .taped-footer {
+  margin-top: 128px;
+}
+
+@media (max-width: 999px) {
+  .page-home .about-section,
+  .page-home .case-studies,
+  .page-home .experience-section,
+  .page-home .publications-section {
+    padding-top: 80px;
+  }
+
+  .page-home .taped-footer {
+    margin-top: 80px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .page-home .top-nav {
+    display: flex;
+  }
+
+  .page-home .mobile-header,
+  .page-home .mobile-menu {
+    display: none !important;
+  }
+
+  .page-home .sidebar {
+    display: none !important;
+  }
+
+  .page-home .content {
+    margin-left: 0;
+  }
+
+  .page-home .section--hero {
+    padding-top: 196px;
+  }
+}
+
+@media (min-width: 1000px) and (max-width: 1199px) {
+  .top-nav__link {
+    padding: 8px 8px;
+    font-size: 13px;
+  }
+
+  .top-nav__cta {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+/* Global dot cursor (ported from reference portfolio's site.css) */
+@media (hover: hover) and (pointer: fine) {
+  html.dot-cursor-on,
+  html.dot-cursor-on body,
+  html.dot-cursor-on * {
+    cursor: none !important;
+  }
+
+  .dot-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    margin: -6px 0 0 -6px;
+    border-radius: 50%;
+    background: #fff;
+    mix-blend-mode: difference;
+    pointer-events: none;
+    z-index: 2147483647;
+    opacity: 0;
+    will-change: transform;
+    transition: opacity 0.2s ease, width 0.16s ease, height 0.16s ease, margin 0.16s ease;
+  }
+
+  .dot-cursor.on {
+    opacity: 1;
+  }
+
+  .dot-cursor.hot {
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;
+  }
+
+  .dot-cursor.down {
+    width: 8px;
+    height: 8px;
+    margin: -4px 0 0 -4px;
+  }
+}

@@ -1,0 +1,218 @@
+/* Case study sections and lists */
+
+/* ---------- Case Study Sections ---------- */
+.cs-section {
+  padding-top: 117px;
+}
+
+.cs-heading {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 41.6px;
+  letter-spacing: -2px;
+  color: var(--text);
+  margin-bottom: 24px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cs-body {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: -0.5px;
+  color: var(--text-body);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Intro and outcome keep 24px, full width */
+.cs-hero__intro,
+#outcome .cs-body {
+  font-size: 24px;
+  line-height: 140%;
+  letter-spacing: -0.7px;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#outcome .cs-body .cs-list li {
+  font-size: 24px;
+  line-height: 140%;
+  letter-spacing: -0.7px;
+}
+
+#outcome .cs-heading {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.cs-body p {
+  margin: 0 0 8px;
+}
+
+.cs-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Challenge / Solution / Impact labels */
+.cs-label {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+  margin-top: 32px;
+}
+
+.cs-label:first-child {
+  margin-top: 0;
+}
+
+.cs-body .cs-label {
+  margin-top: 32px;
+}
+
+.cs-body .cs-label:first-child {
+  margin-top: 0;
+}
+
+.cs-body .cs-list {
+  margin: 0;
+}
+
+.cs-body .cs-list li {
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: -0.5px;
+}
+
+.cs-body .cs-list + .cs-label {
+  margin-top: 32px;
+}
+
+.cs-body .cs-list li strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ---------- Body Note (scope callout) ---------- */
+.cs-body--note {
+  padding: 24px 28px;
+  background: var(--neutral-25);
+  border-radius: 16px;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: -0.5px;
+  color: var(--neutral-600);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cs-body--note p {
+  margin: 0;
+}
+
+/* ---------- Focus Items ---------- */
+.cs-focus-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 24px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cs-focus-item {
+  padding: 18px 24px 16px;
+  background: rgba(239, 246, 255, 0.8);
+  border-radius: 20px;
+  transition: background 0.2s ease;
+}
+
+.cs-focus-item:hover {
+  background: transparent;
+}
+
+.cs-focus-item__title {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  margin-bottom: 5px;
+}
+
+.cs-focus-list--outline .cs-focus-item {
+  background: none;
+  border: 1px solid rgba(232, 227, 227, 0.8);
+  transition: border-color 0.2s ease;
+}
+
+.cs-focus-list--outline .cs-focus-item:hover {
+  border-color: transparent;
+}
+
+.cs-focus-item .cs-list {
+  gap: 4px;
+}
+
+.cs-focus-item .cs-list li {
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: -0.5px;
+}
+
+.cs-focus-item__desc {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: -0.5px;
+  color: var(--text-body);
+  margin: 0;
+}
+
+/* ---------- Process Steps ---------- */
+.cs-process {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cs-process__title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: -0.3px;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.cs-process .cs-list {
+  gap: 6px;
+  list-style: none;
+  padding-left: 0;
+}
+
+.cs-process .cs-list li {
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--neutral-600);
+}
+
+/* ---------- Spaced List ---------- */
+.cs-list--spaced {
+  margin-top: 12px;
+  margin-bottom: 20px;
+}

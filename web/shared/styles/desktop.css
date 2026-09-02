@@ -1,0 +1,179 @@
+/* Desktop / sidebar breakpoints */
+
+/* ---------- Desktop Breakpoint (1296px+) ---------- */
+@media (min-width: 1296px) {
+
+  /* Hide mobile header */
+  .mobile-header {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: none !important;
+  }
+
+  /* Show sidebar */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    padding: 40px 0 40px 32px;
+    z-index: 50;
+  }
+
+  .sidebar-top {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-name {
+    display: block;
+    margin-bottom: 27px;
+    position: relative;
+    width: 123px;
+    height: 48px;
+  }
+
+  .sidebar-name img {
+    width: 123px;
+    height: 48px;
+  }
+
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .nav-link {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 22.5px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    color: var(--text-muted);
+    padding: 0;
+    transition: color 0.25s var(--ease-out-quart);
+  }
+
+  .nav-link:hover {
+    color: var(--text);
+  }
+
+  .nav-link.active {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sidebar-divider {
+    border-top: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+
+  .sidebar-external {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+  }
+
+  .sidebar-external:hover {
+    color: var(--text);
+  }
+
+  /* Content offset */
+  .content {
+    margin-left: var(--sidebar-width);
+    padding: 0 40px 48px;
+  }
+
+
+  /* Work grid on desktop */
+  .work-grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 16px;
+    row-gap: 64px;
+  }
+
+  /* Timeline grid on desktop */
+  .timeline-item {
+    grid-template-columns: 140px 1fr;
+    gap: 16px;
+  }
+
+  /* Case meta 4-col on desktop */
+  .case-meta {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .obj-outcome {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---------- Sidebar: narrower padding at <1328px ---------- */
+@media (min-width: 1296px) and (max-width: 1327px) {
+  .content {
+    padding: 0 24px 48px;
+  }
+}
+
+/* ---------- Sidebar: narrower at <1400px ---------- */
+@media (min-width: 1296px) and (max-width: 1399px) {
+  :root {
+    --sidebar-width: 160px;
+  }
+}
+
+/* ---------- Sidebar: compact at <1340px ---------- */
+@media (min-width: 1296px) and (max-width: 1339px) {
+  :root {
+    --sidebar-width: 148px;
+  }
+  .sidebar {
+    padding: 28px 0 28px 20px;
+  }
+}
+
+/* ---------- Content side padding when sidebar hidden but still desktop ---------- */
+@media (min-width: 1000px) and (max-width: 1295px) {
+  .content {
+    padding: 0 24px 48px;
+  }
+}
+
+/* ---------- Services widget tighter at <1130px ---------- */
+@media (max-width: 1127px) {
+  .publications__tools {
+    padding-left: 0;
+  }
+}
+
+@media (min-width: 1000px) and (max-width: 1129px) {
+  .sp-services__arrow {
+    left: 14px;
+  }
+  .sp-services__wheel {
+    left: -12px;
+  }
+  .sp-services__pill-stack {
+    left: 238px;
+  }
+}

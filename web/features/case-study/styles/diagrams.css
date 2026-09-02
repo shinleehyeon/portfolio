@@ -1,0 +1,230 @@
+/* Next case, diagrams, CTA */
+
+/* ---------- Next Case Study ---------- */
+.cs-next {
+  padding-top: 120px;
+  padding-bottom: 40px;
+}
+
+.cs-next__link {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 40px;
+  border-radius: 28px;
+  background: var(--neutral-25);
+  transition: background 0.2s ease;
+}
+
+.cs-next__link:hover {
+  background: var(--neutral-50);
+}
+
+.cs-next__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--neutral-500);
+  letter-spacing: -0.3px;
+}
+
+.cs-next__title {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 36px;
+  letter-spacing: -1.5px;
+  color: var(--text);
+}
+
+/* ---------- Interactive Diagrams ---------- */
+/* === Grid Treemap === */
+.ct-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 2px;
+  font-family: 'UCity Pro', system-ui, sans-serif;
+}
+
+.ct-cell {
+  border: 1.5px solid;
+  border-radius: 12px;
+  padding: 8px 10px;
+  min-height: 0;
+  transition: transform 0.4s cubic-bezier(0.32, 1.2, 0.5, 1),
+              box-shadow 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@media (hover: hover) {
+  .ct-cell:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px -4px rgba(24, 18, 18, 0.10);
+  }
+}
+
+.ct-cell-header {
+  font-size: 15px;
+  font-weight: 600;
+  color: #181212;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.ct-cell-count {
+  font-size: 12px;
+  font-weight: 400;
+  color: #837D7D;
+  flex-shrink: 0;
+}
+
+.ct-cell-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ct-cell-list li {
+  font-size: 13px;
+  font-weight: 400;
+  color: #3F393A;
+  line-height: 1.3;
+}
+
+.ct-cell-expandable {
+  font-weight: 500;
+  color: #181212;
+  cursor: pointer;
+}
+
+.ct-cell-arrow {
+  font-size: 12px;
+  color: #837D7D;
+  font-weight: 400;
+}
+
+.ct-cell-sublist {
+  list-style: none;
+  padding: 4px 0 2px 12px;
+  margin: 4px 0 0;
+  border-left: 1.5px solid #CDC8C8;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: hidden;
+  max-height: 500px;
+  transition: max-height 0.3s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.2s ease;
+  opacity: 1;
+}
+
+.ct-cell-sublist--collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+  padding: 0 0 0 12px;
+}
+
+.ct-cell-sublist li {
+  font-size: 14px;
+  font-weight: 400;
+  color: #6B6666;
+}
+
+.ct-leaf-row {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 4px;
+}
+
+.ct-cell--leaf {
+  padding: 6px 10px;
+  min-height: 0;
+  flex: 1;
+}
+
+.ct-cell--leaf .ct-cell-header {
+  font-size: 13px;
+  margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  .ct-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+
+  .ct-cell {
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
+
+  .ct-cell-header {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .ct-cell-list li {
+    font-size: 13px;
+  }
+}
+
+/* === D3 Collapsible Tree === */
+.cs-tree {
+  overflow: visible;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+}
+
+.cs-tree svg {
+  display: block;
+}
+
+#blocksTree {
+  max-width: 920px;
+  margin-top: -48px;
+  margin-bottom: -24px;
+}
+
+#messageTree {
+  max-width: 920px;
+  margin-top: -48px;
+  margin-bottom: -48px;
+}
+
+#pipelineTree,
+#systemTree,
+#seoulPipelineTree,
+#seoulSystemTree,
+#slopPipelineTree,
+#slopSystemTree,
+#savequestPipelineTree,
+#savequestSystemTree {
+  max-width: 800px;
+  margin-top: 8px;
+  margin-bottom: -24px;
+}
+
+.ct-link {
+  fill: none;
+  stroke-width: 1.2px;
+}
+
+.ct-node {
+  transition: opacity 0.2s ease;
+}
+
+.ct-node text {
+  pointer-events: none;
+}
+
+/* ---------- Case Study CTA Footer ---------- */
+.cs-cta-footer {
+  padding-top: 11px;
+}

@@ -1,7 +1,7 @@
 "use client";
 
-import { CaseStudyTemplate } from "@/components/case-study/CaseStudyTemplate";
-import { FRESIO_COPY } from "@/lib/fresio-copy";
+import { CaseStudyTemplate } from "@/features/case-study/ui/CaseStudyTemplate";
+import { FRESIO_COPY } from "@/features/case-study/model/copy/fresio";
 
 export function FresioPage() {
   return <CaseStudyTemplate copy={FRESIO_COPY} />;

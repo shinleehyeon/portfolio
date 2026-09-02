@@ -1,4 +1,4 @@
-import type { Lang } from "@/lib/case-study/types";
+import type { Lang } from "@/features/case-study/model/types";
 
 export function LangToggle({ lang, onChange }: { lang: Lang; onChange: (lang: Lang) => void }) {
   return (

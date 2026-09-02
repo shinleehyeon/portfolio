@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Lottie from "lottie-react";
-import bluePompomData from "@/lib/lottie/blue-pompom.json";
+import bluePompomData from "@/shared/lottie/blue-pompom.json";
 
 const POMPOM_WIDTH = 160;
 

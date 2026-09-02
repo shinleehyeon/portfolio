@@ -1,6 +1,6 @@
-import { SiteRuntime } from "@/components/SiteRuntime";
-import { HomePage } from "@/components/pages/HomePage";
-import { HOME_SCRIPTS } from "@/lib/scripts";
+import { SiteRuntime } from "@/shared/ui/SiteRuntime";
+import { HomePage } from "@/features/home";
+import { HOME_SCRIPTS } from "@/shared/lib/scripts";
 
 export default function Page() {
   return (

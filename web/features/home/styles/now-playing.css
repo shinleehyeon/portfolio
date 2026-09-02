@@ -1,0 +1,447 @@
+/* Social proof / now playing */
+
+/* ---------- Social Proof ---------- */
+.social-proof {
+  display: flex;
+  gap: 12px;
+  padding-top: 69px;
+  align-items: stretch;
+}
+
+.social-proof__left {
+  flex: 1;
+  min-width: 0;
+}
+
+.sp-card {
+  border-radius: 44px;
+  overflow: hidden;
+}
+
+/* Testimonial scroll — desktop only, handled in desktop media query */
+
+/* Services Card */
+.sp-card--services {
+  background: rgba(239, 246, 255, 0.48);
+  height: 364px;
+  position: relative;
+  padding: 12px 0 12px 12px;
+  display: flex;
+  align-items: center;
+}
+
+.sp-card--services::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 44px;
+  box-shadow:
+    inset 0 6px 14px 0 #F1F7FF,
+    inset 0 -12px 24px 0 #F1F7FF;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.sp-services__wheel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sp-wheel__track {
+  position: absolute;
+  inset: 0;
+}
+
+.sp-wheel__item {
+  position: absolute;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 25.6px;
+  letter-spacing: -1px;
+  color: var(--neutral-500);
+  opacity: 0.4;
+  white-space: nowrap;
+  transform-origin: left center;
+  will-change: transform, filter, opacity;
+}
+
+
+.sp-services__pill-stack {
+  position: absolute;
+  left: 262px;
+  top: 0;
+  bottom: 0;
+  width: 272px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-right: 12px;
+  z-index: 1;
+  box-sizing: border-box;
+}
+
+.sp-stack__card {
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sp-stack__card--active {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 128%;
+  letter-spacing: -1px;
+  color: var(--text-body);
+  display: flex;
+  align-items: center;
+}
+
+.sp-stack__card--active span {
+  display: block;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-break: strict;
+}
+
+.sp-services__arrow {
+  position: absolute;
+  left: 22px;
+  top: calc(50% - 2px);
+  transform: translateY(-50%);
+  transform-origin: 0 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* Backed-by Card */
+.sp-card--backed {
+  background: rgba(191, 239, 212, 0.32);
+  height: 173px;
+  padding: 41px 40px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.sp-backed__title {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 25.6px;
+  letter-spacing: -1px;
+  color: var(--neutral-600);
+  margin: 0;
+  text-align: center;
+}
+
+.sp-backed__logos {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.sp-backed__logo {
+  display: block;
+  opacity: 0.88;
+}
+
+.sp-now-playing-wrap {
+  position: relative;
+  flex: 0.9;
+  min-width: 0;
+}
+
+.sp-card--now-playing {
+  position: relative;
+  background: rgba(255, 230, 232, 0.88);
+  width: 100%;
+  height: 364px;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 14px 12px;
+  box-sizing: border-box;
+}
+
+.now-playing__pompom {
+  position: absolute;
+  right: 2px;
+  bottom: -2px;
+  width: 72px;
+  height: 40px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.now-playing__pompom .pompom-row {
+  position: static;
+}
+
+/* Testimonial Card */
+.sp-card--testimonial {
+  background: rgba(239, 246, 255, 0.88);
+  flex: 1;
+  min-width: 0;
+  height: 364px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding-bottom: 33px;
+}
+
+.sp-testimonial__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 12px 0;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  background: #F1F7FF;
+  z-index: 2;
+}
+
+.sp-testimonial__author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sp-testimonial__avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  background: #D1E3FF;
+  box-shadow:
+    inset 0 2px 0 0 rgba(193, 197, 240, 0.56),
+    0 2px 0 0 rgba(255, 255, 255, 0.56);
+  padding: 4px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.sp-testimonial__avatar img {
+  width: 56px;
+  height: 56px;
+  border-radius: 36px;
+  object-fit: cover;
+  display: block;
+}
+
+.sp-testimonial__avatar::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 56px;
+  height: 56px;
+  border-radius: 36px;
+  box-shadow:
+    inset 0 2px 0 0 rgba(24, 18, 18, 0.08),
+    0 2px 0 0 rgba(255, 255, 255, 0.32);
+  pointer-events: none;
+}
+
+.sp-testimonial__details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px 0 5px;
+}
+
+.sp-testimonial__name {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 25.6px;
+  letter-spacing: -1px;
+  color: var(--neutral-700);
+}
+
+.sp-testimonial__role {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 21.8px;
+  letter-spacing: -1px;
+  color: var(--neutral-500);
+}
+
+.sp-testimonial__nav {
+  display: flex;
+  gap: 4px;
+  background: rgba(209, 227, 255, 0.64);
+  box-shadow:
+    inset 0 2px 0 0 rgba(193, 197, 240, 0.20),
+    0 2px 0 0 rgba(255, 255, 255, 0.40);
+  border-radius: 1000px;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.sp-testimonial__btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 32px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.2s var(--ease-out-quart),
+              box-shadow 0.35s var(--ease-out-quart),
+              transform 0.4s var(--ease-out-back-soft);
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow:
+    inset 0 2px 0 0 rgba(255, 255, 255, 1),
+    0 1px 0 0 rgba(22, 24, 29, 0.02),
+    0 0 0 1px rgba(22, 24, 29, 0.02),
+    0 1px 8px -4px rgba(22, 24, 29, 0.04),
+    0 4px 12px -6px rgba(22, 24, 29, 0.04),
+    0 1px 3px 1px rgba(22, 24, 29, 0.01);
+}
+
+.sp-testimonial__btn svg {
+  display: block;
+  opacity: 0.72;
+  transition: opacity 0.15s ease;
+}
+
+/* Hover */
+.sp-testimonial__btn:hover:not(:disabled):not(.sp-testimonial__btn--pressed) {
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow:
+    inset 0 2px 0 0 rgba(255, 255, 255, 1),
+    0 0 0 1px rgba(0, 46, 113, 0.05),
+    0 2px 8px 0 rgba(0, 46, 113, 0.02),
+    0 4px 12px -20px rgba(0, 46, 113, 0.04),
+    0 6px 16px -20px rgba(0, 46, 113, 0.06),
+    0 8px 20px -20px rgba(0, 46, 113, 0.08),
+    0 10px 24px -20px rgba(0, 46, 113, 0.11),
+    0 12px 26px -20px rgba(0, 46, 113, 0.13),
+    0 14px 28px -20px rgba(0, 46, 113, 0.15);
+}
+
+.sp-testimonial__btn:hover:not(:disabled):not(.sp-testimonial__btn--pressed) svg {
+  opacity: 1;
+}
+
+/* Pressed (mouse down) */
+.sp-testimonial__btn--pressed {
+  background: rgba(255, 255, 255, 0.48) !important;
+  box-shadow: 0 1px 0 0 rgba(0, 46, 113, 0.04) !important;
+  transition: none !important;
+}
+
+.sp-testimonial__btn--pressed svg {
+  opacity: 0.56 !important;
+}
+
+/* Disabled */
+.sp-testimonial__btn:disabled {
+  background: transparent;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.sp-testimonial__btn:disabled svg {
+  opacity: 0.32;
+}
+
+.sp-testimonial__quote {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: -1px;
+  color: var(--text-body);
+  padding: 0 40px;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sp-testimonial__quote p:first-child {
+  text-indent: -0.36em;
+}
+
+.sp-testimonial__quote p {
+  margin: 0 0 9px;
+}
+
+.sp-testimonial__quote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Pagination dots — hidden on desktop */
+.sp-testimonial__dots {
+  display: none;
+  gap: 8px;
+  justify-content: center;
+  padding: 8px 0 4px;
+}
+
+.sp-testimonial__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #C1C5F0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.25s var(--ease-out-quart),
+              transform 0.4s var(--ease-out-back);
+}
+
+.sp-testimonial__dot--active {
+  background: #002E71;
+  transform: scale(1.33);
+}
+
+/* Testimonial scroll — use container query to only scroll when card is compressed */
+.sp-card--testimonial {
+  container-type: inline-size;
+}
+
+@container (max-width: 533px) {
+  .sp-testimonial__quote {
+    overflow-y: auto;
+    min-height: 0;
+    flex: 1;
+    scrollbar-width: thin;
+    scrollbar-color: #B5D3FF #F1F7FF;
+  }
+  .sp-testimonial__quote::-webkit-scrollbar {
+    width: 6px;
+  }
+  .sp-testimonial__quote::-webkit-scrollbar-track {
+    background: #F1F7FF;
+    border-radius: 3px;
+  }
+  .sp-testimonial__quote::-webkit-scrollbar-thumb {
+    background: #B5D3FF;
+    border-radius: 3px;
+  }
+}
+
+/* Lock testimonial height when side by side and compressed */
+@media (min-width: 1000px) {
+  .social-proof {
+    container-type: inline-size;
+  }
+}
+
+@container (max-width: 1079px) {
+  .sp-card--testimonial {
+    height: 364px;
+    overflow: hidden;
+  }
+}

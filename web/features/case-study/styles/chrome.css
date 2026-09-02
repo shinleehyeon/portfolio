@@ -1,0 +1,112 @@
+/* Case study chrome / sidebar */
+
+/* ---------- Case Study Sidebar ---------- */
+.cs-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--neutral-750, #352F2F);
+  margin-bottom: 32px;
+  transition: color 0.15s ease;
+}
+
+.cs-back svg {
+  flex-shrink: 0;
+  position: relative;
+  top: -0.5px;
+}
+
+.cs-back svg path {
+  fill: currentColor;
+}
+
+.cs-back:hover {
+  color: var(--neutral-950, #0F0A0A);
+}
+
+.cs-back:hover svg {
+  animation: back-arrow-nudge 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes back-arrow-nudge {
+  0%   { transform: translateX(0); }
+  35%  { transform: translateX(-7px); }
+  60%  { transform: translateX(1.5px); }
+  100% { transform: translateX(0); }
+}
+
+.cs-back:active {
+  opacity: 0.64;
+}
+
+.cs-lang {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  flex: 0 0 auto;
+  align-self: flex-start;
+  margin: 0 0 20px;
+  padding: 3px;
+  border: 1px solid var(--neutral-200, #E8E3E3);
+  border-radius: 999px;
+  background: #fff;
+}
+
+.cs-lang__btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--neutral-500, #837D7D);
+  padding: 5px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.cs-lang__btn.is-active {
+  background: var(--neutral-950, #0F0A0A);
+  color: #F5F0F0;
+}
+
+.mobile-header .cs-lang {
+  margin: 0;
+  width: max-content;
+  flex: 0 0 auto;
+}
+
+.cs-back-mobile {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--neutral-750, #352F2F);
+  transition: color 0.15s ease;
+}
+
+.cs-back-mobile svg {
+  flex-shrink: 0;
+  position: relative;
+  top: -0.5px;
+}
+
+.cs-back-mobile svg path {
+  fill: currentColor;
+}
+
+.cs-back-mobile:hover {
+  color: var(--neutral-950, #0F0A0A);
+}
+
+.cs-back-mobile:hover svg {
+  animation: back-arrow-nudge 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cs-back-mobile:active {
+  opacity: 0.64;
+}

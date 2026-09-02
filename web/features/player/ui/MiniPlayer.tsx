@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState, type CSSProperties, type PointerEvent } from "react";
-import { FALLBACK_TONE, sampleArtwork, type ArtworkTone } from "@/lib/artwork-tone";
-import { youtubeThumbFill } from "@/lib/now-playing";
+import { FALLBACK_TONE, sampleArtwork, type ArtworkTone } from "@/features/player/model/artwork-tone";
+import { youtubeThumbFill } from "@/features/player/model/now-playing";
 import { usePlayer } from "./PlayerProvider";
 
 function fmt(seconds: number) {

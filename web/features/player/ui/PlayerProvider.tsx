@@ -7,8 +7,8 @@ import {
   PLAYLIST_STORAGE_KEY,
   parsePlaylistId,
   type PlaylistTrack,
-} from "@/lib/now-playing";
-import { isSiteUrl } from "@/lib/site-origin";
+} from "@/features/player/model/now-playing";
+import { isSiteUrl } from "@/shared/lib/site-origin";
 import {
   close as engineClose,
   ensureEngine,
@@ -21,7 +21,7 @@ import {
   subscribe,
   toggle as engineToggle,
   type PlayerSnap,
-} from "@/lib/youtube-engine";
+} from "@/features/player/model/youtube-engine";
 
 type PlayerContextValue = PlayerSnap & {
   tracks: PlaylistTrack[];

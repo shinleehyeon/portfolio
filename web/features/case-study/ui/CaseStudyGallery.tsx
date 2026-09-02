@@ -76,6 +76,7 @@ export function CaseStudyGallery({
   const [i, setI] = useState(0);
   const [shown, setShown] = useState(slides[0].src);
   const transitioning = useRef(false);
+  const didChangeSlide = useRef(false);
   const pixelsRef = useRef<HTMLDivElement>(null);
   const thumbsRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -96,8 +97,12 @@ export function CaseStudyGallery({
   }, [rate, shown]);
 
   useEffect(() => {
-    const active = thumbsRef.current?.querySelector<HTMLElement>(".cs-gallery__thumb--active");
-    active?.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+    if (!didChangeSlide.current) return;
+    const scroller = thumbsRef.current;
+    const active = scroller?.querySelector<HTMLElement>(".cs-gallery__thumb--active");
+    if (!scroller || !active) return;
+    const left = active.offsetLeft - (scroller.clientWidth - active.offsetWidth) / 2;
+    scroller.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
   }, [i]);
 
   const toggle = () => {
@@ -119,6 +124,7 @@ export function CaseStudyGallery({
   const goTo = (idx: number) => {
     const next = (idx + slides.length) % slides.length;
     if (transitioning.current || next === i) return;
+    didChangeSlide.current = true;
 
     const pixels = pixelsRef.current?.children;
     if (!pixels) {

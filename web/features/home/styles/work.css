@@ -1,0 +1,635 @@
+/* Logos, case studies, experience, CTA */
+
+/* ---------- Logos Section ---------- */
+.logos-section {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 131px 0 127px;
+}
+
+.logos-section__divider {
+  flex: 1;
+  height: 1px;
+  display: block;
+  overflow: visible;
+}
+
+.logos-section__divider line {
+  stroke: #F5F0F0;
+}
+
+.logos-svg {
+  display: block;
+  overflow: visible;
+}
+
+.logos-svg path {
+  fill: #352F2F;
+  stroke: #352F2F;
+  stroke-width: 0.6;
+}
+
+.logos-svg[data-logo="yc"] path[data-logo-y="1"] {
+  fill: #FFFEFE;
+}
+
+.logos-section__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.logos-section__title {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 21.8px;
+  letter-spacing: -1px;
+  color: #352F2F;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.logos-section__logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logos-section__logos img {
+  display: block;
+}
+
+/* ---------- Section Heading 2 ---------- */
+.section-heading-2 {
+  font-family: var(--font);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -2px;
+  color: var(--text);
+  margin: 0;
+}
+
+/* ---------- Case Studies ---------- */
+.case-studies {
+  scroll-margin-top: 80px;
+  padding-top: 120px;
+}
+
+.case-study {
+  display: flex;
+  flex-direction: column;
+  gap: 31px;
+  position: sticky;
+  top: 56px;
+  z-index: 1;
+  will-change: opacity, filter;
+}
+
+.case-study + .case-study {
+  background: var(--bg);
+  border-radius: 64px 64px 0 0;
+  margin-top: 80px;
+  padding-top: 72px;
+  margin-left: -32px;
+  margin-right: -32px;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.case-study__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.case-study__buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.case-study__text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.case-study__title {
+  font-family: var(--font);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -2px;
+  color: var(--text);
+  margin: 0;
+}
+
+.case-study__caption {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: -0.7px;
+  margin: 0;
+}
+
+.case-study__caption-desc { color: var(--neutral-800); }
+.case-study__caption-dot { color: var(--neutral-200); font-weight: 600; }
+.case-study__caption-year { color: var(--neutral-500); }
+
+/* Read Case Study Button */
+.case-study__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 16px 17px 16px 22px;
+  background: #2D80FD;
+  color: #FFFFFF;
+  font-family: var(--font);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 21.8px;
+  letter-spacing: -0.5px;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.2s var(--ease-out-quart),
+              box-shadow 0.4s var(--ease-out-quart),
+              transform 0.45s var(--ease-out-back-soft);
+  box-shadow:
+    0 6px 16px -8px rgba(0, 46, 113, 0.08),
+    0 4px 12px -6px rgba(0, 46, 113, 0.06),
+    0 3px 8px -4px rgba(0, 46, 113, 0.06),
+    0 2px 6px -3px rgba(0, 46, 113, 0.04),
+    0 1px 4px -2px rgba(0, 46, 113, 0.04),
+    0 1px 3px -1px rgba(0, 46, 113, 0.02),
+    0 1px 2px 0 rgba(0, 46, 113, 0.01),
+    0 -1px 0 1px rgba(0, 46, 113, 0.16) inset;
+}
+
+@media (hover: hover) {
+  .case-study__btn:hover {
+    transform: translateY(-1px);
+    background: #1A6FE8;
+    box-shadow:
+      0 6px 32px -12px rgba(0, 46, 113, 0.16),
+      0 4px 24px -12px rgba(0, 46, 113, 0.12),
+      0 4px 12px -4px rgba(0, 46, 113, 0.08),
+      0 3px 8px -3px rgba(0, 46, 113, 0.06),
+      0 2px 4px -2px rgba(0, 46, 113, 0.04),
+      0 2px 4px -1px rgba(0, 46, 113, 0.02),
+      0 1px 3px 0 rgba(0, 46, 113, 0.01),
+      0 -1px 0 1px rgba(0, 46, 113, 0.16) inset,
+      0 1px 2px -1px rgba(0, 46, 113, 0.32) inset;
+  }
+}
+
+.case-study__btn:active {
+  background: rgba(45, 128, 253, 0.72);
+  box-shadow: none;
+  transform: translateY(0) scale(0.985);
+  transition: background 0.1s var(--ease-out-quart),
+              box-shadow 0.1s var(--ease-out-quart),
+              transform 0.12s var(--ease-out-quart);
+}
+
+.case-study__btn:active span,
+.case-study__btn:active svg {
+  opacity: 0.88;
+}
+
+
+/* Website Button */
+.case-study__website-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 100px;
+  background: #F5F0F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  text-decoration: none;
+  color: var(--neutral-600);
+  transition: background 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+  box-shadow: inset 0 2px 0 0 rgba(22, 24, 28, 0.02);
+}
+
+.case-study__website-btn:hover {
+  background: linear-gradient(rgba(15, 10, 10, 0.04), rgba(15, 10, 10, 0.04)), #F5F0F0;
+  color: var(--neutral-700);
+}
+
+.case-study__website-btn:active {
+  background: linear-gradient(rgba(15, 10, 10, 0.08), rgba(15, 10, 10, 0.08)), #F5F0F0;
+  box-shadow: inset 0 2px 0 0 rgba(22, 24, 28, 0.04);
+  color: var(--neutral-900);
+}
+
+.case-study__website-btn .globe-svg {
+  width: 20px;
+  height: 20px;
+}
+
+.case-study__website-btn:hover .globe-svg {
+  animation: none;
+}
+
+.case-study__website-btn:hover .globe-meridian {
+  animation: meridian-burst 1.75s ease-out forwards;
+}
+
+.case-study__website-btn:hover .globe-meridian.m2 {
+  animation-delay: -0.625s;
+}
+
+.case-study__btn span {
+  position: relative;
+  top: 0.5px;
+}
+
+.case-study__btn svg {
+  flex-shrink: 0;
+  transform-origin: 5px 12px;
+  transition: transform 0.45s var(--ease-out-back);
+  will-change: transform;
+}
+
+.case-study__btn:hover svg {
+  animation: arrow-nudge 0.7s var(--ease-out-back);
+}
+
+/* Squash-and-stretch tied to the existing nudge: as the arrow accelerates
+   forward it elongates + thins (tips pulled in), then slightly squashes on the
+   pull-back overshoot, settling back to neutral. */
+@keyframes arrow-nudge {
+  0%   { transform: translateX(0) scaleX(1) scaleY(1); }
+  35%  { transform: translateX(4.5px) scaleX(1.12) scaleY(0.91); }
+  60%  { transform: translateX(-0.8px) scaleX(0.98) scaleY(1.015); }
+  100% { transform: translateX(0) scaleX(1) scaleY(1); }
+}
+
+/* Mirror of arrow-nudge for left-pointing arrows (testimonial prev button) */
+@keyframes arrow-nudge-left {
+  0%   { transform: translateX(0) scaleX(1) scaleY(1); }
+  35%  { transform: translateX(-4.5px) scaleX(1.12) scaleY(0.91); }
+  60%  { transform: translateX(0.8px) scaleX(0.98) scaleY(1.015); }
+  100% { transform: translateX(0) scaleX(1) scaleY(1); }
+}
+
+/* Squash-and-stretch arrow on click for the testimonial nav buttons.
+   Origin matches the arrow's tail so the visible motion is the tip stretching. */
+.sp-testimonial__btn--next svg {
+  transform-origin: 5px 12px;
+  will-change: transform;
+}
+
+.sp-testimonial__btn--prev svg {
+  transform-origin: 19px 12px;
+  will-change: transform;
+}
+
+.sp-testimonial__btn--next.is-clicking svg {
+  animation: arrow-nudge 0.7s var(--ease-out-back);
+}
+
+.sp-testimonial__btn--prev.is-clicking svg {
+  animation: arrow-nudge-left 0.7s var(--ease-out-back);
+}
+
+/* Case Study Image */
+.case-study__image-wrap {
+  background: rgba(209, 227, 255, 0.72);
+  border-radius: 52px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.case-study__tilt {
+  position: relative;
+  will-change: transform;
+  border-radius: 14px;
+  z-index: 2;
+}
+
+.case-study__tilt .tilt-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: 14px;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out-quart);
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 0%, transparent 60%);
+}
+
+.case-study__image-wrap::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background:
+    conic-gradient(
+      from 0deg at 50% 50%,
+      transparent 0deg,
+      rgba(255, 255, 255, 1) 8deg,
+      transparent 16deg,
+      transparent 40deg,
+      rgba(255, 255, 255, 0.85) 48deg,
+      transparent 56deg,
+      transparent 90deg,
+      rgba(255, 255, 255, 0.95) 98deg,
+      transparent 106deg,
+      transparent 140deg,
+      rgba(255, 255, 255, 0.75) 148deg,
+      transparent 156deg,
+      transparent 190deg,
+      rgba(255, 255, 255, 0.9) 198deg,
+      transparent 206deg,
+      transparent 250deg,
+      rgba(255, 255, 255, 0.8) 258deg,
+      transparent 266deg,
+      transparent 310deg,
+      rgba(255, 255, 255, 0.7) 318deg,
+      transparent 326deg,
+      transparent 360deg
+    );
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+  filter: blur(40px);
+  animation: rays-rotate 40s linear infinite;
+}
+
+@keyframes rays-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.case-study__image {
+  width: 100%;
+  display: block;
+  border-radius: 14px;
+  position: relative;
+  z-index: 2;
+  box-shadow:
+    0 2px 0 0 rgba(11, 72, 158, 0.06),
+    0 50px 60px -25px rgba(11, 72, 158, 0.22);
+}
+
+video.case-study__image {
+  width: 100%;
+  height: auto;
+}
+
+.case-study__crop-wrap {
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  box-shadow:
+    0 2px 0 0 rgba(11, 72, 158, 0.06),
+    0 50px 60px -25px rgba(11, 72, 158, 0.22);
+}
+
+.case-study__image--crop-top {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.case-study__image--crop-1 { margin-top: -1px; }
+.case-study__image--crop-2 { margin-top: -2px; }
+
+.case-study__video-border {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  z-index: 2;
+  box-shadow:
+    0 2px 0 0 rgba(11, 72, 158, 0.06),
+    0 50px 60px -25px rgba(11, 72, 158, 0.22);
+}
+
+.case-study__video-border::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  border: 1.5px solid rgba(255, 255, 255, 0.64);
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.case-study__video-border--border-visible::after {
+  opacity: 1;
+}
+
+.case-study__video-border .case-study__image {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* ---------- Experience Section ---------- */
+.experience-section {
+  padding-top: 156px;
+  padding-bottom: 80px;
+  scroll-margin-top: 40px;
+}
+
+.experience__heading {
+  font-family: var(--font);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -2px;
+  color: var(--text);
+  margin: 0 0 49px;
+}
+
+.experience__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 43px;
+}
+
+.experience__row {
+  display: flex;
+  gap: 24px;
+  padding: 18px 20px;
+  margin: -18px -20px;
+  border-radius: 28px;
+  transition: background 0.35s var(--ease-out-quart);
+}
+
+@media (hover: hover) {
+  .experience__row:hover {
+    background: rgba(245, 240, 240, 0.48);
+  }
+
+  .experience__row:hover .experience__desc,
+  .experience__row:hover .experience__caption {
+    color: var(--neutral-700);
+  }
+}
+
+.experience__left {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  width: 360px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.experience__row:not(:last-child) .experience__left::after {
+  content: "";
+  position: absolute;
+  left: 27px;
+  top: 64px;
+  height: 32px;
+  width: 2px;
+  background: var(--neutral-400, #837d7d);
+}
+
+.experience__logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 0;
+  object-fit: cover;
+  flex-shrink: 0;
+  transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transform-origin: center center;
+}
+
+.experience__row:hover .experience__logo {
+  animation: logo-tilt 2s ease-in-out;
+}
+
+@keyframes logo-tilt {
+  0%   { transform: perspective(300px) rotateY(0deg) rotateX(0deg) scale(1); }
+  10%  { transform: perspective(300px) rotateY(7deg) rotateX(-3.5deg) scale(1.06); }
+  25%  { transform: perspective(300px) rotateY(-3deg) rotateX(2deg) scale(1.03); }
+  40%  { transform: perspective(300px) rotateY(1.5deg) rotateX(-1deg) scale(1.015); }
+  55%  { transform: perspective(300px) rotateY(-0.7deg) rotateX(0.4deg) scale(1.007); }
+  70%  { transform: perspective(300px) rotateY(0.3deg) rotateX(-0.15deg) scale(1.003); }
+  85%  { transform: perspective(300px) rotateY(-0.1deg) rotateX(0.05deg) scale(1.001); }
+  100% { transform: perspective(300px) rotateY(0deg) rotateX(0deg) scale(1); }
+}
+
+
+.experience__details {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding-top: 1px;
+}
+
+.experience__title {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 25.6px;
+  letter-spacing: -1px;
+  color: var(--text-body);
+}
+
+.experience__caption {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 21.8px;
+  letter-spacing: -1px;
+  color: var(--neutral-600);
+}
+
+.experience__caption-dot {
+  color: var(--neutral-200);
+}
+
+.experience__desc {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -1px;
+  color: var(--neutral-600);
+  margin: 0;
+  width: 680px;
+  max-width: 100%;
+  flex-shrink: 1;
+  padding-top: 1px;
+}
+
+/* Experience mobile */
+@media (max-width: 999px) {
+  .experience__row {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .experience__left {
+    width: 100%;
+    gap: 20px;
+  }
+  .experience__desc {
+    width: 100%;
+    font-size: 17px;
+  }
+  .experience__rows {
+    gap: 41px;
+  }
+  .experience__heading {
+    margin-bottom: 29px;
+  }
+  .experience-section {
+    padding-top: 76px;
+  }
+}
+
+/* ---------- CTA Block ---------- */
+.cta-block {
+  padding-top: 38px;
+  text-align: center;
+}
+
+.cta-block__content {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  background: rgba(239, 246, 255, 1);
+  border-radius: 84px;
+  padding: 12px 12px 12px 32px;
+  box-shadow: inset 0 1.5px 0 0 rgba(11, 72, 158, 0.04);
+}
+
+.cta-block__label {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 21.8px;
+  letter-spacing: -1px;
+  color: var(--text-body);
+}
+
+.cta-block__label--mobile {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .hero-name {
+    margin-bottom: 33px;
+  }
+  .cta-block__label--desktop {
+    display: none;
+  }
+  .cta-block__label--mobile {
+    display: inline;
+  }
+}

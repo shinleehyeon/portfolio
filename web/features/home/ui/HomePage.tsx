@@ -1,10 +1,10 @@
-import { AboutSection } from "@/components/home/AboutSection";
-import { ExperienceSection } from "@/components/home/ExperienceSection";
-import { PublicationsSection } from "@/components/home/PublicationsSection";
-import { ServicesSection } from "@/components/home/ServicesSection";
-import { SiteChrome } from "@/components/home/SiteChrome";
-import { SiteFooter } from "@/components/home/SiteFooter";
-import { WorkCases } from "@/components/home/WorkCases";
+import { AboutSection } from "@/features/home/ui/AboutSection";
+import { ExperienceSection } from "@/features/home/ui/ExperienceSection";
+import { PublicationsSection } from "@/features/home/ui/PublicationsSection";
+import { ServicesSection } from "@/features/home/ui/ServicesSection";
+import { SiteChrome } from "@/features/home/ui/SiteChrome";
+import { SiteFooter } from "@/features/home/ui/SiteFooter";
+import { WorkCases } from "@/features/home/ui/WorkCases";
 
 export function HomePage() {
   return (
@@ -13,9 +13,9 @@ export function HomePage() {
       <main className="content">
         <ServicesSection />
         <AboutSection />
-        <WorkCases />
         <ExperienceSection />
         <PublicationsSection />
+        <WorkCases />
       </main>
       <SiteFooter />
     </div>

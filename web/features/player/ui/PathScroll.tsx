@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useLayoutEffect } from "react";
-import { jumpToTop, restoreHomeScroll } from "@/lib/home-scroll";
+import { jumpToTop, restoreHomeScroll } from "@/shared/lib/home-scroll";
 
 export function PathScroll() {
   const pathname = usePathname();

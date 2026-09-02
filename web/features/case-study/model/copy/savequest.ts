@@ -1,4 +1,4 @@
-import type { CaseStudyCopy } from "@/lib/case-study/types";
+import type { CaseStudyCopy } from "@/features/case-study/model/types";
 
 const PHONES = [
   { src: "/images/savequest/home.jpg", alt: "SaveQuest home", fit: "phone" as const },

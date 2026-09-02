@@ -1,7 +1,7 @@
 "use client";
 
-import { CaseStudyTemplate } from "@/components/case-study/CaseStudyTemplate";
-import { SLOP_COPY } from "@/lib/slop-copy";
+import { CaseStudyTemplate } from "@/features/case-study/ui/CaseStudyTemplate";
+import { SLOP_COPY } from "@/features/case-study/model/copy/slop";
 
 export function SlopPage() {
   return <CaseStudyTemplate copy={SLOP_COPY} />;

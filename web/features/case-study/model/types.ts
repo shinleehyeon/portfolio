@@ -1,4 +1,4 @@
-import type { CaseStudySlide } from "@/components/CaseStudyGallery";
+import type { CaseStudySlide } from "@/features/case-study/ui/CaseStudyGallery";
 
 export type Lang = "ko" | "en";
 

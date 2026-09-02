@@ -36,11 +36,9 @@ function activateReveals() {
 export function SiteRuntime({
   children,
   scripts,
-  extraCss,
 }: {
   children: ReactNode;
   scripts: string[];
-  extraCss?: string[];
 }) {
   const scriptKey = scripts.join("|");
 
@@ -71,12 +69,5 @@ export function SiteRuntime({
     };
   }, [scriptKey, scripts]);
 
-  return (
-    <>
-      {extraCss?.map((href) => (
-        <link key={href} rel="stylesheet" href={href} />
-      ))}
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

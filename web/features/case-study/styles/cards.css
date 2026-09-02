@@ -1,0 +1,298 @@
+/* Outcome, UEQ, summarize */
+
+/* ---------- Outcome Cards ---------- */
+.cs-outcome-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.cs-outcome-card {
+  padding: 22px 28px 20px;
+  background: none;
+  border: 1px solid rgba(232, 227, 227, 0.8);
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease;
+}
+
+.cs-outcome-card:hover {
+  border-color: transparent;
+}
+
+.cs-outcome-card__metric {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -1.5px;
+  color: var(--neutral-750, #352F2F);
+  margin-bottom: 6px;
+}
+
+.cs-outcome-card__label {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  margin-bottom: 5px;
+}
+
+.cs-outcome-card__desc {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: -0.5px;
+  color: var(--text-body);
+  margin: 0;
+}
+
+/* ---------- UEQ Radar Chart ---------- */
+.cs-ueq-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+@media (max-width: 1080px) and (min-width: 901px) {
+  .cs-ueq-layout {
+    align-items: center;
+  }
+  .cs-ueq-radar svg {
+    transform: scale(0.9);
+    transform-origin: center center;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.cs-ueq-layout__text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cs-ueq-layout__text .cs-body {
+  margin: 0;
+}
+
+.cs-ueq-radar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+@media (max-width: 900px) {
+  .cs-ueq-layout {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+  #outcome .cs-ueq-layout__text .cs-body {
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: -0.3px;
+  }
+  .cs-ueq-radar svg {
+    transform: none;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .cs-ueq-layout + .cs-outcome-grid {
+    margin-top: 48px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cs-ueq-radar svg {
+    max-width: 100%;
+  }
+}
+
+.cs-ueq-radar svg {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  transform: scale(0.9);
+  transform-origin: top center;
+  margin-top: -24px;
+  margin-bottom: -40px;
+}
+
+.ueq-poly {
+  cursor: pointer;
+  transition: fill 0.3s ease, stroke-width 0.3s ease, stroke-opacity 0.3s ease;
+}
+
+.ueq-poly--before:hover,
+.ueq-poly--before.ueq-poly--active {
+  fill: rgba(172, 165, 165, 0.4);
+  stroke-width: 2.5;
+}
+
+.ueq-poly--after:hover,
+.ueq-poly--after.ueq-poly--active {
+  fill: rgba(45, 128, 253, 0.22);
+  stroke-width: 2.5;
+}
+
+.ueq-poly:not(:hover):not(.ueq-poly--active) ~ .ueq-poly:not(:hover):not(.ueq-poly--active) {
+  /* both idle — no dimming */
+}
+
+.ueq-tooltip {
+  position: fixed;
+  z-index: 9999;
+  font-family: 'UCity Pro', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  color: #fff;
+  background: #181212;
+  padding: 6px 14px;
+  border-radius: 8px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.ueq-tooltip--visible {
+  opacity: 1;
+}
+
+
+/* ---------- Summarize Button ---------- */
+.cs-summarize__btn {
+  font-family: 'UCity Pro', system-ui, sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--neutral-700, #3F393A);
+  background: rgba(232, 227, 227, 0.32);
+  border: none;
+  border-radius: 100px;
+  box-shadow: inset 0 1.5px 0 0 rgba(15, 10, 10, 0.03);
+  height: 56px;
+  padding: 0 22px;
+  position: relative;
+  left: -8px;
+  top: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.cs-summarize__btn:hover {
+  background: rgba(232, 227, 227, 0.56);
+  color: var(--neutral-900, #1E1919);
+}
+
+.cs-summarize__btn--loading {
+  background: rgba(232, 227, 227, 0.32);
+  cursor: default;
+}
+
+.cs-summarize__btn--loading .cs-summarize__text {
+  background: linear-gradient(
+    90deg,
+    var(--neutral-400, #908A8A) 0%,
+    var(--neutral-200, #CCC8C8) 40%,
+    var(--neutral-400, #908A8A) 80%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: summarize-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes summarize-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes summarize-nudge {
+  0%, 100% { transform: translateX(0); }
+  10% { transform: translateX(-7px); }
+  20% { transform: translateX(5.5px); }
+  30% { transform: translateX(-4.5px); }
+  40% { transform: translateX(3.5px); }
+  50% { transform: translateX(-2.5px); }
+  60% { transform: translateX(1.8px); }
+  70% { transform: translateX(-1px); }
+  80% { transform: translateX(0.5px); }
+  90% { transform: translateX(-0.2px); }
+}
+
+.cs-summarize__btn--nudge {
+  animation: summarize-nudge 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cs-summarize__btn--done {
+  border-color: transparent;
+  color: var(--neutral-400, #908A8A);
+  cursor: default;
+}
+
+.cs-summarize__panel {
+  position: fixed;
+  bottom: 32px;
+  left: var(--sidebar-width, 192px);
+  margin-left: 32px;
+  z-index: 200;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.cs-summarize__panel--visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.cs-summarize__panel-inner {
+  background: #181212;
+  color: #F5F0F0;
+  font-family: 'UCity Pro', system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.2px;
+  padding: 20px 24px;
+  border-radius: 16px;
+  max-width: 560px;
+  box-shadow: 0 8px 32px rgba(24, 18, 18, 0.2);
+}
+
+.cs-summarize__panel-inner p {
+  margin: 0 0 12px;
+}
+
+.cs-summarize__panel-inner p:last-child {
+  margin-bottom: 0;
+}
+
+.cs-summarize__panel-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  color: rgba(245, 240, 240, 0.5);
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px;
+  transition: color 0.15s ease;
+}
+
+.cs-summarize__panel-close:hover {
+  color: #F5F0F0;
+}

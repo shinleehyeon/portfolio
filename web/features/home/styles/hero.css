@@ -1,0 +1,114 @@
+/* Hero */
+
+/* ---------- Hero / About ---------- */
+.hero-name {
+  font-family: var(--font);
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -3px;
+  color: var(--text);
+  margin-bottom: 57px;
+  text-align: center;
+}
+
+.hero-tagline {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.hero-location {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+
+.hero-bio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 36px;
+  letter-spacing: -0.7px;
+  color: var(--text-body);
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.hero-bio p {
+  margin: 0;
+}
+
+.hero-bio--location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--neutral-500);
+  font-weight: 400;
+  perspective: 500px;
+}
+
+.flip-text {
+  display: inline-block;
+}
+
+.flip-char {
+  display: inline-block;
+  transform-style: preserve-3d;
+  will-change: transform;
+  backface-visibility: visible;
+}
+
+/* Animated Globe Icon */
+.globe-wrap {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  display: inline-flex;
+  position: relative;
+  top: -1px;
+}
+
+.globe-svg {
+  width: 22px;
+  height: 22px;
+  overflow: visible;
+}
+
+/* Meridian ellipses animate their rx to simulate rotation */
+.globe-meridian {
+  transform-origin: 11px 11px;
+  will-change: transform;
+  transform: scaleX(0.4);
+}
+
+.globe-meridian.m2 {
+  transform: scaleX(0.4);
+}
+
+.globe-spinning .globe-meridian {
+  animation: meridian-burst 1.75s ease-out forwards;
+}
+
+.globe-spinning .globe-meridian.m2 {
+  animation-delay: -0.625s;
+}
+
+
+@keyframes meridian-burst {
+  0%    { transform: scaleX(0.4); }
+  12.5% { transform: scaleX(1); }
+  25%   { transform: scaleX(0.4); }
+  37.5% { transform: scaleX(0.15); }
+  50%   { transform: scaleX(0.4); }
+  62.5% { transform: scaleX(1); }
+  75%   { transform: scaleX(0.4); }
+  87.5% { transform: scaleX(0.15); }
+  100%  { transform: scaleX(0.4); }
+}

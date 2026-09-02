@@ -1,0 +1,73 @@
+/* Fonts — UCity Pro */
+
+/* ---------- @font-face: UCity Pro ---------- */
+@font-face {
+  font-family: 'UCity Pro';
+  src: url('/fonts/UCityProWeb-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'UCity Pro';
+  src: url('/fonts/UCityProWeb-LightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: block;
+}
+@font-face {
+  font-family: 'UCity Pro';
+  src: url('/fonts/UCityProWeb-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'UCity Pro';
+  src: url('/fonts/UCityProWeb-RegularItalic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: block;
+}
+@font-face {
+  font-family: 'UCity Pro';
+  src: url('/fonts/UCityProWeb-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'UCity Pro';
+  src: url('/fonts/UCityProWeb-SemiboldItalic.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+  font-display: block;
+}
+@font-face {
+  font-family: 'UCity Pro';
+  src: url('/fonts/UCityProWeb-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'UCity Pro';
+  src: url('/fonts/UCityProWeb-BoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: block;
+}
+@font-face {
+  font-family: 'UCity Pro';
+  src: url('/fonts/UCityProWeb-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'UCity Pro';
+  src: url('/fonts/UCityProWeb-BlackItalic.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+  font-display: block;
+}

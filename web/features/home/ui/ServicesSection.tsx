@@ -1,5 +1,5 @@
-import { NowPlaying } from "@/components/home/NowPlaying";
-import { PompomMascots } from "@/components/home/PompomMascots";
+import { NowPlaying } from "@/features/home/ui/NowPlaying";
+import { PompomMascots } from "@/features/home/ui/PompomMascots";
 
 export function ServicesSection() {
   return (

@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { saveHomeScroll } from "@/lib/home-scroll";
-import { isSiteUrl } from "@/lib/site-origin";
-import { close as engineClose } from "@/lib/youtube-engine";
+import { saveHomeScroll } from "@/shared/lib/home-scroll";
+import { isSiteUrl } from "@/shared/lib/site-origin";
+import { close as engineClose } from "@/features/player/model/youtube-engine";
 
 export function ClientNav() {
   const router = useRouter();

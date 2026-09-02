@@ -1,0 +1,454 @@
+/* Taped footer and footer responsive */
+
+/* ---------- Taped Footer (21st.dev Footer Taped Design) ---------- */
+.page-home .content {
+  padding-bottom: 0;
+}
+
+.taped-footer {
+  width: 100%;
+  margin-top: 80px;
+  padding: 56px 40px 32px;
+  background: #F0F0F0;
+  color: #2B2525;
+}
+
+.taped-footer__inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.taped-footer__sheet {
+  position: relative;
+  overflow: visible;
+  background: #fff;
+  border: 5px solid #4994E2;
+  border-radius: 24px;
+  padding: 40px 16px;
+}
+
+.taped-footer__tape {
+  display: none;
+  position: absolute;
+  top: -13px;
+  left: -30px;
+  width: 80px;
+  height: 36px;
+  pointer-events: none;
+  transform: scale(0.75);
+  transform-origin: center;
+}
+
+.taped-footer__tape img {
+  display: block;
+  width: 95px;
+  height: 80px;
+  max-width: none;
+}
+
+.taped-footer__tape--right {
+  left: auto;
+  right: -32px;
+  transform: rotate(90deg) scale(0.75);
+}
+
+.taped-footer__row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 8px;
+}
+
+.taped-footer__brand {
+  max-width: 280px;
+}
+
+.taped-footer__name {
+  display: inline-block;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  color: #2B2525;
+}
+
+.taped-footer__tagline {
+  margin: 8px 0 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: rgba(43, 37, 37, 0.5);
+}
+
+.footer-pompom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  height: 90px;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.pompom-row {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+  pointer-events: auto;
+}
+
+.pompom {
+  display: block;
+  overflow: visible;
+}
+
+.taped-footer__cols {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 80px;
+}
+
+.taped-footer__col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.taped-footer__heading {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(43, 37, 37, 0.5);
+}
+
+.taped-footer__col a,
+.taped-footer__muted {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(43, 37, 37, 0.5);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.taped-footer__col a:hover {
+  color: #2B2525;
+}
+
+.taped-footer__muted {
+  pointer-events: none;
+}
+
+.taped-footer__soon {
+  display: inline-flex;
+  margin-left: 4px;
+  padding: 2px 12px;
+  border-radius: 12px;
+  background: #E5E5E5;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6B6666;
+}
+
+.taped-footer__soon--left {
+  transform: rotate(-3deg);
+}
+
+.taped-footer__soon--right {
+  transform: rotate(3deg);
+}
+
+.taped-footer__bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px 24px;
+  margin-top: 12px;
+  padding: 0 16px;
+}
+
+.taped-footer__copy,
+.taped-footer__bar-links a {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(43, 37, 37, 0.55);
+  text-decoration: none;
+}
+
+.taped-footer__bar-links {
+  display: flex;
+  gap: 16px;
+}
+
+.taped-footer__bar-links a:hover {
+  color: #2B2525;
+}
+
+@media (min-width: 768px) {
+  .taped-footer__tape {
+    display: block;
+  }
+
+  .taped-footer__row {
+    flex-direction: row;
+    gap: 40px;
+    padding: 0 32px;
+  }
+
+  .taped-footer__cols {
+    gap: 16px 80px;
+  }
+
+  .taped-footer__col {
+    gap: 16px;
+  }
+
+  .taped-footer__bar {
+    padding: 0 32px;
+  }
+}
+
+@media (max-width: 767px) {
+  .taped-footer {
+    margin-top: 56px;
+    padding: 28px 24px 24px;
+  }
+
+  .taped-footer__col--desktop {
+    display: none;
+  }
+
+  .taped-footer__sheet {
+    padding: 32px 16px;
+  }
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  padding: 99px 0 0;
+  margin-bottom: -8px;
+}
+
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__copyright {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 21.76px;
+  letter-spacing: -1px;
+  color: #2B2525;
+}
+
+.footer__copyright strong {
+  font-weight: 600;
+}
+
+.footer__socials {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.footer__social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.15s ease;
+}
+
+.footer__social:hover {
+  opacity: 0.7;
+}
+
+.footer__social img {
+  display: block;
+}
+
+/* ---------- About / Footer Responsive ---------- */
+@media (max-width: 1110px) {
+  .about__body {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 1079px) {
+  .about__hero-photo {
+    width: 28vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .about-section {
+    padding-top: 21px;
+  }
+
+  .about__body {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .about__hero-photo {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 24px;
+    order: -1;
+  }
+
+  .about__heading {
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: -1.5px;
+    padding-bottom: 32px;
+  }
+
+  .about__content {
+    font-size: 22px;
+    line-height: 32px;
+    letter-spacing: -0.5px;
+  }
+
+  .about__content p {
+    margin-bottom: 16px;
+  }
+
+  .about__footer {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 71px;
+  }
+
+  .about__cta-card {
+    flex: none;
+    border-radius: 32px;
+    padding: 28px 28px 32px;
+  }
+
+  .about__ask-ai {
+    padding: 40px 0 32px;
+  }
+
+  .about__ask-ai-title {
+    font-size: 24px;
+  }
+
+  .site-footer {
+    padding-top: 48px;
+  }
+}
+
+@media (max-width: 767px) {
+  .about__book-btn {
+    display: inline-flex !important;
+    padding-right: 22px;
+  }
+
+  .about__book-btn svg {
+    display: none;
+  }
+}
+
+@media (max-width: 544px) {
+  .about__cta-controls {
+    flex-direction: column;
+  }
+
+  .about__email-pill {
+    width: 100%;
+  }
+
+  .about__email-text {
+    text-align: center;
+  }
+
+  .about__book-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .about__cta-br {
+    display: block;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-section {
+    padding-top: 0;
+  }
+
+  .about__heading {
+    font-size: 28px;
+    line-height: 32px;
+    padding-bottom: 24px;
+  }
+
+  .about__content {
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: -0.3px;
+  }
+
+  .about__content p {
+    margin-bottom: 14px;
+  }
+
+  .about__footer {
+    padding-top: 52px;
+  }
+
+  .about__ask-ai {
+    gap: 12px;
+  }
+
+  .about__ask-ai-title {
+    font-size: 20px;
+  }
+
+  .site-footer {
+    padding-top: 23px;
+  }
+
+  .about__cta-card {
+    padding: 20px 20px 24px;
+    border-radius: 28px;
+    gap: 16px;
+  }
+
+  .about__cta-title {
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: -0.7px;
+  }
+
+  .about__email-pill {
+    gap: 12px;
+    padding-left: 16px;
+  }
+
+  .about__email-text {
+    font-size: 17px;
+    letter-spacing: -1px;
+  }
+
+  .footer__inner {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+
+  .footer__copyright {
+    font-size: 15px;
+    letter-spacing: -0.5px;
+  }
+}

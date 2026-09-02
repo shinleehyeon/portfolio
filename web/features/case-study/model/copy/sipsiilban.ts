@@ -1,4 +1,4 @@
-import type { CaseStudyCopy } from "@/lib/case-study/types";
+import type { CaseStudyCopy } from "@/features/case-study/model/types";
 
 const GALLERY = [
   { src: "/images/sipsiilban/verify.jpg", alt: "신원 인증", fit: "phone" as const },

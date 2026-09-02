@@ -1,0 +1,63 @@
+/* Design tokens */
+
+/* ---------- Design Tokens ---------- */
+:root {
+  /* Motion: spring-inspired easing curves
+     - --ease-out-spring: gentle settle, no overshoot, for hover lifts and reveals
+     - --ease-out-back: small overshoot for tactile responses (icons, scale)
+     - --ease-out-back-soft: very subtle overshoot for sub-pixel tactility
+     - --ease-out-quart: smooth, fast ramp to rest, for fades and opacity */
+  --ease-out-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-back-soft: cubic-bezier(0.32, 1.2, 0.5, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --bg: #FFFFFF;
+  --text: #181212;
+  --text-body: #211B1C;
+  --text-muted: #837D7D;
+  --border: #E5E5E5;
+  /* Accent (OKLAB perceptually uniform) */
+  --accent-900: #3C000A;
+  --accent-800: #61091C;
+  --accent-700: #891D30;
+  --accent-600: #B43145;
+  --accent-500: #E0465C;
+  --accent-400: #EF6C78;
+  --accent-300: #FC8E95;
+  --accent-200: #FFAEB2;
+  --accent-100: #FFCED1;
+  --accent-50: #FFDEE0;
+  --accent-25: #FFE6E8;
+  --accent: #E0465C;
+  --accent-hover: #B43145;
+
+  /* Neutral — warm gray, OKLAB perceptually uniform */
+  --neutral-950: #0F0A0A;
+  --neutral-900: #181212;
+  --neutral-850: #211B1C;
+  --neutral-800: #2B2525;
+  --neutral-750: #352F2F;
+  --neutral-700: #3F393A;
+  --neutral-650: #4A4444;
+  --neutral-600: #554F4F;
+  --neutral-550: #605A5A;
+  --neutral-500: #6B6666;
+  --neutral-450: #777171;
+  --neutral-400: #837D7D;
+  --neutral-350: #8F8989;
+  --neutral-300: #9B9596;
+  --neutral-250: #A7A2A2;
+  --neutral-200: #B4AFAF;
+  --neutral-150: #C1BBBB;
+  --neutral-100: #CDC8C8;
+  --neutral-75: #DAD6D6;
+  --neutral-50: #E8E3E3;
+  --neutral-25: #F5F0F0;
+  --neutral-0: #FFFEFE;
+
+  --font: 'UCity Pro', system-ui, -apple-system, sans-serif;
+  --sidebar-width: 192px;
+  --content-max: 1080px;
+}

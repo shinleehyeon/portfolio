@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { CaseStudyChrome } from "./CaseStudyChrome";
 import { CaseStudyBlockRenderer } from "./CaseStudyBlockRenderer";
-import type { CaseStudyCopy, Lang } from "@/lib/case-study/types";
+import type { CaseStudyCopy, Lang } from "@/features/case-study/model/types";
 
 export function CaseStudyTemplate({ copy }: { copy: CaseStudyCopy }) {
   const [lang, setLang] = useState<Lang>("ko");

@@ -1,4 +1,4 @@
-import { NOW_PLAYING, type PlaylistTrack } from "@/lib/now-playing";
+import { NOW_PLAYING, type PlaylistTrack } from "@/features/player/model/now-playing";
 
 type YTPlayer = {
   playVideo: () => void;

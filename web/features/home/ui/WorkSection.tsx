@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import "./work.css";
+import "../styles/work-full.css";
 
 type Step = { label: string; src: string; alt: string };
 

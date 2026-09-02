@@ -1,9 +1,9 @@
 const LINKS = [
   { href: "#hero", id: "hero", label: "Hero" },
   { href: "#about", id: "about", label: "About" },
-  { href: "#projects", id: "projects", label: "Projects" },
   { href: "#experience", id: "experience", label: "Experience" },
   { href: "#highlights", id: "highlights", label: "Highlights" },
+  { href: "#projects", id: "projects", label: "Projects" },
 ] as const;
 
 export function TopNav() {

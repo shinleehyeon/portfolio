@@ -1,7 +1,7 @@
 "use client";
 
-import { youtubeThumb } from "@/lib/now-playing";
-import { usePlayer } from "@/components/player/PlayerProvider";
+import { youtubeThumb } from "@/features/player/model/now-playing";
+import { usePlayer } from "@/features/player/ui/PlayerProvider";
 
 export function NowPlaying() {
   const { tracks, index, track, playing, go, toggle } = usePlayer();

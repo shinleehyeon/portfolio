@@ -1,4 +1,4 @@
-import type { CaseStudyCopy } from "@/lib/case-study/types";
+import type { CaseStudyCopy } from "@/features/case-study/model/types";
 
 const GALLERY = [
   { src: "/images/fresio/demo.mp4", alt: "Fresio demo", poster: "/images/fresio/demo-poster.jpg", fit: "phone" as const },
