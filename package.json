@@ -7,6 +7,7 @@
     "start": "next start --port 3000"
   },
   "dependencies": {
+    "@openreplay/tracker": "^18.1.4",
     "lottie-react": "^2.4.1",
     "next": "^15.5.2",
     "react": "^19.1.1",

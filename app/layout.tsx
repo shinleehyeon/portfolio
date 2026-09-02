@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SitePlayer } from "@/features/player";
 import { DotCursor } from "@/shared/ui/DotCursor";
+import { OpenReplayTracker } from "@/shared/ui/OpenReplayTracker";
 import "@/shared/styles/index.css";
 import "./globals.css";
 
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <SitePlayer>{children}</SitePlayer>
         <DotCursor />
+        <OpenReplayTracker />
       </body>
     </html>
   );
