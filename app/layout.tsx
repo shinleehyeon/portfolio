@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { SitePlayer } from "@/features/player";
 import { DotCursor } from "@/shared/ui/DotCursor";
 import { OpenReplayTracker } from "@/shared/ui/OpenReplayTracker";
@@ -12,7 +13,7 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Frontend Developer`,
+    default: SITE_NAME,
     template: `%s — ${SITE_NAME}`,
   },
   description: DESCRIPTION,
@@ -40,14 +41,14 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — Frontend Developer`,
+    title: SITE_NAME,
     description: DESCRIPTION,
     locale: "ko_KR",
     images: [{ url: "/images/about-hero.png", width: 1200, height: 630, alt: SITE_NAME }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — Frontend Developer`,
+    title: SITE_NAME,
     description: DESCRIPTION,
     images: ["/images/about-hero.png"],
   },
@@ -97,6 +98,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <DotCursor />
         <OpenReplayTracker />
       </body>
+      {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ? (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+      ) : null}
     </html>
   );
 }
