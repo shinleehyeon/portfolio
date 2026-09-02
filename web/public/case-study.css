@@ -1052,13 +1052,6 @@
   margin-bottom: -24px;
 }
 
-#savequestPipelineTree,
-#savequestSystemTree {
-  max-width: 640px;
-  padding-left: 72px;
-  box-sizing: border-box;
-}
-
 .ct-link {
   fill: none;
   stroke-width: 1.2px;

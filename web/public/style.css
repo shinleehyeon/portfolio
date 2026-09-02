@@ -1472,9 +1472,20 @@ video.case-study__image {
 .experience__left {
   display: flex;
   gap: 24px;
-  align-items: center;
+  align-items: flex-start;
   width: 360px;
   flex-shrink: 0;
+  position: relative;
+}
+
+.experience__row:not(:last-child) .experience__left::after {
+  content: "";
+  position: absolute;
+  left: 27px;
+  top: 64px;
+  height: 32px;
+  width: 2px;
+  background: var(--neutral-400, #837d7d);
 }
 
 .experience__logo {
