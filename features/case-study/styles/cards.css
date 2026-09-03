@@ -8,7 +8,7 @@
 .cs-outcome-card {
   padding: 22px 28px 20px;
   background: none;
-  border: 1px solid rgba(232, 227, 227, 0.8);
+  border: 1px solid var(--border-soft);
   border-radius: 28px;
   display: flex;
   flex-direction: column;
@@ -165,7 +165,7 @@
   font-weight: 600;
   letter-spacing: -0.3px;
   color: var(--neutral-700, #3F393A);
-  background: rgba(232, 227, 227, 0.32);
+  background: rgba(var(--border-soft-rgb), 0.32);
   border: none;
   border-radius: 100px;
   box-shadow: inset 0 1.5px 0 0 rgba(15, 10, 10, 0.03);
@@ -181,12 +181,12 @@
 }
 
 .cs-summarize__btn:hover {
-  background: rgba(232, 227, 227, 0.56);
+  background: rgba(var(--border-soft-rgb), 0.56);
   color: var(--neutral-900, #1E1919);
 }
 
 .cs-summarize__btn--loading {
-  background: rgba(232, 227, 227, 0.32);
+  background: rgba(var(--border-soft-rgb), 0.32);
   cursor: default;
 }
 
@@ -261,7 +261,7 @@
   padding: 20px 24px;
   border-radius: 16px;
   max-width: 560px;
-  box-shadow: 0 8px 32px rgba(24, 18, 18, 0.2);
+  box-shadow: 0 8px 32px rgba(var(--shadow-color), 0.2);
 }
 
 .cs-summarize__panel-inner p {
@@ -287,5 +287,5 @@
 }
 
 .cs-summarize__panel-close:hover {
-  color: #F5F0F0;
+  color: var(--neutral-25);
 }

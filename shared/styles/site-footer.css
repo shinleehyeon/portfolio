@@ -14,7 +14,7 @@
   font-weight: 400;
   line-height: 21.76px;
   letter-spacing: -1px;
-  color: #2B2525;
+  color: var(--neutral-800);
 }
 
 .footer__copyright strong {

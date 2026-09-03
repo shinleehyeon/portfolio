@@ -6,8 +6,8 @@
   width: 100%;
   margin-top: 80px;
   padding: 56px 40px 32px;
-  background: #F0F0F0;
-  color: #2B2525;
+  background: var(--neutral-50);
+  color: var(--neutral-800);
 }
 
 .taped-footer__inner {
@@ -18,7 +18,7 @@
 .taped-footer__sheet {
   position: relative;
   overflow: visible;
-  background: #fff;
+  background: var(--bg);
   border: 5px solid #4994E2;
   border-radius: 24px;
   padding: 40px 16px;
@@ -41,6 +41,10 @@
   width: 95px;
   height: 80px;
   max-width: none;
+}
+
+:root[data-theme="dark"] .taped-footer__tape img {
+  filter: brightness(0) invert(1);
 }
 
 .taped-footer__tape--right {
@@ -67,7 +71,7 @@
   font-size: 24px;
   font-weight: 800;
   letter-spacing: -0.8px;
-  color: #2B2525;
+  color: var(--neutral-800);
 }
 
 .taped-footer__tagline {
@@ -75,7 +79,7 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 1.45;
-  color: rgba(43, 37, 37, 0.5);
+  color: var(--text-muted);
   word-break: keep-all;
   overflow-wrap: break-word;
 }
@@ -123,20 +127,20 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: rgba(43, 37, 37, 0.5);
+  color: var(--text-muted);
 }
 
 .taped-footer__col a,
 .taped-footer__muted {
   font-size: 14px;
   font-weight: 500;
-  color: rgba(43, 37, 37, 0.5);
+  color: var(--text-muted);
   text-decoration: none;
   white-space: nowrap;
 }
 
 .taped-footer__col a:hover {
-  color: #2B2525;
+  color: var(--neutral-800);
 }
 
 .taped-footer__muted {
@@ -148,10 +152,10 @@
   margin-left: 4px;
   padding: 2px 12px;
   border-radius: 12px;
-  background: #E5E5E5;
+  background: var(--neutral-75);
   font-size: 12px;
   font-weight: 600;
-  color: #6B6666;
+  color: var(--neutral-500);
 }
 
 .taped-footer__soon--left {
@@ -176,7 +180,7 @@
 .taped-footer__bar-links a {
   font-size: 14px;
   font-weight: 400;
-  color: rgba(43, 37, 37, 0.55);
+  color: var(--text-muted);
   text-decoration: none;
 }
 
@@ -186,7 +190,7 @@
 }
 
 .taped-footer__bar-links a:hover {
-  color: #2B2525;
+  color: var(--neutral-800);
 }
 
 @media (min-width: 768px) {

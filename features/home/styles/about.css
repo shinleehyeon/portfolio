@@ -74,6 +74,10 @@
   object-fit: contain;
 }
 
+:root[data-theme="dark"] .now-playing__tape img {
+  filter: brightness(0) invert(1);
+}
+
 .now-playing__tape span {
   position: relative;
   z-index: 1;
@@ -83,6 +87,10 @@
   letter-spacing: 0.3px;
   color: #fff;
   text-transform: uppercase;
+}
+
+:root[data-theme="dark"] .now-playing__tape span {
+  color: #222;
 }
 
 .now-playing__yt {
@@ -125,7 +133,7 @@
   font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.4px;
-  color: #211B1C;
+  color: var(--text-body);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -135,7 +143,7 @@
 .now-playing__row-artist {
   font-size: 13px;
   letter-spacing: -0.3px;
-  color: #6B6666;
+  color: var(--neutral-500);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -157,13 +165,21 @@
   align-items: center;
   justify-content: center;
   padding: 0;
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--overlay);
   text-decoration: none;
   box-sizing: border-box;
 }
 
 .now-playing__ctrl--main {
-  background: #fff;
+  background: var(--overlay-strong);
+}
+
+:root[data-theme="dark"] .now-playing__ctrl {
+  background: rgba(255, 244, 246, 0.16);
+}
+
+:root[data-theme="dark"] .now-playing__ctrl--main {
+  background: rgba(255, 244, 246, 0.28);
 }
 
 .now-playing__list {
@@ -194,7 +210,7 @@
 
 .now-playing__row.is-active,
 .now-playing__row:hover {
-  background: rgba(255, 209, 213, 0.56);
+  background: rgba(var(--pink-tint-rgb), 0.56);
 }
 
 .now-playing__row img {
@@ -216,7 +232,7 @@
   font-weight: 600;
   line-height: 41.6px;
   letter-spacing: -2px;
-  color: #181212;
+  color: var(--text);
   margin: 0;
   padding-bottom: 43px;
   text-align: left;
@@ -227,7 +243,7 @@
   font-weight: 400;
   line-height: 33.6px;
   letter-spacing: -0.7px;
-  color: #211B1C;
+  color: var(--text-body);
 }
 
 .about__content p {
@@ -245,7 +261,7 @@
 
 .about__cta-card {
   flex: 0 0 586px;
-  background: rgba(239, 246, 255, 0.8);
+  background: var(--surface-tint);
   border-radius: 40px;
   padding: 33px 40px 40px;
   display: flex;
@@ -263,7 +279,7 @@
   font-weight: 600;
   line-height: 33.6px;
   letter-spacing: -1px;
-  color: #211B1C;
+  color: var(--text-body);
   text-align: center;
 }
 
@@ -293,7 +309,7 @@
   font-weight: 400;
   line-height: 21.76px;
   letter-spacing: -1px;
-  color: #2B2525;
+  color: var(--neutral-800);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -315,11 +331,11 @@
   background: rgba(255, 255, 255, 0.68);
   box-shadow:
     inset 0 2px 0 0 rgba(255, 255, 255, 1),
-    0 1px 0 0 rgba(22, 24, 29, 0.02),
-    0 0 0 1px rgba(22, 24, 29, 0.02),
-    0 1px 8px -4px rgba(22, 24, 29, 0.04),
-    0 4px 12px -6px rgba(22, 24, 29, 0.04),
-    0 1px 3px 1px rgba(22, 24, 29, 0.01);
+    0 1px 0 0 rgba(var(--shadow-color), 0.02),
+    0 0 0 1px rgba(var(--shadow-color), 0.02),
+    0 1px 8px -4px rgba(var(--shadow-color), 0.04),
+    0 4px 12px -6px rgba(var(--shadow-color), 0.04),
+    0 1px 3px 1px rgba(var(--shadow-color), 0.01);
 }
 
 .about__icon-btn img {
@@ -364,11 +380,11 @@
   background: rgba(255, 255, 255, 0.68) !important;
   box-shadow:
     inset 0 2px 0 0 rgba(255, 255, 255, 1),
-    0 1px 0 0 rgba(22, 24, 29, 0.02),
-    0 0 0 1px rgba(22, 24, 29, 0.02),
-    0 1px 8px -4px rgba(22, 24, 29, 0.04),
-    0 4px 12px -6px rgba(22, 24, 29, 0.04),
-    0 1px 3px 1px rgba(22, 24, 29, 0.01) !important;
+    0 1px 0 0 rgba(var(--shadow-color), 0.02),
+    0 0 0 1px rgba(var(--shadow-color), 0.02),
+    0 1px 8px -4px rgba(var(--shadow-color), 0.04),
+    0 4px 12px -6px rgba(var(--shadow-color), 0.04),
+    0 1px 3px 1px rgba(var(--shadow-color), 0.01) !important;
   transition: none !important;
   opacity: 1 !important;
 }
@@ -396,7 +412,7 @@
   font-weight: 400;
   line-height: 33.6px;
   letter-spacing: -1px;
-  color: #352F2F;
+  color: var(--neutral-750);
   text-align: center;
 }
 
@@ -404,11 +420,11 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  background: rgba(232, 227, 227, 0.64);
+  background: rgba(var(--border-soft-rgb), 0.64);
   border: none;
   border-radius: 1000px;
   padding: 4px;
   box-shadow:
-    inset 0 1.5px 0 0 rgba(24, 18, 18, 0.04),
+    inset 0 1.5px 0 0 rgba(var(--shadow-color), 0.04),
     0 2px 0 0 rgba(255, 255, 255, 0.40);
 }

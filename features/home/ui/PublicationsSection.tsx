@@ -305,7 +305,7 @@ const AWARDS = [
 
 const STACK = [
   { name: "Next.js", rating: 5, caption: "실무 경험 & 해커톤 2회 수상", logo: (
-    <img src="https://cdn.simpleicons.org/nextdotjs/000000" alt="Next.js" width="40" height="40" />
+    <img className="pub-tool__logo-next" src="https://cdn.simpleicons.org/nextdotjs/000000" alt="Next.js" width="40" height="40" />
   ) },
   { name: "ReactNative", rating: 5, caption: "해커톤 3회 수상 & 프로젝트 5회 이상", logo: (
     <img src="https://cdn.simpleicons.org/react/61DAFB" alt="React Native" width="42" height="42" />

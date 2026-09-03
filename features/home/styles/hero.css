@@ -51,6 +51,10 @@
   perspective: 500px;
 }
 
+:root[data-theme="dark"] .hero-bio--location {
+  color: var(--neutral-300);
+}
+
 .flip-text {
   display: inline-block;
 }

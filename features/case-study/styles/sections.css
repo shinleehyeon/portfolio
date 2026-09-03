@@ -126,7 +126,7 @@
 
 .cs-focus-item {
   padding: 18px 24px 16px;
-  background: rgba(239, 246, 255, 0.8);
+  background: var(--surface-tint);
   border-radius: 20px;
   transition: background 0.2s ease;
 }
@@ -146,7 +146,7 @@
 
 .cs-focus-list--outline .cs-focus-item {
   background: none;
-  border: 1px solid rgba(232, 227, 227, 0.8);
+  border: 1px solid var(--border-soft);
   transition: border-color 0.2s ease;
 }
 

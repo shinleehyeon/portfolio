@@ -8,8 +8,8 @@
   cursor: zoom-in;
   position: relative;
   box-shadow:
-    0 0 0 1px rgba(24, 18, 18, 0.05),
-    0 4px 16px rgba(24, 18, 18, 0.04);
+    0 0 0 1px rgba(var(--shadow-color), 0.05),
+    0 4px 16px rgba(var(--shadow-color), 0.04);
   will-change: transform;
 }
 
@@ -113,7 +113,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(24, 18, 18, 0.28);
+  background: rgba(var(--shadow-color), 0.28);
   pointer-events: none;
 }
 
@@ -143,7 +143,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: rgba(232, 227, 227, 0.56);
+  background: rgba(var(--border-soft-rgb), 0.56);
   border: none;
   cursor: pointer;
   display: flex;
@@ -161,7 +161,7 @@
 }
 
 .cs-gallery__nav:hover {
-  background: rgba(232, 227, 227, 0.8);
+  background: var(--border-soft);
   transform: scale(1.05);
 }
 
@@ -348,8 +348,8 @@
   overflow: hidden;
   background: var(--neutral-25);
   box-shadow:
-    0 0 0 1px rgba(24, 18, 18, 0.05),
-    0 4px 16px rgba(24, 18, 18, 0.04);
+    0 0 0 1px rgba(var(--shadow-color), 0.05),
+    0 4px 16px rgba(var(--shadow-color), 0.04);
   will-change: transform;
 }
 
@@ -369,8 +369,8 @@
   border-radius: 14px;
   background: #f3eee9;
   box-shadow:
-    0 0 0 1px rgba(24, 18, 18, 0.05),
-    0 4px 16px rgba(24, 18, 18, 0.04);
+    0 0 0 1px rgba(var(--shadow-color), 0.05),
+    0 4px 16px rgba(var(--shadow-color), 0.04);
 }
 
 .cs-phones img {
@@ -382,6 +382,6 @@
   object-fit: contain;
   border-radius: 18px;
   box-shadow:
-    0 0 0 1px rgba(24, 18, 18, 0.06),
-    0 8px 24px rgba(24, 18, 18, 0.08);
+    0 0 0 1px rgba(var(--shadow-color), 0.06),
+    0 8px 24px rgba(var(--shadow-color), 0.08);
 }

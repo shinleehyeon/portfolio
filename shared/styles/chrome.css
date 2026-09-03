@@ -181,3 +181,34 @@
   color: var(--text);
   margin-bottom: 48px;
 }
+
+.theme-toggle {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 40;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-soft);
+  background: var(--overlay);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: transform 0.2s var(--ease-out-quart), background 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  border-color: transparent;
+}
+
+@media (max-width: 767px) {
+  .theme-toggle {
+    right: 14px;
+    bottom: 14px;
+  }
+}

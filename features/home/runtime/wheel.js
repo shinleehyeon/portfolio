@@ -26,6 +26,9 @@
     '배포에서 끝나지 않습니다. 연동과 운영이 끊기면 제품이 아닙니다.'
   ];
 
+  var isDarkTheme = document.documentElement.dataset.theme === 'dark';
+  var PILL_BG_RGB = isDarkTheme ? '48,58,86' : '214,231,255';
+
   var pillStack = document.getElementById('pillStack');
   var stackAnimating = false;
   var ANIM_DUR = 450;
@@ -40,18 +43,18 @@
   var elActiveText = elActive.querySelector('span');
 
   var S = {
-    top2:   { w: 134, h: 20, bg: 0.24, r: '14px 14px 0 0', shadow: '0 -12px 8px 0 rgba(241,247,255,0.35)', stroke: 'none', pad: '0', scale: 1, opacity: 1, yOff: 0 },
-    top1:   { w: 184, h: 28, bg: 0.44, r: '18px 18px 0 0', shadow: '0 -12px 8px 0 rgba(241,247,255,0.35)', stroke: 'none', pad: '0', scale: 1, opacity: 1, yOff: 0 },
-    active: { w: 260, h: 175, bg: 0.92, r: '32px', shadow: '0 -12px 8px 0 rgba(241,247,255,0.35)', stroke: 'inset 0 -2px 0 0 rgba(190,217,255,0.32)', pad: '22px 28px 23px', scale: 1, opacity: 1, yOff: 0 },
-    bot1:   { w: 184, h: 28, bg: 0.44, r: '0 0 18px 18px', shadow: 'none', stroke: 'inset 0 -1.5px 0 0 rgba(214,231,255,0.32)', pad: '0', scale: 1, opacity: 1, yOff: 0 },
-    bot2:   { w: 134, h: 20, bg: 0.24, r: '0 0 14px 14px', shadow: 'none', stroke: 'inset 0 -1.5px 0 0 rgba(214,231,255,0.24)', pad: '0', scale: 1, opacity: 1, yOff: 0 },
+    top2:   { w: 134, h: 20, bg: 0.24, r: '14px 14px 0 0', shadow: '0 -12px 8px 0 rgba(' + PILL_BG_RGB + ',0.35)', stroke: 'none', pad: '0', scale: 1, opacity: 1, yOff: 0 },
+    top1:   { w: 184, h: 28, bg: 0.44, r: '18px 18px 0 0', shadow: '0 -12px 8px 0 rgba(' + PILL_BG_RGB + ',0.35)', stroke: 'none', pad: '0', scale: 1, opacity: 1, yOff: 0 },
+    active: { w: 260, h: 175, bg: 0.92, r: '32px', shadow: '0 -12px 8px 0 rgba(' + PILL_BG_RGB + ',0.35)', stroke: 'inset 0 -2px 0 0 rgba(' + PILL_BG_RGB + ',0.32)', pad: '22px 28px 23px', scale: 1, opacity: 1, yOff: 0 },
+    bot1:   { w: 184, h: 28, bg: 0.44, r: '0 0 18px 18px', shadow: 'none', stroke: 'inset 0 -1.5px 0 0 rgba(' + PILL_BG_RGB + ',0.32)', pad: '0', scale: 1, opacity: 1, yOff: 0 },
+    bot2:   { w: 134, h: 20, bg: 0.24, r: '0 0 14px 14px', shadow: 'none', stroke: 'inset 0 -1.5px 0 0 rgba(' + PILL_BG_RGB + ',0.24)', pad: '0', scale: 1, opacity: 1, yOff: 0 },
   };
 
   function applyState(el, s, animate) {
     el.style.transition = animate ? ANIM_TR : 'none';
     el.style.width = s.w + 'px';
     el.style.height = s.h + 'px';
-    el.style.background = 'rgba(214,231,255,' + s.bg + ')';
+    el.style.background = 'rgba(' + PILL_BG_RGB + ',' + s.bg + ')';
     el.style.borderRadius = s.r;
     el.style.boxShadow = (s.stroke !== 'none' && s.shadow !== 'none') ? s.stroke + ',' + s.shadow : (s.stroke !== 'none' ? s.stroke : s.shadow);
     el.style.padding = s.pad;
@@ -65,6 +68,19 @@
   applyState(elBot1, S.bot1, false);
   applyState(elBot2, S.bot2, false);
   elActiveText.textContent = descriptions[0];
+
+  // Live-react to the theme toggle: keep each pill's current opacity, just
+  // swap the color base so this doesn't get stuck on a stale theme's tint.
+  function retintPill(el) {
+    var bg = el.style.background;
+    var m = bg && bg.match(/rgba\([^,]+,[^,]+,[^,]+,\s*([\d.]+)\)/);
+    if (m) el.style.background = 'rgba(' + PILL_BG_RGB + ',' + m[1] + ')';
+  }
+  new MutationObserver(function() {
+    isDarkTheme = document.documentElement.dataset.theme === 'dark';
+    PILL_BG_RGB = isDarkTheme ? '48,58,86' : '214,231,255';
+    [elTop2, elTop1, elActive, elBot1, elBot2].forEach(retintPill);
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
   function updateDescription(idx) {
     if (stackAnimating) return;

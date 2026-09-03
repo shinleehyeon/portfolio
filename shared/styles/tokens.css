@@ -12,6 +12,19 @@
   --text-muted: #837D7D;
   --border: #E5E5E5;
 
+  /* Soft surfaces used for card/button/tag backgrounds and outlines */
+  --surface-tint-rgb: 239, 246, 255;
+  --surface-tint: rgba(239, 246, 255, 0.8);
+  --surface-tint-strong: rgba(239, 246, 255, 1);
+  --surface-hover: rgba(239, 246, 255, 0.5);
+  --border-soft-rgb: 232, 227, 227;
+  --border-soft: rgba(232, 227, 227, 0.8);
+  --overlay: rgba(255, 255, 255, 0.9);
+  --overlay-strong: rgba(255, 255, 255, 1);
+  --shadow-color: 24, 18, 18;
+  --icon-strong: #002E71;
+  --pink-tint-rgb: 255, 230, 232;
+
   --accent-900: #3C000A;
   --accent-800: #61091C;
   --accent-700: #891D30;
@@ -52,4 +65,50 @@
   --font: 'UCity Pro', system-ui, -apple-system, sans-serif;
   --sidebar-width: 192px;
   --content-max: 1080px;
+}
+
+/* === Dark theme ===
+   Applies ONLY when explicitly picked via the toggle. Does not follow
+   OS/browser color-scheme preference. */
+:root[data-theme="dark"] {
+  --bg: #0F0A0A;
+  --text: #F5F0F0;
+  --text-body: #E8E3E3;
+  --text-muted: #9B9596;
+  --border: #352F2F;
+
+  --surface-tint-rgb: 48, 58, 86;
+  --surface-tint: rgba(48, 58, 86, 0.72);
+  --surface-tint-strong: rgba(48, 58, 86, 0.95);
+  --surface-hover: rgba(48, 58, 86, 0.42);
+  --border-soft-rgb: 83, 77, 77;
+  --border-soft: rgba(83, 77, 77, 0.6);
+  --overlay: rgba(24, 18, 18, 0.85);
+  --overlay-strong: rgba(15, 10, 10, 1);
+  --shadow-color: 0, 0, 0;
+  --icon-strong: #8FB8FF;
+  --pink-tint-rgb: 86, 58, 70;
+
+  --neutral-950: #FFFEFE;
+  --neutral-900: #F5F0F0;
+  --neutral-850: #E8E3E3;
+  --neutral-800: #DAD6D6;
+  --neutral-750: #CDC8C8;
+  --neutral-700: #C1BBBB;
+  --neutral-650: #B4AFAF;
+  --neutral-600: #A7A2A2;
+  --neutral-550: #9B9596;
+  --neutral-500: #8F8989;
+  --neutral-450: #837D7D;
+  --neutral-400: #777171;
+  --neutral-350: #6B6666;
+  --neutral-300: #605A5A;
+  --neutral-250: #554F4F;
+  --neutral-200: #4A4444;
+  --neutral-150: #3F393A;
+  --neutral-100: #352F2F;
+  --neutral-75: #2B2525;
+  --neutral-50: #211B1C;
+  --neutral-25: #181212;
+  --neutral-0: #0F0A0A;
 }

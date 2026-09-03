@@ -43,7 +43,7 @@
   font-weight: 400;
   line-height: 21.8px;
   letter-spacing: -1px;
-  color: #352F2F;
+  color: var(--neutral-750);
   margin: 0;
   white-space: nowrap;
 }
@@ -203,7 +203,7 @@
   width: 56px;
   height: 56px;
   border-radius: 100px;
-  background: #F5F0F0;
+  background: var(--neutral-25);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -211,17 +211,17 @@
   text-decoration: none;
   color: var(--neutral-600);
   transition: background 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
-  box-shadow: inset 0 2px 0 0 rgba(22, 24, 28, 0.02);
+  box-shadow: inset 0 2px 0 0 rgba(var(--shadow-color), 0.02);
 }
 
 .case-study__website-btn:hover {
-  background: linear-gradient(rgba(15, 10, 10, 0.04), rgba(15, 10, 10, 0.04)), #F5F0F0;
+  background: linear-gradient(rgba(var(--shadow-color), 0.04), rgba(var(--shadow-color), 0.04)), var(--neutral-25);
   color: var(--neutral-700);
 }
 
 .case-study__website-btn:active {
   background: linear-gradient(rgba(15, 10, 10, 0.08), rgba(15, 10, 10, 0.08)), #F5F0F0;
-  box-shadow: inset 0 2px 0 0 rgba(22, 24, 28, 0.04);
+  box-shadow: inset 0 2px 0 0 rgba(var(--shadow-color), 0.04);
   color: var(--neutral-900);
 }
 
@@ -585,7 +585,7 @@ video.case-study__image {
   display: inline-flex;
   align-items: center;
   gap: 24px;
-  background: rgba(239, 246, 255, 1);
+  background: var(--surface-tint-strong);
   border-radius: 84px;
   padding: 12px 12px 12px 32px;
   box-shadow: inset 0 1.5px 0 0 rgba(11, 72, 158, 0.04);

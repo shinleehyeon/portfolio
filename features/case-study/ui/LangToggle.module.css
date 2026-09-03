@@ -6,9 +6,9 @@
   align-self: flex-start;
   margin: 0 0 20px;
   padding: 3px;
-  border: 1px solid var(--neutral-200, #E8E3E3);
+  border: 1px solid var(--border-soft);
   border-radius: 999px;
-  background: #fff;
+  background: var(--bg);
 }
 
 .btn {
@@ -27,7 +27,7 @@
 
 .active {
   background: var(--neutral-950, #0F0A0A);
-  color: #F5F0F0;
+  color: var(--neutral-25);
 }
 
 :global(.mobile-header) .root {

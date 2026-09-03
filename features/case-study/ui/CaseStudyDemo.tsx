@@ -109,12 +109,12 @@ export function CaseStudyDemo({
       <div className="cs-demo__bar">
         <button type="button" className="cs-demo__play" onClick={toggle} aria-label={playing ? "Pause" : "Play"}>
           {playing ? (
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="#002E71">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--icon-strong)">
               <rect x="6" y="5" width="4" height="14" rx="1" />
               <rect x="14" y="5" width="4" height="14" rx="1" />
             </svg>
           ) : (
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="#002E71">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--icon-strong)">
               <path d="M8 5.5v13l11-6.5L8 5.5Z" />
             </svg>
           )}

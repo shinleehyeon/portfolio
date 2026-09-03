@@ -10,6 +10,14 @@
     '#E1D5E7', '#E8E3E3', '#E8E3E3', '#B2EBF2', '#FFF9C4'
   ];
 
+  function isDarkTheme() {
+    return document.documentElement.dataset.theme === 'dark';
+  }
+  // Root node + default (uncolored) node palette, theme-aware.
+  var PAL = isDarkTheme()
+    ? { rootBg: '#F5F0F0', rootText: '#181212', nodeBg: '#2B2525', nodeText: '#F5F0F0', muted: 'rgba(24,18,18,0.7)', mutedText: '#9B9596', stroke: '#554F4F' }
+    : { rootBg: '#181212', rootText: '#F5F0F0', nodeBg: '#F5F0F0', nodeText: '#181212', muted: 'rgba(245,240,240,0.7)', mutedText: '#837D7D', stroke: '#CDC8C8' };
+
   function assignColors(d, idx) {
     d._branchIdx = idx;
     if (d.children) d.children.forEach(function(c) { assignColors(c, idx); });
@@ -268,7 +276,7 @@
         group.append('rect')
           .attr('x', 0).attr('y', 0)
           .attr('width', cw).attr('height', ch)
-          .attr('fill', '#FFFFFF')
+          .attr('fill', PAL.nodeBg)
           .attr('rx', 10)
           .style('cursor', 'pointer')
           .on('click', function() {
@@ -280,7 +288,7 @@
           .attr('x', 14).attr('y', 20)
           .attr('font-size', '14px')
           .attr('font-weight', '600')
-          .attr('fill', '#837D7D')
+          .attr('fill', PAL.mutedText)
           .style('cursor', 'pointer')
           .text('← ' + (focus.parent === root ? 'Design Re-work' : focus.parent.data.label))
           .on('click', function() {
@@ -312,8 +320,8 @@
 
       cells.forEach(function(cell) {
         var branchIdx = cell.data._branchIdx;
-        var fill = branchIdx >= 0 ? FILLS[branchIdx % FILLS.length] : '#F5F0F0';
-        var stroke = branchIdx >= 0 ? COLORS[branchIdx % COLORS.length] : '#CDC8C8';
+        var fill = branchIdx >= 0 ? FILLS[branchIdx % FILLS.length] : PAL.nodeBg;
+        var stroke = branchIdx >= 0 ? COLORS[branchIdx % COLORS.length] : PAL.stroke;
         var hasKids = cell.children && cell.children.length;
         var cellW = cell.x1 - cell.x0;
         var cellH = cell.y1 - cell.y0;
@@ -343,7 +351,7 @@
             .attr('y', 20 + li * headerLineH)
             .attr('font-size', headerFont + 'px')
             .attr('font-weight', '600')
-            .attr('fill', '#181212')
+            .attr('fill', PAL.nodeText)
             .text(line);
         });
         var headerUsed = headerLines.length * headerLineH + 12;
@@ -354,7 +362,7 @@
             .attr('y', 20)
             .attr('text-anchor', 'end')
             .attr('font-size', '12px')
-            .attr('fill', '#837D7D')
+            .attr('fill', PAL.mutedText)
             .text(cell.children.length);
         }
 
@@ -371,7 +379,7 @@
                 g.append('text')
                   .attr('x', 14).attr('y', yPos).attr('dy', '0.8em')
                   .attr('font-size', '14px')
-                  .attr('fill', '#837D7D')
+                  .attr('fill', PAL.mutedText)
                   .text('+' + remaining + ' more');
               }
               break;
@@ -383,7 +391,7 @@
                 .attr('x', 14).attr('y', yPos + li * lineH).attr('dy', '0.8em')
                 .attr('font-size', childFont + 'px')
                 .attr('font-weight', '400')
-                .attr('fill', '#3F393A')
+                .attr('fill', PAL.nodeText)
                 .text(line);
             });
             yPos += childLines.length * lineH + 4;
@@ -491,13 +499,16 @@
         .attr('dy', '0.35em').attr('x', 10)
         .attr('font-size', function(d) { return d.depth === 0 ? '14px' : '12.5px'; })
         .attr('font-weight', function(d) { return d.depth <= 1 || (d.children || d._children) ? '600' : '400'; })
-        .attr('fill', function(d) { return d.depth === 0 ? '#F5F0F0' : '#181212'; })
+        .attr('fill', function(d) {
+          if (d.depth === 0) return PAL.rootText;
+          return d.data._branchIdx >= 0 ? '#181212' : PAL.nodeText;
+        })
         .text(function(d) { return d.data.label; });
 
       nodeEnter.append('text')
         .attr('class', 'ct-indicator').attr('dy', '0.35em')
         .attr('font-size', '10px')
-        .attr('fill', function(d) { return d.depth === 0 ? 'rgba(245,240,240,0.7)' : '#837D7D'; });
+        .attr('fill', function(d) { return d.depth === 0 ? PAL.muted : PAL.mutedText; });
 
       var nodeUpdate = nodeEnter.merge(node);
 
@@ -508,14 +519,14 @@
       nodeUpdate.select('rect')
         .attr('width', function(d) { return estimateWidth(d); })
         .attr('fill', function(d) {
-          if (d.depth === 0) return '#181212';
+          if (d.depth === 0) return PAL.rootBg;
           var idx = d.data._branchIdx;
-          return idx >= 0 ? FILLS[idx % FILLS.length] : '#F5F0F0';
+          return idx >= 0 ? FILLS[idx % FILLS.length] : PAL.nodeBg;
         })
         .attr('stroke', function(d) {
-          if (d.depth === 0) return '#181212';
+          if (d.depth === 0) return PAL.rootBg;
           var idx = d.data._branchIdx;
-          return idx >= 0 ? COLORS[idx % COLORS.length] : '#CDC8C8';
+          return idx >= 0 ? COLORS[idx % COLORS.length] : PAL.stroke;
         })
         .attr('stroke-width', 1.2)
         .attr('stroke-dasharray', function(d) {
@@ -523,11 +534,15 @@
         });
 
       nodeUpdate.selectAll('text:not(.ct-indicator)')
-        .attr('fill', function(d) { return d.depth === 0 ? '#F5F0F0' : '#181212'; });
+        .attr('fill', function(d) {
+          if (d.depth === 0) return PAL.rootText;
+          // Colored branch nodes keep a light pastel fill regardless of theme, so their text stays dark.
+          return d.data._branchIdx >= 0 ? '#181212' : PAL.nodeText;
+        });
 
       nodeUpdate.select('.ct-indicator')
         .attr('x', function(d) { return estimateWidth(d) - 16; })
-        .attr('fill', function(d) { return d.depth === 0 ? 'rgba(245,240,240,0.7)' : '#837D7D'; })
+        .attr('fill', function(d) { return d.depth === 0 ? PAL.muted : PAL.mutedText; })
         .text(function(d) {
           if (d._children) return '+' + d._children.length;
           if (d.children && d.depth > 0) return '−';

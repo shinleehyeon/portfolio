@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { SitePlayer } from "@/features/player";
 import { DotCursor } from "@/shared/ui/DotCursor";
 import { OpenReplayTracker } from "@/shared/ui/OpenReplayTracker";
+import { ThemeToggle } from "@/shared/ui/ThemeToggle";
 import { SITE_URL, SITE_NAME } from "@/shared/lib/site-url";
 import "@/shared/styles/index.css";
 import "./globals.css";
@@ -62,6 +63,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
+    { media: "(prefers-color-scheme: dark)", color: "#0F0A0A" },
+  ],
+};
+
 const JSON_LD = {
   "@context": "https://schema.org",
   "@graph": [
@@ -92,10 +100,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" href="/fonts/UCityProWeb-Semibold.woff2" as="font" type="font/woff2" crossOrigin="" />
         <link rel="preload" href="/fonts/UCityProWeb-Bold.woff2" as="font" type="font/woff2" crossOrigin="" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark'){document.documentElement.dataset.theme=t;}}catch(e){}})();",
+          }}
+        />
       </head>
       <body>
         <SitePlayer>{children}</SitePlayer>
         <DotCursor />
+        <ThemeToggle />
         <OpenReplayTracker />
       </body>
       {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ? (
