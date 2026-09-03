@@ -9,7 +9,6 @@ const ROUTES: { path: string; priority: number; changeFrequency: MetadataRoute.S
   { path: "/sipsiilban", priority: 0.8, changeFrequency: "monthly" },
   { path: "/slop", priority: 0.8, changeFrequency: "monthly" },
   { path: "/fresio", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/voiceflow", priority: 0.8, changeFrequency: "monthly" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

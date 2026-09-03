@@ -47,7 +47,7 @@ document.getElementById('footerYear').textContent = new Date().getFullYear();
       if (!btn) return;
       btn.addEventListener('click', function(e) {
         e.preventDefault();
-        navigator.clipboard.writeText('gregory@murynmukha.com').then(function() {
+        navigator.clipboard.writeText('shinlee7878@gmail.com').then(function() {
           btn.textContent = 'Copied';
           btn.style.color = 'var(--text)';
           setTimeout(function() { btn.textContent = 'Email'; btn.style.color = ''; }, 2000);

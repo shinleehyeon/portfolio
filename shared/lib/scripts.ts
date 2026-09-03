@@ -28,7 +28,6 @@ export const CASE_STUDY_BOOT: SiteBoot = {
   run: ["/runtime/trees.js", "/runtime/voiceflow-runtime.js"],
 };
 
-export const VOICEFLOW_BOOT = CASE_STUDY_BOOT;
 export const SCHOLUB_BOOT = CASE_STUDY_BOOT;
 export const SEOUL_BIKE_BOOT = CASE_STUDY_BOOT;
 export const SLOP_BOOT = CASE_STUDY_BOOT;
