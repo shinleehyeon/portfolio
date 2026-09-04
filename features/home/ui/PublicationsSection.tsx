@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, type ReactNode } from "react";
 
 type Award = (typeof AWARDS)[number];
 
@@ -303,15 +303,24 @@ const AWARDS = [
   },
 ];
 
-const STACK = [
+const STACK: {
+  name: string;
+  shortName?: string;
+  rating: number;
+  caption: string;
+  logo: ReactNode;
+}[] = [
   { name: "Next.js", rating: 5, caption: "실무 경험 & 해커톤 2회 수상", logo: (
     <img className="pub-tool__logo-next" src="https://cdn.simpleicons.org/nextdotjs/000000" alt="Next.js" width="40" height="40" />
   ) },
-  { name: "ReactNative", rating: 5, caption: "해커톤 3회 수상 & 프로젝트 5회 이상", logo: (
+  { name: "React & ReactNative", rating: 5, caption: "해커톤 3회 수상 & 프로젝트 5회 이상", logo: (
     <img src="https://cdn.simpleicons.org/react/61DAFB" alt="React Native" width="42" height="42" />
   ) },
-  { name: "Typescript", rating: 4, caption: "해커톤 7회 수상 & 프로젝트 10회 이상", logo: (
-    <img src="https://cdn.simpleicons.org/typescript/3178C6" alt="TypeScript" width="38" height="38" />
+  { name: "Typescript & Javascript", shortName: "TS & JS", rating: 4, caption: "해커톤 7회 수상 & 프로젝트 10회 이상", logo: (
+    <span className="pub-tool__logo-stack">
+      <img className="pub-tool__logo-stack-item" src="https://cdn.simpleicons.org/typescript/3178C6" alt="" width="38" height="38" />
+      <img className="pub-tool__logo-stack-item" src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="" width="38" height="38" />
+    </span>
   ) },
   { name: "Redis", rating: 3.5, caption: "프로젝트 5회 이상", logo: (
     <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/redis/redis-original.svg" alt="Redis" width="40" height="40" />
@@ -355,7 +364,7 @@ export function PublicationsSection() {
                             <span className="pub-tool__title-name">{item.name}</span>
                             <FlowerRating rating={item.rating} />
                           </span>
-                          <span className="pub-tool__title-short">{item.name}</span>
+                          <span className="pub-tool__title-short">{item.shortName ?? item.name}</span>
                         </div>
                         <div className="pub-tool__caption">
                           <span className="pub-tool__caption-full">{item.caption}</span>
