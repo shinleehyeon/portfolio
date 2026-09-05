@@ -76,7 +76,7 @@ export function CaseStudyChrome({
             <a
               key={item.id}
               href={`#${item.id}`}
-              className={`mobile-header__link${active === item.id ? " active" : ""} reveal-load`}
+              className={`mobile-header__link reveal-load reveal-load--active${active === item.id ? " active" : ""}`}
               data-reveal-delay={140 + idx * 40}
               data-section={item.id}
             >
@@ -123,7 +123,7 @@ export function CaseStudyChrome({
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className={`nav-link${active === item.id ? " active" : ""} reveal-load`}
+                className={`nav-link reveal-load reveal-load--active${active === item.id ? " active" : ""}`}
                 data-reveal-delay={140 + idx * 40}
                 data-section={item.id}
               >
@@ -134,7 +134,7 @@ export function CaseStudyChrome({
         </div>
         <div className="sidebar-bottom">
           <button
-            className={`cs-summarize__btn reveal-load${nudge ? " cs-summarize__btn--nudge" : ""}`}
+            className={`cs-summarize__btn reveal-load reveal-load--active${nudge ? " cs-summarize__btn--nudge" : ""}`}
             data-reveal-delay="540"
             id="summarizeBtn"
             onClick={() => setSummaryOpen((open) => !open)}
