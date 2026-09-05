@@ -19,12 +19,6 @@
 
 ---
 
-## 데모
-
-<img src="docs/assets/demo.gif" width="100%" alt="포트폴리오 시연" />
-
-[https://hyeon.im](https://hyeon.im)
-
 ## 프로젝트 구조
 
 ```
