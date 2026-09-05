@@ -71,7 +71,7 @@
    Applies ONLY when explicitly picked via the toggle. Does not follow
    OS/browser color-scheme preference. */
 :root[data-theme="dark"] {
-  --bg: #0F0A0A;
+  --bg: #000;
   --text: #F5F0F0;
   --text-body: #E8E3E3;
   --text-muted: #9B9596;
@@ -84,7 +84,7 @@
   --border-soft-rgb: 83, 77, 77;
   --border-soft: rgba(83, 77, 77, 0.6);
   --overlay: rgba(24, 18, 18, 0.85);
-  --overlay-strong: rgba(15, 10, 10, 1);
+  --overlay-strong: #000;
   --shadow-color: 0, 0, 0;
   --icon-strong: #8FB8FF;
   --pink-tint-rgb: 86, 58, 70;
@@ -110,5 +110,5 @@
   --neutral-75: #2B2525;
   --neutral-50: #211B1C;
   --neutral-25: #181212;
-  --neutral-0: #0F0A0A;
+  --neutral-0: #000;
 }
