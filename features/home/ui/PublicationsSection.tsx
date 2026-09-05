@@ -258,7 +258,7 @@ const AWARDS = [
   {
     org: "SK 플래닛",
     date: "2025.02",
-    icon: "/images/logo-sk-wing.png",
+    icon: "/images/logo-sk-wing.png?v=2",
     iconPad: true,
     title: "AppJam 미래산업 부문",
     award: "최우수상 (1등)",

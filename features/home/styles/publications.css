@@ -92,7 +92,8 @@ a.award-row:hover .award-row__title {
 }
 
 .award-row__icon--pad {
-  padding: 3px;
+  padding: 1px;
+  object-position: center;
 }
 
 .award-row__title {
