@@ -331,7 +331,7 @@ const STACK: {
   { name: "Docker", rating: 4, caption: "프로젝트 4회", logo: (
     <img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker" width="42" height="42" />
   ) },
-  { name: "AWS", rating: 3, caption: "교육 2회 수강", logo: (
+  { name: "AWS", rating: 3, caption: "교육 2회 수강 & 프로젝트 1회", logo: (
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" width="52" height="32" />
   ) },
   { name: "GCP", rating: 2, caption: "프로젝트 1회", logo: (
