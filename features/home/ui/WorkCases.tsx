@@ -9,7 +9,7 @@ export function WorkCases() {
                   <p className="case-study__caption"><span className="case-study__caption-desc">Visualizing bike accident risk against dedicated lanes</span> <span className="case-study__caption-dot">&nbsp;・&nbsp;</span> <span className="case-study__caption-year">2025</span></p>
                 </div>
                 <div className="case-study__buttons">
-                  <a className="case-study__website-btn" href="https://sesac-project.vercel.app/" target="_blank" rel="noopener" aria-label="Visit live site">
+                  <a className="case-study__website-btn" href="https://bikeinsight.app" target="_blank" rel="noopener" aria-label="Visit live site">
                     <svg className="globe-svg" viewBox="0 0 22 22" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="10" stroke="currentColor" strokeWidth="1.5" /><line x1="1" y1="11" x2="21" y2="11" stroke="currentColor" strokeWidth="1.5" /><ellipse className="globe-meridian" cx="11" cy="11" rx="10" ry="10" stroke="currentColor" strokeWidth="1.5" vectorEffect="non-scaling-stroke" /><ellipse className="globe-meridian m2" cx="11" cy="11" rx="10" ry="10" stroke="currentColor" strokeWidth="1.5" vectorEffect="non-scaling-stroke" /></svg>
                   </a>
                   <a className="case-study__btn" href="/seoul-bike">
