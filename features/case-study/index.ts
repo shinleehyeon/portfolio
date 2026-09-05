@@ -1,6 +1,2 @@
-export { FresioPage } from "./ui/FresioPage";
-export { SaveQuestPage } from "./ui/SaveQuestPage";
-export { ScholubPage } from "./ui/ScholubPage";
-export { SeoulBikePage } from "./ui/SeoulBikePage";
-export { SipsiilbanPage } from "./ui/SipsiilbanPage";
-export { SlopPage } from "./ui/SlopPage";
+export { CaseStudyTemplate } from "./ui/CaseStudyTemplate";
+export { CASE_STUDIES, caseStudyPath, getCaseStudy } from "./model/registry";

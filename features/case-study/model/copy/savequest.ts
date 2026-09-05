@@ -1,4 +1,20 @@
-import type { CaseStudyCopy } from "@/features/case-study/model/types";
+import type { CaseStudyCopy, CaseStudySeo, CaseStudyWork } from "@/features/case-study/model/types";
+import { SAVEQUEST_PIPELINE, SAVEQUEST_SYSTEM } from "@/features/case-study/model/copy/trees";
+
+export const SAVEQUEST_SEO: CaseStudySeo = {
+  title: "SaveQuest",
+  description: "SaveQuest turns saving into a daily quest, reading card payments as spend-limit challenges with XP, coins, and rankings.",
+  image: "/images/work-savequest.jpg",
+};
+
+export const SAVEQUEST_WORK: CaseStudyWork = {
+  title: "SaveQuest",
+  caption: "Turning saving into a daily quest",
+  year: "2025",
+  image: "/images/work-savequest.jpg",
+  imageAlt: "SaveQuest cover",
+  footerLabel: "SaveQuest",
+};
 
 const PHONES = [
   { src: "/images/savequest/home.jpg", alt: "SaveQuest home", fit: "phone" as const },
@@ -92,7 +108,7 @@ export const SAVEQUEST_COPY: CaseStudyCopy = {
           "다이어그램은 영어입니다. Collect, Match, Judge, Reward. 노드를 누르면 펼쳐집니다.",
         ],
       },
-      { type: "treeDiagram", id: "savequestPipelineTree" },
+      { type: "treeDiagram", id: "savequestPipelineTree", tree: SAVEQUEST_PIPELINE },
       {
         type: "textSection",
         id: "system",
@@ -102,7 +118,7 @@ export const SAVEQUEST_COPY: CaseStudyCopy = {
           "결제 원본과 유저 상태는 나눕니다. 모델이나 외부 카드 API는 가장자리에 두고, 매 화면 한가운데에 두지 않았습니다.",
         ],
       },
-      { type: "treeDiagram", id: "savequestSystemTree" },
+      { type: "treeDiagram", id: "savequestSystemTree", tree: SAVEQUEST_SYSTEM, collapseAt: 2 },
       {
         type: "product",
         heading: "제품",
@@ -176,7 +192,7 @@ export const SAVEQUEST_COPY: CaseStudyCopy = {
           "The diagram stays in English. Collect, Match, Judge, Reward. Click a node to expand.",
         ],
       },
-      { type: "treeDiagram", id: "savequestPipelineTree" },
+      { type: "treeDiagram", id: "savequestPipelineTree", tree: SAVEQUEST_PIPELINE },
       {
         type: "textSection",
         id: "system",
@@ -186,7 +202,7 @@ export const SAVEQUEST_COPY: CaseStudyCopy = {
           "Raw payments and user state are split. Card APIs sit at the edge of the graph, not in the middle of every screen.",
         ],
       },
-      { type: "treeDiagram", id: "savequestSystemTree" },
+      { type: "treeDiagram", id: "savequestSystemTree", tree: SAVEQUEST_SYSTEM, collapseAt: 2 },
       {
         type: "product",
         heading: "Product",

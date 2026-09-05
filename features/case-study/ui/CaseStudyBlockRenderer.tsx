@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { CaseStudyGallery } from "@/features/case-study/ui/CaseStudyGallery";
 import { CaseStudyDemo } from "@/features/case-study/ui/CaseStudyDemo";
+import { CaseStudyTree } from "@/features/case-study/ui/CaseStudyTree";
 import type { CaseStudyBlock } from "@/features/case-study/model/types";
 
 export function CaseStudyBlockRenderer({ block }: { block: CaseStudyBlock }) {
@@ -62,11 +63,11 @@ export function CaseStudyBlockRenderer({ block }: { block: CaseStudyBlock }) {
       return (
         <section id={block.id ?? "focus"} className="cs-section">
           <div className="centered">
-            <h2 className="cs-heading shiny-hover">{block.heading}</h2>
-            <div className="cs-body">
+            <h2 className="cs-heading shiny-hover reveal-scroll">{block.heading}</h2>
+            <div className="cs-body reveal-scroll">
               {block.body.map((p) => <p key={p}>{p}</p>)}
             </div>
-            <div className="cs-focus-list">
+            <div className="cs-focus-list reveal-scroll">
               {block.items.map((item) => (
                 <div className="cs-focus-item" key={item.title}>
                   <h3 className="cs-focus-item__title">{item.title}</h3>
@@ -82,9 +83,9 @@ export function CaseStudyBlockRenderer({ block }: { block: CaseStudyBlock }) {
       return (
         <section className="cs-section">
           <div className="centered">
-            <h2 className="cs-heading shiny-hover">{block.heading}</h2>
+            <h2 className="cs-heading shiny-hover reveal-scroll">{block.heading}</h2>
             {block.body ? (
-              <div className="cs-body">
+              <div className="cs-body reveal-scroll">
                 <p>{block.body}</p>
               </div>
             ) : null}
@@ -106,8 +107,8 @@ export function CaseStudyBlockRenderer({ block }: { block: CaseStudyBlock }) {
       return (
         <section id={block.id} className="cs-section">
           <div className="centered">
-            <h2 className="cs-heading shiny-hover">{block.heading}</h2>
-            <div className="cs-body">
+            <h2 className="cs-heading shiny-hover reveal-scroll">{block.heading}</h2>
+            <div className="cs-body reveal-scroll">
               {block.body.map((p) => <p key={p}>{p}</p>)}
             </div>
           </div>
@@ -118,7 +119,7 @@ export function CaseStudyBlockRenderer({ block }: { block: CaseStudyBlock }) {
       return (
         <section className="cs-image cs-image--wide">
           <div className="centered">
-            <div className="cs-diagram cs-tree" id={block.id}></div>
+            <CaseStudyTree id={block.id} tree={block.tree} collapseAt={block.collapseAt} />
           </div>
         </section>
       );
@@ -136,8 +137,8 @@ export function CaseStudyBlockRenderer({ block }: { block: CaseStudyBlock }) {
       return (
         <section id="product" className="cs-section">
           <div className="centered">
-            <h2 className="cs-heading shiny-hover">{block.heading}</h2>
-            <div className="cs-body">
+            <h2 className="cs-heading shiny-hover reveal-scroll">{block.heading}</h2>
+            <div className="cs-body reveal-scroll">
               {block.entries.map((entry) => (
                 <Fragment key={entry.label}>
                   <span className="cs-label">{entry.label}</span>

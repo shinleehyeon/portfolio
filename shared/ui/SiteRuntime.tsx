@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useLayoutEffect, type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import type { SiteBoot } from "@/shared/lib/scripts";
+import { useReveals } from "@/shared/lib/use-reveals";
 
 function loadScript(src: string, force: boolean) {
   return new Promise<void>((resolve, reject) => {
@@ -21,21 +22,9 @@ function loadScript(src: string, force: boolean) {
   });
 }
 
-function activateReveals() {
-  document.querySelectorAll(".reveal-load").forEach((node) => {
-    node.classList.add("reveal-load--active");
-  });
-  document.querySelectorAll(".reveal-scroll").forEach((node) => {
-    node.classList.add("reveal-scroll--visible");
-  });
-}
-
 export function SiteRuntime({ children, boot }: { children: ReactNode; boot: SiteBoot }) {
   const key = `${boot.cdn.join("|")}|${boot.run.join("|")}`;
-
-  useLayoutEffect(() => {
-    activateReveals();
-  }, [key]);
+  useReveals(key);
 
   useEffect(() => {
     document.body.classList.add("fonts-ready");

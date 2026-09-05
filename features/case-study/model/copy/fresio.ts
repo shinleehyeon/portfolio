@@ -1,4 +1,20 @@
-import type { CaseStudyCopy } from "@/features/case-study/model/types";
+import type { CaseStudyCopy, CaseStudySeo, CaseStudyWork } from "@/features/case-study/model/types";
+
+export const FRESIO_SEO: CaseStudySeo = {
+  title: "Fresio",
+  description:
+    "Fresio is a fridge assistant tying a door display to a phone app — add food by barcode or photo, track expiry, and get recipes from what's left.",
+  image: "/images/fresio/cover.jpg",
+};
+
+export const FRESIO_WORK: CaseStudyWork = {
+  title: "Fresio",
+  caption: "Fridge display and app in one flow",
+  year: "2024",
+  image: "/images/work-fresio.jpg",
+  imageAlt: "Fresio 기기 메인",
+  footerLabel: "Fresio",
+};
 
 const GALLERY = [
   { src: "/images/fresio/demo.mp4", alt: "Fresio demo", poster: "/images/fresio/demo-poster.jpg", fit: "phone" as const },

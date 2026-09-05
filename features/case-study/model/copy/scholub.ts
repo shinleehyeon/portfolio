@@ -1,4 +1,20 @@
-import type { CaseStudyCopy } from "@/features/case-study/model/types";
+import type { CaseStudyCopy, CaseStudySeo, CaseStudyWork } from "@/features/case-study/model/types";
+import { SCHOLUB_PIPELINE, SCHOLUB_SYSTEM } from "@/features/case-study/model/copy/trees";
+
+export const SCHOLUB_SEO: CaseStudySeo = {
+  title: "Scholub",
+  description: "Scholub turns the daily flood of AI papers into news you can actually read, with screening, summaries, AI search, and discussion.",
+  image: "/images/work/scholub.jpg",
+};
+
+export const SCHOLUB_WORK: CaseStudyWork = {
+  title: "Scholub",
+  caption: "Turning latest AI papers into readable news",
+  year: "2025",
+  image: "/images/work-scholub.png",
+  imageAlt: "Scholub paper detail page",
+  footerLabel: "Scholub",
+};
 
 const GALLERY = [
   { src: "/images/scholub/demo.mp4", alt: "Scholub demo", poster: "/images/scholub/demo-poster.jpg" },
@@ -87,7 +103,7 @@ export const SCHOLUB_COPY: CaseStudyCopy = {
           "다이어그램은 영어입니다. Collect, Filter, Enrich, Publish. 노드를 누르면 펼쳐집니다.",
         ],
       },
-      { type: "treeDiagram", id: "pipelineTree" },
+      { type: "treeDiagram", id: "pipelineTree", tree: SCHOLUB_PIPELINE },
       {
         type: "textSection",
         id: "system",
@@ -97,7 +113,7 @@ export const SCHOLUB_COPY: CaseStudyCopy = {
           "메타데이터는 Postgres, PDF와 썸네일은 S3, 세션은 Redis입니다. 모델은 그래프 가장자리에 두고, 매 요청 한가운데에 두지 않았습니다.",
         ],
       },
-      { type: "treeDiagram", id: "systemTree" },
+      { type: "treeDiagram", id: "systemTree", tree: SCHOLUB_SYSTEM, collapseAt: 2 },
       {
         type: "product",
         heading: "제품",
@@ -171,7 +187,7 @@ export const SCHOLUB_COPY: CaseStudyCopy = {
           "The diagram stays in English. Collect, Filter, Enrich, Publish. Click a node to expand.",
         ],
       },
-      { type: "treeDiagram", id: "pipelineTree" },
+      { type: "treeDiagram", id: "pipelineTree", tree: SCHOLUB_PIPELINE },
       {
         type: "textSection",
         id: "system",
@@ -181,7 +197,7 @@ export const SCHOLUB_COPY: CaseStudyCopy = {
           "Postgres holds metadata. S3 holds PDFs and thumbnails. Redis caches sessions. Models sit at the edge of the graph, not in the middle of every request.",
         ],
       },
-      { type: "treeDiagram", id: "systemTree" },
+      { type: "treeDiagram", id: "systemTree", tree: SCHOLUB_SYSTEM, collapseAt: 2 },
       {
         type: "product",
         heading: "Product",

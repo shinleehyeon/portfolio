@@ -2,6 +2,11 @@ import type { CaseStudySlide } from "@/features/case-study/ui/CaseStudyGallery";
 
 export type Lang = "ko" | "en";
 
+export type TreeNode = {
+  label: string;
+  children?: TreeNode[];
+};
+
 export type CaseStudyBlock =
   | {
       type: "hero";
@@ -26,10 +31,26 @@ export type CaseStudyBlock =
       groups: { title: string; items: string[] }[];
     }
   | { type: "textSection"; id: string; heading: string; body: string[] }
-  | { type: "treeDiagram"; id: string }
+  | { type: "treeDiagram"; id: string; tree: TreeNode; collapseAt?: number }
   | { type: "video"; src: string; poster?: string; hint?: string; portrait?: boolean }
   | { type: "product"; heading: string; entries: { label: string; body: string }[] }
   | { type: "gallery"; slides: CaseStudySlide[]; variant?: "phone"; showDots?: boolean };
+
+export type CaseStudyWork = {
+  title: string;
+  caption: string;
+  year: string;
+  image: string;
+  imageAlt: string;
+  footerLabel: string;
+  liveUrl?: string;
+};
+
+export type CaseStudySeo = {
+  title: string;
+  description: string;
+  image: string;
+};
 
 export type CaseStudyProject = {
   slug: string;
@@ -40,3 +61,10 @@ export type CaseStudyProject = {
 };
 
 export type CaseStudyCopy = Record<Lang, CaseStudyProject>;
+
+export type CaseStudyEntry = {
+  slug: string;
+  seo: CaseStudySeo;
+  work: CaseStudyWork;
+  copy: CaseStudyCopy;
+};

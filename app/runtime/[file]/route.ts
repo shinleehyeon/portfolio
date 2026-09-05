@@ -3,9 +3,6 @@ import { join } from "node:path";
 
 const FILES: Record<string, string> = {
   "home-runtime.js": join(process.cwd(), "features/home/runtime/home-runtime.js"),
-  "wheel.js": join(process.cwd(), "features/home/runtime/wheel.js"),
-  "voiceflow-runtime.js": join(process.cwd(), "features/case-study/runtime/voiceflow-runtime.js"),
-  "trees.js": join(process.cwd(), "features/case-study/runtime/trees.js"),
 };
 
 export async function GET(_req: Request, { params }: { params: Promise<{ file: string }> }) {

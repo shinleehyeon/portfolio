@@ -1,8 +1,8 @@
-(function() {
-  var track = document.querySelector('.sp-wheel__track');
-  var arrow = document.querySelector('.sp-services__arrow');
-  var wheelContainer = document.querySelector('.sp-services__wheel');
-  if (!track) return;
+export function initWheel(root) {
+  var track = root.querySelector('.sp-wheel__track');
+  var arrow = root.querySelector('.sp-services__arrow');
+  var wheelContainer = root.querySelector('.sp-services__wheel');
+  if (!track) return function () {};
 
   var services = [
     '왜부터',
@@ -655,4 +655,10 @@
   window.addEventListener('mouseup', function() {
     wheelContainer.style.cursor = 'grab';
   });
-})();
+
+  return function dispose() {
+    if (timerRAF) cancelAnimationFrame(timerRAF);
+    if (sweepRAF) cancelAnimationFrame(sweepRAF);
+    window.wheelSetPaused = undefined;
+  };
+}

@@ -6,7 +6,7 @@ const LINKS = [
   { href: "#projects", id: "projects", label: "Projects" },
 ] as const;
 
-export function TopNav() {
+export function TopNav({ active }: { active: string }) {
   return (
     <nav className="top-nav" aria-label="Primary">
       <div className="top-nav__pill">
@@ -14,11 +14,11 @@ export function TopNav() {
           <img src="/images/about-hero.png" alt="" width="40" height="40" />
         </a>
         <div className="top-nav__links">
-          {LINKS.map((link, i) => (
+          {LINKS.map((link) => (
             <a
               key={link.id}
               href={link.href}
-              className={`top-nav__link${i === 0 ? " active" : ""}`}
+              className={`top-nav__link${active === link.id ? " active" : ""}`}
               data-section={link.id}
             >
               {link.label}

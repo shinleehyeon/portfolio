@@ -1,4 +1,19 @@
-import type { CaseStudyCopy } from "@/features/case-study/model/types";
+import type { CaseStudyCopy, CaseStudySeo, CaseStudyWork } from "@/features/case-study/model/types";
+
+export const SIPSIILBAN_SEO: CaseStudySeo = {
+  title: "십시일반",
+  description: "Sipsiilban is a React Native app for finding nearby convenience stores and franchises on a map and paying with a single QR.",
+  image: "/images/sipsiilban/cover.jpg",
+};
+
+export const SIPSIILBAN_WORK: CaseStudyWork = {
+  title: "십시일반",
+  caption: "Finding nearby stores and paying with QR",
+  year: "2025",
+  image: "/images/work-sipsiilban.jpg",
+  imageAlt: "십시일반 메인",
+  footerLabel: "십시일반",
+};
 
 const GALLERY = [
   { src: "/images/sipsiilban/verify.jpg", alt: "신원 인증", fit: "phone" as const },

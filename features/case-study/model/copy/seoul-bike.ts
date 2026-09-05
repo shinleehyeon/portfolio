@@ -1,4 +1,22 @@
-import type { CaseStudyCopy } from "@/features/case-study/model/types";
+import type { CaseStudyCopy, CaseStudySeo, CaseStudyWork } from "@/features/case-study/model/types";
+import { SEOUL_PIPELINE, SEOUL_SYSTEM } from "@/features/case-study/model/copy/trees";
+
+export const SEOUL_BIKE_SEO: CaseStudySeo = {
+  title: "Seoul Bike Accident Insights",
+  description:
+    "A dashboard and map joining Seoul bike-accident records with dedicated-lane data to show on-lane vs off-lane risk, time patterns, and blackspots.",
+  image: "/images/work-seoul-access.png",
+};
+
+export const SEOUL_BIKE_WORK: CaseStudyWork = {
+  title: "Seoul Bike Accident Insights",
+  caption: "Visualizing bike accident risk against dedicated lanes",
+  year: "2025",
+  image: "/images/work-seoul-access.png",
+  imageAlt: "Seoul Bike Accident Insights dashboard",
+  footerLabel: "Seoul Bike Accident",
+  liveUrl: "https://bikeinsight.app",
+};
 
 const GALLERY = [
   { src: "/images/seoul-bike/dashboard.png", alt: "Seoul bike accident dashboard" },
@@ -85,7 +103,7 @@ export const SEOUL_BIKE_COPY: CaseStudyCopy = {
           "다이어그램은 영어입니다. Collect, Clean, Enrich, Publish. 노드를 누르면 펼쳐집니다.",
         ],
       },
-      { type: "treeDiagram", id: "seoulPipelineTree" },
+      { type: "treeDiagram", id: "seoulPipelineTree", tree: SEOUL_PIPELINE },
       {
         type: "textSection",
         id: "system",
@@ -95,7 +113,7 @@ export const SEOUL_BIKE_COPY: CaseStudyCopy = {
           "런타임 서버는 거의 없습니다. 파이썬이 JSON을 만들고 프론트가 읽습니다. LLM은 채팅 한 경로에만 붙어 있습니다. 다이어그램은 영어입니다. Clients, Pipeline, Data. 노드를 누르면 펼쳐집니다.",
         ],
       },
-      { type: "treeDiagram", id: "seoulSystemTree" },
+      { type: "treeDiagram", id: "seoulSystemTree", tree: SEOUL_SYSTEM, collapseAt: 2 },
       {
         type: "product",
         heading: "제품",
@@ -168,7 +186,7 @@ export const SEOUL_BIKE_COPY: CaseStudyCopy = {
           "The diagram stays in English. Collect, Clean, Enrich, Publish. Click a node to expand.",
         ],
       },
-      { type: "treeDiagram", id: "seoulPipelineTree" },
+      { type: "treeDiagram", id: "seoulPipelineTree", tree: SEOUL_PIPELINE },
       {
         type: "textSection",
         id: "system",
@@ -178,7 +196,7 @@ export const SEOUL_BIKE_COPY: CaseStudyCopy = {
           "Almost no runtime server. Python writes JSON; the frontend reads it. The LLM sits on the chat path only.",
         ],
       },
-      { type: "treeDiagram", id: "seoulSystemTree" },
+      { type: "treeDiagram", id: "seoulSystemTree", tree: SEOUL_SYSTEM, collapseAt: 2 },
       {
         type: "product",
         heading: "Product",

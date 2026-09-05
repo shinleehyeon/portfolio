@@ -1,6 +1,10 @@
-import type { ReactNode } from "react";
+"use client";
+
+import { useEffect, useState, type ReactNode } from "react";
 import { LangToggle } from "./LangToggle";
 import type { Lang } from "@/features/case-study/model/types";
+import { useHideOnScroll } from "@/shared/lib/use-hide-on-scroll";
+import { useScrollSpy } from "@/shared/lib/use-scroll-spy";
 
 const BACK_ICON = (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -26,9 +30,43 @@ export function CaseStudyChrome({
   summarize: { label: string; paragraphs: [string, string, string] };
   children: ReactNode;
 }) {
+  const ids = navItems.map((item) => item.id);
+  const active = useScrollSpy(ids, 0.25);
+  const headerHidden = useHideOnScroll();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [summaryOpen, setSummaryOpen] = useState(false);
+  const [nudge, setNudge] = useState(false);
+  const year = new Date().getFullYear();
+
+  useEffect(() => {
+    document.body.classList.toggle("menu-open", menuOpen);
+    return () => document.body.classList.remove("menu-open");
+  }, [menuOpen]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setNudge(true), 1300);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!summaryOpen) return;
+    const onPointer = (event: PointerEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (target?.closest("#summarizeBtn") || target?.closest("#summarizePanel")) return;
+      setSummaryOpen(false);
+    };
+    document.addEventListener("pointerdown", onPointer);
+    return () => document.removeEventListener("pointerdown", onPointer);
+  }, [summaryOpen]);
+
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <>
-      <header className="mobile-header">
+      <header
+        className="mobile-header"
+        style={{ transform: headerHidden ? "translateY(-100%)" : "translateY(0)" }}
+      >
         <a href="/" className="mobile-logo cs-back-mobile reveal-load" data-reveal-delay="60">
           {BACK_ICON} Back
         </a>
@@ -38,7 +76,7 @@ export function CaseStudyChrome({
             <a
               key={item.id}
               href={`#${item.id}`}
-              className={`mobile-header__link${idx === 0 ? " active" : ""} reveal-load`}
+              className={`mobile-header__link${active === item.id ? " active" : ""} reveal-load`}
               data-reveal-delay={140 + idx * 40}
               data-section={item.id}
             >
@@ -46,22 +84,31 @@ export function CaseStudyChrome({
             </a>
           ))}
         </nav>
-        <button className="menu-toggle" aria-label="Menu" aria-expanded="false">
+        <button
+          className="menu-toggle"
+          aria-label="Menu"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
           <span className="bar"></span>
           <span className="bar"></span>
           <span className="bar"></span>
         </button>
       </header>
 
-      <div className="mobile-menu" aria-hidden="true">
-        <a href="/#hero" className="mobile-menu-link">Hero</a>
-        <a href="/#about" className="mobile-menu-link">About</a>
-        <a href="/#experience" className="mobile-menu-link">Experience</a>
-        <a href="/#highlights" className="mobile-menu-link">Highlights</a>
-        <a href="/#projects" className="mobile-menu-link">Projects</a>
+      <div className="mobile-menu" aria-hidden={!menuOpen}>
+        {navItems.map((item) => (
+          <a key={item.id} href={`#${item.id}`} className="mobile-menu-link" onClick={closeMenu}>
+            {item.label}
+          </a>
+        ))}
         <div className="mobile-menu-bottom">
-          <a href="https://linkedin.com/in/shinleehyeon" target="_blank" rel="noopener" className="mobile-menu-link">LinkedIn</a>
-          <a href="#" className="mobile-menu-link" id="mobileMenuCopyEmail">Email</a>
+          <a href="https://linkedin.com/in/shinleehyeon" target="_blank" rel="noopener" className="mobile-menu-link">
+            LinkedIn
+          </a>
+          <a href="/" className="mobile-menu-link" onClick={closeMenu}>
+            Home
+          </a>
         </div>
       </div>
 
@@ -76,7 +123,7 @@ export function CaseStudyChrome({
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className={`nav-link${idx === 0 ? " active" : ""} reveal-load`}
+                className={`nav-link${active === item.id ? " active" : ""} reveal-load`}
                 data-reveal-delay={140 + idx * 40}
                 data-section={item.id}
               >
@@ -86,15 +133,23 @@ export function CaseStudyChrome({
           </nav>
         </div>
         <div className="sidebar-bottom">
-          <button className="cs-summarize__btn reveal-load" data-reveal-delay="540" id="summarizeBtn">
+          <button
+            className={`cs-summarize__btn reveal-load${nudge ? " cs-summarize__btn--nudge" : ""}`}
+            data-reveal-delay="540"
+            id="summarizeBtn"
+            onClick={() => setSummaryOpen((open) => !open)}
+            onAnimationEnd={() => setNudge(false)}
+          >
             <span className="cs-summarize__text">{summarize.label}</span>
           </button>
         </div>
       </aside>
 
-      <div className="cs-summarize__panel" id="summarizePanel">
+      <div className={`cs-summarize__panel${summaryOpen ? " cs-summarize__panel--visible" : ""}`} id="summarizePanel">
         <div className="cs-summarize__panel-inner">
-          <button className="cs-summarize__panel-close" id="summarizePanelClose">&times;</button>
+          <button className="cs-summarize__panel-close" id="summarizePanelClose" onClick={() => setSummaryOpen(false)}>
+            &times;
+          </button>
           <p>{summarize.paragraphs[0]}</p>
           <p>{summarize.paragraphs[1]}</p>
           <p>{summarize.paragraphs[2]}</p>
@@ -107,7 +162,9 @@ export function CaseStudyChrome({
         <footer className="site-footer">
           <div className="centered">
             <div className="footer__inner">
-              <span className="footer__copyright">©<span id="footerYear"></span> <strong>Leehyeon Shin</strong>. All rights reserved.</span>
+              <span className="footer__copyright">
+                ©{year} <strong>Leehyeon Shin</strong>. All rights reserved.
+              </span>
               <div className="footer__socials">
                 <a href="https://github.com/shinleehyeon" target="_blank" rel="noopener" className="footer__social" aria-label="GitHub">
                   <img src="/images/icon-github.svg" alt="" width="20" height="20" />

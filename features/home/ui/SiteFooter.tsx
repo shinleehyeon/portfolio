@@ -1,3 +1,4 @@
+import { CASE_STUDIES, caseStudyPath } from "@/features/case-study/model/registry";
 import { PompomMascots } from "@/features/home/ui/PompomMascots";
 
 function TapeMark() {
@@ -49,12 +50,11 @@ export function SiteFooter() {
 
               <div className="taped-footer__col taped-footer__col--desktop">
                 <h4 className="taped-footer__heading">Projects</h4>
-                <a href="/seoul-bike">Seoul Bike Accident</a>
-                <a href="/fresio">Fresio</a>
-                <a href="/scholub">Scholub</a>
-                <a href="/slop">SLOP</a>
-                <a href="/sipsiilban">십시일반</a>
-                <a href="/savequest">SaveQuest</a>
+                {CASE_STUDIES.map((entry) => (
+                  <a key={entry.slug} href={caseStudyPath(entry.slug)}>
+                    {entry.work.footerLabel}
+                  </a>
+                ))}
               </div>
 
               <div className="taped-footer__col taped-footer__col--desktop">

@@ -1,4 +1,20 @@
-import type { CaseStudyCopy } from "@/features/case-study/model/types";
+import type { CaseStudyCopy, CaseStudySeo, CaseStudyWork } from "@/features/case-study/model/types";
+import { SLOP_PIPELINE, SLOP_SYSTEM } from "@/features/case-study/model/copy/trees";
+
+export const SLOP_SEO: CaseStudySeo = {
+  title: "SLOP",
+  description: "SLOP turns the article you're already reading into a short-form video on the same page, via a Chrome extension and generation pipeline.",
+  image: "/images/slop/slop.jpg",
+};
+
+export const SLOP_WORK: CaseStudyWork = {
+  title: "SLOP",
+  caption: "Turning articles into shorts on the page",
+  year: "2025",
+  image: "/images/slop/slop.jpg",
+  imageAlt: "SLOP landing",
+  footerLabel: "SLOP",
+};
 
 const NAV = {
   ko: [
@@ -78,7 +94,7 @@ export const SLOP_COPY: CaseStudyCopy = {
           "다이어그램은 영어입니다. Parse, Generate, Publish. 노드를 누르면 펼쳐집니다.",
         ],
       },
-      { type: "treeDiagram", id: "slopPipelineTree" },
+      { type: "treeDiagram", id: "slopPipelineTree", tree: SLOP_PIPELINE },
       {
         type: "textSection",
         id: "system",
@@ -88,7 +104,7 @@ export const SLOP_COPY: CaseStudyCopy = {
           "NestJS가 인증·쇼츠·파일을 맡고, Prisma·S3·Redis·Meilisearch·OpenRouter가 가장자리에 있습니다.",
         ],
       },
-      { type: "treeDiagram", id: "slopSystemTree" },
+      { type: "treeDiagram", id: "slopSystemTree", tree: SLOP_SYSTEM, collapseAt: 2 },
       {
         type: "product",
         heading: "제품",
@@ -167,7 +183,7 @@ export const SLOP_COPY: CaseStudyCopy = {
           "The diagram stays in English. Parse, Generate, Publish. Click a node to expand.",
         ],
       },
-      { type: "treeDiagram", id: "slopPipelineTree" },
+      { type: "treeDiagram", id: "slopPipelineTree", tree: SLOP_PIPELINE },
       {
         type: "textSection",
         id: "system",
@@ -177,7 +193,7 @@ export const SLOP_COPY: CaseStudyCopy = {
           "NestJS owns auth, shorts, and files. Prisma, S3, Redis, Meilisearch, and OpenRouter sit at the edge.",
         ],
       },
-      { type: "treeDiagram", id: "slopSystemTree" },
+      { type: "treeDiagram", id: "slopSystemTree", tree: SLOP_SYSTEM, collapseAt: 2 },
       {
         type: "product",
         heading: "Product",
