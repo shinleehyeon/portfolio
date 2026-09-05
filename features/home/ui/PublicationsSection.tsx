@@ -74,8 +74,20 @@ function AwardHoverGroup({ items }: { items: Award[] }) {
         };
         const rowContent = (
           <div className="award-row__text">
-            <span className="award-row__title">{award.title} {award.award}</span>
-            <span className="award-row__meta">{award.org} - {award.date}</span>
+            <span className="award-row__title-row">
+              {"icon" in award && award.icon && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={award.icon}
+                  alt=""
+                  className={`award-row__icon${"iconPad" in award && award.iconPad ? " award-row__icon--pad" : ""}`}
+                  width="26"
+                  height="26"
+                />
+              )}
+              <span className="award-row__title">{award.title} {award.award}</span>
+            </span>
+            <span className="award-row__badge">{award.org} · {award.date}</span>
           </div>
         );
         return award.href ? (
@@ -219,7 +231,8 @@ function FlowerRating({ rating }: { rating: number }) {
 const AWARDS = [
   {
     org: "당근마켓",
-    date: "25.09",
+    date: "2025.09",
+    icon: "/images/logo-daangn-pin.png",
     title: "Daangn Builder's Camp 해커톤",
     award: "우승 (1등)",
     rank: "1st",
@@ -231,7 +244,8 @@ const AWARDS = [
   },
   {
     org: "과학기술정보통신부",
-    date: "24.12",
+    date: "2024.12",
+    icon: "/images/logo-korea-gov.png",
     title: "SW 동행 해커톤",
     award: "창의재단이사장상 (2등)",
     rank: "2nd",
@@ -243,7 +257,9 @@ const AWARDS = [
   },
   {
     org: "SK 플래닛",
-    date: "25.02",
+    date: "2025.02",
+    icon: "/images/logo-sk-wing.png",
+    iconPad: true,
     title: "AppJam 미래산업 부문",
     award: "최우수상 (1등)",
     rank: "1st",
@@ -255,7 +271,8 @@ const AWARDS = [
   },
   {
     org: "USLASH",
-    date: "25.07",
+    date: "2025.07",
+    icon: "/images/logo-uslash.png",
     title: "U/THON",
     award: "우수상 (2등)",
     rank: "2nd",
@@ -267,7 +284,8 @@ const AWARDS = [
   },
   {
     org: "선린인터넷고등학교",
-    date: "25.07",
+    date: "2025.07",
+    icon: "/images/logo-sunrin-emblem.png",
     title: "제 11회 선린 해커톤",
     award: "은상 (2등)",
     rank: "2nd",
@@ -279,7 +297,8 @@ const AWARDS = [
   },
   {
     org: "선린인터넷고등학교",
-    date: "25.11",
+    date: "2025.11",
+    icon: "/images/logo-sunrin-emblem.png",
     title: "디지털 콘텐츠 개발 대회 생활 부문",
     award: "금상 (1등)",
     rank: "1st",
@@ -291,7 +310,8 @@ const AWARDS = [
   },
   {
     org: "선린인터넷고등학교",
-    date: "26.07",
+    date: "2026.07",
+    icon: "/images/logo-sunrin-emblem.png",
     title: "제 12회 선린 해커톤",
     award: "은상 (1등)",
     rank: "1st",

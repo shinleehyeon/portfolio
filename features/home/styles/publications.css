@@ -68,7 +68,31 @@ a.award-row:hover .award-row__title {
 }
 
 .award-row__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
   width: auto;
+}
+
+.award-row__title-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.award-row__icon {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  padding: 3px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.award-row__icon--pad {
+  padding: 3px;
 }
 
 .award-row__title {
@@ -80,11 +104,17 @@ a.award-row:hover .award-row__title {
   color: var(--text-body);
 }
 
-.award-row__meta {
-  display: inline;
-  margin-left: 8px;
-  font-size: 19px;
-  font-weight: 400;
+.award-row__badge {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background-color: var(--surface-tint);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
   color: var(--neutral-600);
 }
 
@@ -174,9 +204,21 @@ a.award-row:hover .award-row__title {
 }
 
 @media (max-width: 600px) {
-  .award-row__title,
-  .award-row__meta {
+  .award-row__icon {
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    border-radius: 6px;
+  }
+  .award-row__icon--pad {
+    padding: 2px;
+  }
+  .award-row__title {
     font-size: 16px;
+  }
+  .award-row__badge {
+    font-size: 12px;
+    padding: 3px 8px;
   }
 }
 
