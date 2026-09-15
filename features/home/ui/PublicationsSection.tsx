@@ -313,7 +313,7 @@ const AWARDS = [
     date: "2026.07",
     icon: "/images/logo-sunrin-emblem.png",
     title: "제 12회 선린 해커톤",
-    award: "은상 (1등)",
+    award: "금상 (1등)",
     rank: "1st",
     project: "SLOP",
     href: "/case-studies/slop",
