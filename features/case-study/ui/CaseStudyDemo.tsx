@@ -36,7 +36,7 @@ export function CaseStudyDemo({
   const [playing, setPlaying] = useState(false);
   const [time, setTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [rate, setRate] = useState(0.75);
+  const [rate, setRate] = useState(1);
 
   useEffect(() => {
     const v = videoRef.current;
