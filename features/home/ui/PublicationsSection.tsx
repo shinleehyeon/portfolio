@@ -342,8 +342,8 @@ const STACK: {
       <img className="pub-tool__logo-stack-item" src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="" width="38" height="38" />
     </span>
   ) },
-  { name: "Redis", rating: 3.5, caption: "프로젝트 5회 이상", logo: (
-    <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/redis/redis-original.svg" alt="Redis" width="40" height="40" />
+  { name: "Terraform", rating: 2, caption: "프로젝트 2회", logo: (
+    <img src="https://cdn.simpleicons.org/terraform/7B42BC" alt="Terraform" width="40" height="40" />
   ) },
   { name: "Docker", rating: 4, caption: "프로젝트 4회", logo: (
     <img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker" width="42" height="42" />
@@ -351,7 +351,7 @@ const STACK: {
   { name: "NestJS", rating: 3, caption: "프로젝트 10회 이상", logo: (
     <img src="https://cdn.simpleicons.org/nestjs/E0234E" alt="NestJS" width="40" height="40" />
   ) },
-  { name: "AWS", rating: 3, caption: "교육 2회 수강 & 프로젝트 1회", logo: (
+  { name: "AWS", rating: 4, caption: "프로젝트 2회", logo: (
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" width="52" height="32" />
   ) },
   { name: "GCP", rating: 2, caption: "프로젝트 1회", logo: (
