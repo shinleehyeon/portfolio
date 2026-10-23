@@ -12,8 +12,8 @@
   flex-shrink: 0;
   width: 300px;
   align-self: flex-start;
+  aspect-ratio: 3 / 4;
   border-radius: 28px;
-  overflow: hidden;
   position: relative;
   will-change: transform, opacity;
   opacity: 0;
@@ -24,7 +24,7 @@
 .about__hero-glare {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 3;
   pointer-events: none;
   border-radius: 28px;
   opacity: 0;
@@ -37,10 +37,51 @@
   translate: 0 0;
 }
 
-.about__hero-photo img {
+.about__hero-stack {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  outline-offset: 6px;
+  border-radius: 28px;
+}
+
+.about__hero-card {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 85%;
+  border-radius: 28px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+  user-select: none;
+  -webkit-user-drag: none;
+  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease;
+}
+
+.about__hero-card[data-pos="0"] {
+  z-index: 2;
+  transform: none;
+}
+
+.about__hero-card[data-pos="1"] {
+  z-index: 1;
+  transform: translate(16px, 12px) rotate(5deg);
+}
+
+.about__hero-card[data-pos="2"] {
+  z-index: 0;
+  transform: translate(-14px, 20px) rotate(-5deg);
+}
+
+.about__hero-card[data-pos="3"] {
+  z-index: -1;
+  transform: translate(6px, 26px) rotate(1.5deg);
+}
+
+.about__hero-card.about__hero-card--leaving {
+  transform: translate(-70%, -4%) rotate(-12deg);
+  opacity: 0;
 }
 
 .now-playing {

@@ -1485,6 +1485,32 @@
           if (heroGlare) heroGlare.style.opacity = '0';
           hStart();
         });
+
+        var heroStack = document.getElementById('aboutHeroStack');
+        if (heroStack) {
+          var heroCards = heroStack.querySelectorAll('.about__hero-card');
+          var heroBusy = false;
+
+          function heroNext() {
+            if (heroBusy) return;
+            heroBusy = true;
+            var top = heroStack.querySelector('[data-pos="0"]');
+            top.classList.add('about__hero-card--leaving');
+            setTimeout(function() {
+              heroCards.forEach(function(card) {
+                var pos = +card.getAttribute('data-pos');
+                card.setAttribute('data-pos', (pos + heroCards.length - 1) % heroCards.length);
+              });
+              top.classList.remove('about__hero-card--leaving');
+              heroBusy = false;
+            }, 280);
+          }
+
+          heroStack.addEventListener('click', heroNext);
+          heroStack.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); heroNext(); }
+          });
+        }
       }
 
       var photoObserver = new IntersectionObserver(function(entries) {

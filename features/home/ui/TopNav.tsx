@@ -11,7 +11,7 @@ export function TopNav({ active }: { active: string }) {
     <nav className="top-nav" aria-label="Primary">
       <div className="top-nav__pill">
         <a className="top-nav__avatar" href="#about" aria-label="About">
-          <img src="/images/about-hero.png" alt="" width="40" height="40" />
+          <img src="/images/about-id.png" alt="" width="40" height="40" />
         </a>
         <div className="top-nav__links">
           {LINKS.map((link) => (
