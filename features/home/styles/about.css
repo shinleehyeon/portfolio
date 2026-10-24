@@ -74,11 +74,6 @@
   transform: translate(-14px, 20px) rotate(-5deg);
 }
 
-.about__hero-card[data-pos="3"] {
-  z-index: -1;
-  transform: translate(6px, 26px) rotate(1.5deg);
-}
-
 .about__hero-card.about__hero-card--leaving {
   transform: translate(-70%, -4%) rotate(-12deg);
   opacity: 0;

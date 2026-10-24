@@ -35,8 +35,7 @@ export function AboutSection() {
                   <div className="about__hero-stack" id="aboutHeroStack" role="button" tabIndex={0} aria-label="다음 사진 보기">
                     <img className="about__hero-card" data-pos="0" src="/images/about-id.png" alt="신이현" width="300" height="400" />
                     <img className="about__hero-card" data-pos="1" src="/images/about-hero.png" alt="" width="300" height="400" />
-                    <img className="about__hero-card" data-pos="2" src="/images/about-airport.jpg" alt="" width="300" height="400" />
-                    <img className="about__hero-card" data-pos="3" src="/images/about-office.jpg" alt="" width="300" height="400" />
+                    <img className="about__hero-card" data-pos="2" src="/images/about-office.jpg" alt="" width="300" height="400" />
                   </div>
                 </div>
               </div>
