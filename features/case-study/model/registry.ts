@@ -1,5 +1,6 @@
 import type { CaseStudyEntry } from "@/features/case-study/model/types";
 import { FRESIO_COPY, FRESIO_SEO, FRESIO_WORK } from "@/features/case-study/model/copy/fresio";
+import { PETCLINIC_COPY, PETCLINIC_SEO, PETCLINIC_WORK } from "@/features/case-study/model/copy/petclinic";
 import { SAVEQUEST_COPY, SAVEQUEST_SEO, SAVEQUEST_WORK } from "@/features/case-study/model/copy/savequest";
 import { SCHOLUB_COPY, SCHOLUB_SEO, SCHOLUB_WORK } from "@/features/case-study/model/copy/scholub";
 import { SEOUL_BIKE_COPY, SEOUL_BIKE_SEO, SEOUL_BIKE_WORK } from "@/features/case-study/model/copy/seoul-bike";
@@ -13,6 +14,7 @@ export function caseStudyPath(slug: string) {
 export const CASE_STUDIES: CaseStudyEntry[] = [
   { slug: "seoul-bike", seo: SEOUL_BIKE_SEO, work: SEOUL_BIKE_WORK, copy: SEOUL_BIKE_COPY },
   { slug: "fresio", seo: FRESIO_SEO, work: FRESIO_WORK, copy: FRESIO_COPY },
+  { slug: "petclinic", seo: PETCLINIC_SEO, work: PETCLINIC_WORK, copy: PETCLINIC_COPY },
   { slug: "scholub", seo: SCHOLUB_SEO, work: SCHOLUB_WORK, copy: SCHOLUB_COPY },
   { slug: "slop", seo: SLOP_SEO, work: SLOP_WORK, copy: SLOP_COPY },
   { slug: "sipsiilban", seo: SIPSIILBAN_SEO, work: SIPSIILBAN_WORK, copy: SIPSIILBAN_COPY },

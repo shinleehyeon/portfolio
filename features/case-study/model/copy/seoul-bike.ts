@@ -10,8 +10,8 @@ export const SEOUL_BIKE_SEO: CaseStudySeo = {
 
 export const SEOUL_BIKE_WORK: CaseStudyWork = {
   title: "Seoul Bike Accident Insights",
-  caption: "Visualizing bike accident risk against dedicated lanes",
-  year: "2025",
+  caption: "[Bespin Global] 서울시 자전거 사고 데이터(TAAS)와 자전거도로 데이터(OpenStreetMap)를 결합해 고위험 도로 구간을 지도와 차트로 시각화한 인사이트 대시보드",
+  year: "2026",
   image: "/images/work-seoul-access.png",
   imageAlt: "Seoul Bike Accident Insights dashboard",
   footerLabel: "Seoul Bike Accident",
@@ -59,7 +59,7 @@ export const SEOUL_BIKE_COPY: CaseStudyCopy = {
       {
         type: "hero",
         title: "Seoul Bike",
-        year: "2025",
+        year: "2026",
         intro: "표만 봐서는 안 보이는 위험을, 지도와 대시보드로 시각화합니다. 어느 도로부터 손봐야 하는지를 사고 지점과 전용도로 위에서 바로 볼 수 있게 했습니다.",
         tags: [
           { label: "프론트엔드", tip: "대시보드, MapLibre 지도, 기간 필터, 블랙스팟 표를 Next.js로 구현했습니다." },
@@ -142,7 +142,7 @@ export const SEOUL_BIKE_COPY: CaseStudyCopy = {
       {
         type: "hero",
         title: "Seoul Bike",
-        year: "2025",
+        year: "2026",
         intro: "Risk that a table hides, shown on a map and a dashboard. The point is not another chart — it is seeing which road to touch first, on top of the actual crash points and bike lanes.",
         tags: [
           { label: "Frontend", tip: "Built the dashboard, MapLibre map, period filters, and blackspot table in Next.js." },

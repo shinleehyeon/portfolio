@@ -9,7 +9,7 @@ export const SLOP_SEO: CaseStudySeo = {
 
 export const SLOP_WORK: CaseStudyWork = {
   title: "SLOP",
-  caption: "Turning articles into shorts on the page",
+  caption: "[선린 해커톤 금상] 기사를 페이지 위에서 바로 숏폼으로 바꿔주는 서비스",
   year: "2025",
   image: "/images/slop/slop.jpg",
   imageAlt: "SLOP landing",

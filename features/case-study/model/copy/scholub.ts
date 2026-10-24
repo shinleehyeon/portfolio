@@ -9,7 +9,7 @@ export const SCHOLUB_SEO: CaseStudySeo = {
 
 export const SCHOLUB_WORK: CaseStudyWork = {
   title: "Scholub",
-  caption: "Turning latest AI papers into readable news",
+  caption: "[디지털 콘텐츠 개발대회 금상] 최신 AI 논문을 읽기 쉬운 뉴스로 풀어주는 서비스",
   year: "2025",
   image: "/images/work-scholub.png",
   imageAlt: "Scholub paper detail page",

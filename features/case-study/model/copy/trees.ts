@@ -131,3 +131,52 @@ export const SAVEQUEST_SYSTEM: TreeNode = {
     { label: "Infra", children: [{ label: "User state" }, { label: "Payment log" }, { label: "Assets" }] },
   ],
 };
+
+export const PETCLINIC_PIPELINE: TreeNode = {
+  label: "Change",
+  children: [
+    { label: "Build", children: [{ label: "GitHub Actions" }, { label: "Docker image" }] },
+    { label: "Push", children: [{ label: "OIDC role (no keys)" }, { label: "ECR" }] },
+    { label: "Roll out", children: [{ label: "Instance Refresh" }, { label: "50% stay healthy" }, { label: "60s warm-up" }] },
+    { label: "Watch", children: [{ label: "ALB 5xx / CPU alarms" }, { label: "Discord alert" }] },
+  ],
+};
+
+export const PETCLINIC_SYSTEM: TreeNode = {
+  label: "PetClinic",
+  children: [
+    {
+      label: "Edge",
+      children: [
+        { label: "Route 53 + ACM" },
+        { label: "CloudFront", children: [{ label: "Static cache" }, { label: "Error pages (S3)" }] },
+        { label: "WAF", children: [{ label: "Managed rules" }, { label: "Rate limit" }] },
+      ],
+    },
+    {
+      label: "App",
+      children: [
+        { label: "External ALB" },
+        { label: "Web (Apache)", children: [{ label: "ASG 2–6" }] },
+        { label: "Internal ALB" },
+        { label: "WAS (Spring)", children: [{ label: "Docker" }, { label: "ASG 2–6" }] },
+      ],
+    },
+    {
+      label: "Data",
+      children: [
+        { label: "RDS MySQL", children: [{ label: "Multi-AZ" }, { label: "Private subnet" }] },
+        { label: "Secrets Manager", children: [{ label: "30-day rotation" }, { label: "VPC endpoint" }] },
+      ],
+    },
+    {
+      label: "Ops",
+      children: [
+        { label: "CloudWatch + SNS" },
+        { label: "Lambda → Discord" },
+        { label: "GuardDuty / CloudTrail" },
+        { label: "IAM groups" },
+      ],
+    },
+  ],
+};

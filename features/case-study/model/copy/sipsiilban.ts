@@ -8,7 +8,7 @@ export const SIPSIILBAN_SEO: CaseStudySeo = {
 
 export const SIPSIILBAN_WORK: CaseStudyWork = {
   title: "십시일반",
-  caption: "Finding nearby stores and paying with QR",
+  caption: "[선린 해커톤 은상] 주변 가게를 찾고 QR로 결제하는 서비스",
   year: "2025",
   image: "/images/work-sipsiilban.jpg",
   imageAlt: "십시일반 메인",

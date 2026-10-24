@@ -9,7 +9,7 @@ export const FRESIO_SEO: CaseStudySeo = {
 
 export const FRESIO_WORK: CaseStudyWork = {
   title: "Fresio",
-  caption: "Fridge display and app in one flow",
+  caption: "[창의재단이사장상] 냉장고 디스플레이와 앱을 하나의 흐름으로 잇는 스마트 냉장고 서비스",
   year: "2024",
   image: "/images/work-fresio.jpg",
   imageAlt: "Fresio 기기 메인",

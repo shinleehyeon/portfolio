@@ -9,7 +9,7 @@ export const SAVEQUEST_SEO: CaseStudySeo = {
 
 export const SAVEQUEST_WORK: CaseStudyWork = {
   title: "SaveQuest",
-  caption: "Turning saving into a daily quest",
+  caption: "[STA+C 가작상] 저축을 매일의 퀘스트로 바꾸는 게임형 금융 습관 앱",
   year: "2025",
   image: "/images/work-savequest.jpg",
   imageAlt: "SaveQuest cover",

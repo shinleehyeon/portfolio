@@ -199,7 +199,9 @@
 #slopPipelineTree,
 #slopSystemTree,
 #savequestPipelineTree,
-#savequestSystemTree {
+#savequestSystemTree,
+#petclinicPipelineTree,
+#petclinicSystemTree {
   max-width: 800px;
   margin-top: 8px;
   margin-bottom: -24px;
