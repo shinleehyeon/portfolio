@@ -12,7 +12,7 @@
   flex-shrink: 0;
   width: 300px;
   align-self: flex-start;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 3 / 4.6;
   border-radius: 28px;
   position: relative;
   will-change: transform, opacity;
