@@ -385,3 +385,10 @@
     0 0 0 1px rgba(var(--shadow-color), 0.06),
     0 8px 24px rgba(var(--shadow-color), 0.08);
 }
+
+@media (max-width: 900px) {
+  .cs-gallery--fixed-frame.cs-gallery--fit-web .cs-gallery__main {
+    height: auto;
+    max-height: min(68vh, 620px);
+  }
+}

@@ -367,3 +367,53 @@
   font-size: 14px;
   color: var(--neutral-500);
 }
+
+.cs-demo__full {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(var(--surface-tint-rgb), 0.96);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .cs-demo__full {
+    display: flex;
+  }
+  .cs-demo__bar {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cs-heading {
+    font-size: 30px;
+  }
+  .cs-hero__title {
+    font-size: clamp(38px, 11vw, 48px);
+  }
+  .cs-hero__intro {
+    font-size: 17px;
+    line-height: 26px;
+  }
+  .cs-body,
+  .cs-body--note,
+  .cs-body .cs-list li,
+  .cs-focus-item__title,
+  .cs-focus-item__desc,
+  .cs-focus-item .cs-list li,
+  .cs-label {
+    font-size: 16px;
+  }
+  #outcome .cs-body,
+  #outcome .cs-body .cs-list li {
+    font-size: 18px;
+  }
+}

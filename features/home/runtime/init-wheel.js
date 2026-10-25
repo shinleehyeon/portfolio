@@ -146,20 +146,22 @@ export function initWheel(root) {
   var CARD_H = wheelEl ? wheelEl.offsetHeight : 364;
   var CENTER_Y = CARD_H / 2;
 
-  window.addEventListener('resize', function() {
+  function remeasure() {
     if (wheelEl) {
       CARD_H = wheelEl.offsetHeight;
       CENTER_Y = CARD_H / 2;
       render();
     }
-  });
+  }
+  window.addEventListener('resize', remeasure);
+  var wheelRO = (wheelEl && typeof ResizeObserver !== 'undefined') ? new ResizeObserver(remeasure) : null;
+  if (wheelRO) wheelRO.observe(wheelEl);
 
   var R = 128;
   var STEP_DEG = 12;
   var DEG = Math.PI / 180;
 
   var CX = 64 - R;
-  var CY = CENTER_Y;
 
   var BLUR = [0, 1, 2, 3, 4, 5];
 
@@ -205,7 +207,7 @@ export function initWheel(root) {
       var angleRad = angleDeg * DEG;
 
       var x = CX + R * Math.cos(angleRad);
-      var y = CY + R * Math.sin(angleRad);
+      var y = CENTER_Y + R * Math.sin(angleRad);
       var rot = angleDeg;
 
       var dist = Math.abs(angleDeg) / STEP_DEG;
@@ -359,6 +361,7 @@ export function initWheel(root) {
   var sweepPaused = false;
 
   function triggerSweep() {
+    if (isNarrowMobile.matches) return;
     var activeSlot = N + currentIdx;
     var el = els[activeSlot];
     if (!el) return;
@@ -659,6 +662,7 @@ export function initWheel(root) {
   return function dispose() {
     if (timerRAF) cancelAnimationFrame(timerRAF);
     if (sweepRAF) cancelAnimationFrame(sweepRAF);
+    if (wheelRO) wheelRO.disconnect();
     window.wheelSetPaused = undefined;
   };
 }

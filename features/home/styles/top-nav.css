@@ -151,3 +151,75 @@
   }
 }
 
+
+@media (max-width: 553px) {
+  .page-home .section--hero {
+    padding-top: 112px;
+  }
+  .page-home .hero-name {
+    font-size: 38px;
+    letter-spacing: -1.8px;
+    margin-bottom: 28px;
+  }
+  .page-home .hero-bio {
+    font-size: 17px;
+    line-height: 27px;
+    letter-spacing: -0.4px;
+    font-weight: 500;
+    gap: 10px;
+  }
+  .page-home .hero-bio p {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  .page-home .hero-bio .hero-bio--location {
+    font-size: 16px;
+    margin-top: 2px;
+  }
+  .page-home .sp-card--services {
+    height: 200px;
+    min-height: 200px;
+  }
+  .page-home .social-proof {
+    padding-top: 40px;
+  }
+}
+
+@media (max-width: 553px) {
+  .page-home .experience__heading,
+  .page-home .publications__heading {
+    font-size: 26px;
+  }
+  .page-home .experience__title {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .page-home .experience__caption {
+    font-size: 15px;
+    line-height: 20px;
+  }
+  .page-home .experience__desc {
+    font-size: 15px;
+  }
+  .page-home .award-row__title {
+    font-size: 19px;
+  }
+  .page-home .award-row__badge {
+    font-size: 13px;
+  }
+  .page-home .activity__title {
+    font-size: 19px;
+  }
+  .page-home .activity-item__title {
+    font-size: 17px;
+  }
+  .page-home .activity-item__description {
+    font-size: 15px;
+  }
+  .page-home .cta-banner__title {
+    font-size: 32px;
+  }
+  .page-home .cta-banner__subtext {
+    font-size: 15px;
+  }
+}

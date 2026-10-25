@@ -927,3 +927,53 @@ a.award-row:hover .award-row__title {
     left: 12px;
   }
 }
+
+@media (max-width: 767px) {
+  .sp-now-playing-wrap {
+    display: none;
+  }
+}
+
+@media (max-width: 507px) {
+  .publications__tools {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .pub-tool {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    margin: 0;
+    padding: 18px 16px;
+    border-radius: 22px;
+    background: var(--surface-tint);
+  }
+  .pub-tool__logo,
+  .pub-tool__logo:has(.pub-tool__logo-stack) {
+    width: 48px;
+    height: 48px;
+  }
+  .pub-tool__logo--icon img {
+    width: 40px;
+    height: 40px;
+  }
+  .pub-tool__logo-stack {
+    transform: scale(0.8);
+    transform-origin: left center;
+  }
+  .pub-tool__details {
+    gap: 4px;
+    width: 100%;
+  }
+  .pub-tool__title {
+    font-size: 19px;
+    line-height: 24px;
+  }
+  .pub-tool__caption {
+    font-size: 15px;
+    line-height: 20px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+}

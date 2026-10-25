@@ -61,6 +61,7 @@ export function mountTree(
   const depthGap = opts?.depthGap ?? 240;
   const sibGap = opts?.sibGap ?? 10;
   const collapseAt = opts?.collapseAt ?? 3;
+  const narrow = window.innerWidth <= 900;
   const PAL = themePalette();
   const tree = cloneTree(data);
   tree.children?.forEach((child, i) => assignColors(child, i));
@@ -105,6 +106,20 @@ export function mountTree(
     treeLayout(root);
     const nodes = root.descendants() as Hier[];
     const links = root.links();
+
+    if (narrow) {
+      const maxW: number[] = [];
+      nodes.forEach((d) => {
+        maxW[d.depth] = Math.max(maxW[d.depth] ?? 0, estimateWidth(d));
+      });
+      const offsets: number[] = [0];
+      for (let k = 1; k < maxW.length; k++) offsets[k] = offsets[k - 1] + maxW[k - 1] + 36;
+      nodes.forEach((d) => {
+        d.y = offsets[d.depth];
+      });
+      const total = 40 + offsets[offsets.length - 1] + maxW[maxW.length - 1] + 24;
+      svg.attr("width", Math.max(total, el.clientWidth));
+    }
 
     let minY = Infinity;
     let maxY = -Infinity;
@@ -259,20 +274,9 @@ export function mountTree(
 
   update(root);
 
-  if (window.innerWidth <= 900) {
+  if (narrow) {
     el.style.overflowX = "auto";
     el.style.maxWidth = "100%";
-    requestAnimationFrame(() => {
-      const svgEl = el.querySelector("svg");
-      const group = svgEl?.querySelector("g");
-      if (!svgEl || !group) return;
-      const bbox = (group as SVGGElement).getBBox();
-      const w = bbox.x + bbox.width + 40;
-      if (w > el.clientWidth) {
-        svgEl.style.minWidth = `${w}px`;
-        svgEl.style.width = `${w}px`;
-      }
-    });
   }
 
   return () => {

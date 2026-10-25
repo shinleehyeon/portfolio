@@ -112,6 +112,13 @@ export function CaseStudyGallery({
     else v.pause();
   };
 
+  const fullscreen = () => {
+    const v = videoRef.current as (HTMLVideoElement & { webkitEnterFullscreen?: () => void }) | null;
+    if (!v) return;
+    if (v.requestFullscreen) v.requestFullscreen().catch(() => v.webkitEnterFullscreen?.());
+    else v.webkitEnterFullscreen?.();
+  };
+
   const seek = (value: number) => {
     const v = videoRef.current;
     if (!v) return;
@@ -257,6 +264,11 @@ export function CaseStudyGallery({
               </button>
             ))}
           </div>
+          <button type="button" className="cs-demo__full" onClick={fullscreen} aria-label="전체 화면">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--icon-strong)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" />
+            </svg>
+          </button>
         </div>
       ) : null}
       <div className="cs-gallery__thumb-row">

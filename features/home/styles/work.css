@@ -561,9 +561,14 @@ video.case-study__image {
     width: 100%;
     gap: 20px;
   }
+  .experience__row:not(:last-child) .experience__left::after {
+    display: none;
+  }
   .experience__desc {
     width: 100%;
     font-size: 17px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
   .experience__rows {
     gap: 41px;
