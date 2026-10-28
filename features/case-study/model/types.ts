@@ -7,6 +7,13 @@ export type TreeNode = {
   children?: TreeNode[];
 };
 
+export type FileTreeItem = {
+  name: string;
+  note?: string;
+  accent?: boolean;
+  children?: FileTreeItem[];
+};
+
 export type CaseStudyBlock =
   | {
       type: "hero";
@@ -32,6 +39,7 @@ export type CaseStudyBlock =
     }
   | { type: "textSection"; id: string; heading: string; body: string[] }
   | { type: "treeDiagram"; id: string; tree: TreeNode; collapseAt?: number }
+  | { type: "fileTree"; id: string; heading: string; root: string; tree: FileTreeItem[] }
   | { type: "video"; src: string; poster?: string; hint?: string; portrait?: boolean }
   | { type: "product"; heading: string; entries: { label: string; body: string }[] }
   | { type: "gallery"; slides: CaseStudySlide[]; variant?: "phone"; showDots?: boolean };

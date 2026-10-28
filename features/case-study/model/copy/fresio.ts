@@ -1,4 +1,5 @@
 import type { CaseStudyCopy, CaseStudySeo, CaseStudyWork } from "@/features/case-study/model/types";
+import { FRESIO_REPO } from "@/features/case-study/model/copy/file-trees";
 
 export const FRESIO_SEO: CaseStudySeo = {
   title: "Fresio",
@@ -39,12 +40,14 @@ const NAV = {
   ko: [
     { id: "overview", label: "개요" },
     { id: "focus", label: "초점" },
+    { id: "repo", label: "레포" },
     { id: "flow", label: "흐름" },
     { id: "product", label: "제품" },
   ],
   en: [
     { id: "overview", label: "Overview" },
     { id: "focus", label: "Focus" },
+    { id: "repo", label: "Repo" },
     { id: "flow", label: "Flow" },
     { id: "product", label: "Product" },
   ],
@@ -102,6 +105,7 @@ export const FRESIO_COPY: CaseStudyCopy = {
           { title: "스택", items: ["React Native · Expo", "React · Vite 디스플레이", "PostgreSQL · Redis · S3"] },
         ],
       },
+      { type: "fileTree", id: "repo", heading: "레포", root: "fresio", tree: FRESIO_REPO },
       {
         type: "focusList",
         id: "flow",
@@ -180,6 +184,7 @@ export const FRESIO_COPY: CaseStudyCopy = {
           { title: "Stack", items: ["React Native · Expo", "React · Vite display", "PostgreSQL · Redis · S3"] },
         ],
       },
+      { type: "fileTree", id: "repo", heading: "Repo", root: "fresio", tree: FRESIO_REPO },
       {
         type: "focusList",
         id: "flow",

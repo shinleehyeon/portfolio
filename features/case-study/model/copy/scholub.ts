@@ -1,5 +1,6 @@
 import type { CaseStudyCopy, CaseStudySeo, CaseStudyWork } from "@/features/case-study/model/types";
 import { SCHOLUB_PIPELINE, SCHOLUB_SYSTEM } from "@/features/case-study/model/copy/trees";
+import { SCHOLUB_REPO } from "@/features/case-study/model/copy/file-trees";
 
 export const SCHOLUB_SEO: CaseStudySeo = {
   title: "Scholub",
@@ -28,6 +29,7 @@ const NAV = {
   ko: [
     { id: "overview", label: "개요" },
     { id: "focus", label: "초점" },
+    { id: "repo", label: "레포" },
     { id: "pipeline", label: "파이프라인" },
     { id: "system", label: "시스템" },
     { id: "product", label: "제품" },
@@ -35,6 +37,7 @@ const NAV = {
   en: [
     { id: "overview", label: "Overview" },
     { id: "focus", label: "Focus" },
+    { id: "repo", label: "Repo" },
     { id: "pipeline", label: "Pipeline" },
     { id: "system", label: "System" },
     { id: "product", label: "Product" },
@@ -94,6 +97,7 @@ export const SCHOLUB_COPY: CaseStudyCopy = {
           { title: "모델", items: ["리뷰어 점수: OpenAI", "검색·요약: Perplexity", "썸네일: Gemini", "심층 분석: FastAPI 서브 에이전트"] },
         ],
       },
+      { type: "fileTree", id: "repo", heading: "레포", root: "Scholub", tree: SCHOLUB_REPO },
       {
         type: "textSection",
         id: "pipeline",
@@ -178,6 +182,7 @@ export const SCHOLUB_COPY: CaseStudyCopy = {
           { title: "Models", items: ["Reviewer scoring: OpenAI", "Search & summary: Perplexity", "Thumbnails: Gemini", "Deeper analysis: FastAPI sub-agent"] },
         ],
       },
+      { type: "fileTree", id: "repo", heading: "Repo", root: "Scholub", tree: SCHOLUB_REPO },
       {
         type: "textSection",
         id: "pipeline",

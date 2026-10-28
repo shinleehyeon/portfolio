@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { CaseStudyGallery } from "@/features/case-study/ui/CaseStudyGallery";
 import { CaseStudyDemo } from "@/features/case-study/ui/CaseStudyDemo";
 import { CaseStudyTree } from "@/features/case-study/ui/CaseStudyTree";
+import { CaseStudyFileTree } from "@/features/case-study/ui/CaseStudyFileTree";
 import type { CaseStudyBlock } from "@/features/case-study/model/types";
 
 export function CaseStudyBlockRenderer({ block }: { block: CaseStudyBlock }) {
@@ -120,6 +121,15 @@ export function CaseStudyBlockRenderer({ block }: { block: CaseStudyBlock }) {
         <section className="cs-image cs-image--wide">
           <div className="centered">
             <CaseStudyTree id={block.id} tree={block.tree} collapseAt={block.collapseAt} />
+          </div>
+        </section>
+      );
+
+    case "fileTree":
+      return (
+        <section id={block.id} className="cs-section">
+          <div className="centered">
+            <CaseStudyFileTree root={block.root} heading={block.heading} tree={block.tree} />
           </div>
         </section>
       );

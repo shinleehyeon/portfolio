@@ -1,4 +1,5 @@
 import type { CaseStudyCopy, CaseStudySeo, CaseStudyWork } from "@/features/case-study/model/types";
+import { SIPSIILBAN_REPO } from "@/features/case-study/model/copy/file-trees";
 
 export const SIPSIILBAN_SEO: CaseStudySeo = {
   title: "십시일반",
@@ -28,12 +29,14 @@ const NAV = {
   ko: [
     { id: "overview", label: "개요" },
     { id: "focus", label: "초점" },
+    { id: "repo", label: "레포" },
     { id: "flow", label: "흐름" },
     { id: "product", label: "제품" },
   ],
   en: [
     { id: "overview", label: "Overview" },
     { id: "focus", label: "Focus" },
+    { id: "repo", label: "Repo" },
     { id: "flow", label: "Flow" },
     { id: "product", label: "Product" },
   ],
@@ -91,6 +94,7 @@ export const SIPSIILBAN_COPY: CaseStudyCopy = {
           { title: "스택", items: ["React Native · Expo", "TypeScript", "NestJS · FastAPI", "Next.js POS"] },
         ],
       },
+      { type: "fileTree", id: "repo", heading: "레포", root: "sipsi-monorepo", tree: SIPSIILBAN_REPO },
       {
         type: "focusList",
         id: "flow",
@@ -169,6 +173,7 @@ export const SIPSIILBAN_COPY: CaseStudyCopy = {
           { title: "Stack", items: ["React Native · Expo", "TypeScript", "NestJS · FastAPI", "Next.js POS"] },
         ],
       },
+      { type: "fileTree", id: "repo", heading: "Repo", root: "sipsi-monorepo", tree: SIPSIILBAN_REPO },
       {
         type: "focusList",
         id: "flow",

@@ -1,4 +1,5 @@
 import type { CaseStudyCopy, CaseStudySeo, CaseStudyWork } from "@/features/case-study/model/types";
+import { SEOUL_REPO } from "@/features/case-study/model/copy/file-trees";
 import { SEOUL_PIPELINE, SEOUL_SYSTEM } from "@/features/case-study/model/copy/trees";
 
 export const SEOUL_BIKE_SEO: CaseStudySeo = {
@@ -29,6 +30,7 @@ const NAV = {
   ko: [
     { id: "overview", label: "개요" },
     { id: "focus", label: "초점" },
+    { id: "repo", label: "레포" },
     { id: "pipeline", label: "파이프라인" },
     { id: "system", label: "시스템" },
     { id: "product", label: "제품" },
@@ -36,6 +38,7 @@ const NAV = {
   en: [
     { id: "overview", label: "Overview" },
     { id: "focus", label: "Focus" },
+    { id: "repo", label: "Repo" },
     { id: "pipeline", label: "Pipeline" },
     { id: "system", label: "System" },
     { id: "product", label: "Product" },
@@ -94,6 +97,7 @@ export const SEOUL_BIKE_COPY: CaseStudyCopy = {
           { title: "모델", items: ["OpenRouter · Gemini", "제공 집계만 근거", "개입 방향 대화", "참고 표와 같이 둠"] },
         ],
       },
+      { type: "fileTree", id: "repo", heading: "레포", root: "seoul-access-map", tree: SEOUL_REPO },
       {
         type: "textSection",
         id: "pipeline",
@@ -177,6 +181,7 @@ export const SEOUL_BIKE_COPY: CaseStudyCopy = {
           { title: "Models", items: ["OpenRouter · Gemini", "Only provided aggregates", "Intervention dialogue", "Sits next to a reference table"] },
         ],
       },
+      { type: "fileTree", id: "repo", heading: "Repo", root: "seoul-access-map", tree: SEOUL_REPO },
       {
         type: "textSection",
         id: "pipeline",

@@ -1,4 +1,5 @@
 import type { CaseStudyCopy, CaseStudySeo, CaseStudyWork } from "@/features/case-study/model/types";
+import { SAVEQUEST_REPO } from "@/features/case-study/model/copy/file-trees";
 import { SAVEQUEST_PIPELINE, SAVEQUEST_SYSTEM } from "@/features/case-study/model/copy/trees";
 
 export const SAVEQUEST_SEO: CaseStudySeo = {
@@ -33,6 +34,7 @@ const NAV = {
   ko: [
     { id: "overview", label: "개요" },
     { id: "focus", label: "초점" },
+    { id: "repo", label: "레포" },
     { id: "pipeline", label: "파이프라인" },
     { id: "system", label: "시스템" },
     { id: "product", label: "제품" },
@@ -40,6 +42,7 @@ const NAV = {
   en: [
     { id: "overview", label: "Overview" },
     { id: "focus", label: "Focus" },
+    { id: "repo", label: "Repo" },
     { id: "pipeline", label: "Pipeline" },
     { id: "system", label: "System" },
     { id: "product", label: "Product" },
@@ -99,6 +102,7 @@ export const SAVEQUEST_COPY: CaseStudyCopy = {
           { title: "상점", items: ["캐릭터", "펫", "배경", "랜덤박스"] },
         ],
       },
+      { type: "fileTree", id: "repo", heading: "레포", root: "SaveQuest", tree: SAVEQUEST_REPO },
       {
         type: "textSection",
         id: "pipeline",
@@ -183,6 +187,7 @@ export const SAVEQUEST_COPY: CaseStudyCopy = {
           { title: "Shop", items: ["Characters", "Pets", "Backgrounds", "Random boxes"] },
         ],
       },
+      { type: "fileTree", id: "repo", heading: "Repo", root: "SaveQuest", tree: SAVEQUEST_REPO },
       {
         type: "textSection",
         id: "pipeline",

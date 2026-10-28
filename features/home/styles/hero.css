@@ -9,6 +9,74 @@
   text-align: center;
 }
 
+.hero-doodle {
+  position: relative;
+  display: inline-block;
+  vertical-align: baseline;
+  isolation: isolate;
+}
+
+.hero-doodle__text {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-doodle__mark {
+  position: absolute;
+  pointer-events: none;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+  mask-position: center;
+  -webkit-mask-position: center;
+}
+
+.hero-doodle--circle .hero-doodle__mark {
+  z-index: 3;
+  top: 50%;
+  left: -10%;
+  width: 120%;
+  height: 1.35em;
+  transform: translateY(-52%);
+}
+
+.hero-doodle--highlight .hero-doodle__mark {
+  z-index: 0;
+  left: -4%;
+  top: auto;
+  bottom: 0;
+  width: 108%;
+  height: 0.5em;
+  mix-blend-mode: multiply;
+}
+
+.hero-doodle--underline .hero-doodle__mark {
+  z-index: 1;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  height: 0.28em;
+  transform: translateY(-35%);
+}
+
+.hero-doodle--wash .hero-doodle__mark {
+  z-index: 1;
+  left: -14%;
+  top: 8%;
+  width: 128%;
+  height: 1.35em;
+}
+
+.hero-doodle--badge .hero-doodle__mark {
+  z-index: 3;
+  left: 100%;
+  top: 0;
+  width: 1em;
+  height: 1em;
+  transform: translate(-6%, -40%);
+}
+
 .hero-tagline {
   font-size: 24px;
   font-weight: 600;

@@ -146,7 +146,7 @@ const ACTIVITY_ICONS = {
 const ACTIVITIES = [
   {
     title: "엔지니어를 넘어 '빌더'로, 당근 Builder's Camp 해커톤",
-    description: "당근 빌더스 캠프 해커톤에서 우승한 경험을 소개한 당근 블로그입니다.",
+    description: "당근 빌더스 캠프 해커톤에서 우승한 경험을 소개한 당근 공식 블로그입니다.",
     date: "2025",
     icon: "newspaper",
     href: "https://careers.daangn.com/blog/post/%EB%8B%B9%EA%B7%BC-%ED%95%B4%EC%BB%A4%ED%86%A4-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4-%EC%B1%84%EC%9A%A9/",

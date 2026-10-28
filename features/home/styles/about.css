@@ -1,11 +1,13 @@
 .about-section {
   padding-top: 77px;
   padding-bottom: 0;
+  overflow: visible;
 }
 
 .about__body {
   display: flex;
   gap: 48px;
+  overflow: visible;
 }
 
 .about__hero-photo {
@@ -279,6 +281,8 @@
 }
 
 .about__content {
+  position: relative;
+  overflow: visible;
   font-size: 24px;
   font-weight: 400;
   line-height: 33.6px;
@@ -288,6 +292,109 @@
 
 .about__content p {
   margin: 0 0 21px;
+  word-break: keep-all;
+}
+
+.about__reveal-ch {
+  display: inline;
+  will-change: opacity;
+}
+
+.about__cue {
+  --g: 3px;
+  --t: 1px;
+  --rw: 100%;
+  --hr: 100%;
+  --wf: 0;
+  --rd: 0.45s;
+  --wash: transparent;
+  position: relative;
+  display: inline;
+  margin: 0 -0.05em;
+  padding: 0 0.05em var(--g);
+  border-radius: 0.1em;
+  color: var(--tone);
+  cursor: pointer;
+  outline: none;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  background-image:
+    linear-gradient(var(--hov), var(--hov)),
+    linear-gradient(var(--rule), var(--rule)),
+    linear-gradient(var(--wash), var(--wash));
+  background-repeat: no-repeat;
+  background-position: 0 100%, 0 100%, 0 calc(100% - var(--g));
+  background-size: 0% var(--t), var(--rw) var(--t), 100% calc((100% - var(--g)) * var(--wf));
+  transition: color 0.35s ease, opacity 0.45s ease, background-size var(--rd) cubic-bezier(0.65, 0, 0.35, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.about__cue--y { --tone: #7a2e1f; --rule: #7a2e1f; --hov: #b8452d; --hovc: #b8452d; }
+.about__cue--p { --tone: #7a2e5c; --rule: #7a2e5c; --hov: #c45d9a; --hovc: #c45d9a; }
+.about__cue--g { --tone: #2f5c3a; --rule: #2f5c3a; --hov: #4f8a5c; --hovc: #4f8a5c; }
+.about__cue--b { --tone: #2a4a7a; --rule: #2a4a7a; --hov: #3d6db0; --hovc: #3d6db0; }
+
+@media (hover: hover) {
+  .about__cue:hover {
+    color: var(--hovc);
+    background-size: var(--hr) var(--t), var(--rw) var(--t), 100% calc(100% - var(--g));
+  }
+}
+
+.about__cue.is-on,
+.about__cue.is-show {
+  color: var(--hovc);
+  background-size: var(--hr) var(--t), var(--rw) var(--t), 100% calc(100% - var(--g));
+}
+
+.about__cue:focus-visible {
+  outline: 2px solid var(--tone);
+  outline-offset: 3px;
+}
+
+.about__content--live .about__cue:not(.is-on):not(.is-show) {
+  opacity: 0.4;
+}
+
+.about__cue-float {
+  position: absolute;
+  left: calc(100% + 14px);
+  top: 50%;
+  z-index: 30;
+  width: 180px;
+  height: 225px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: transparent;
+  box-shadow: 0 24px 60px -18px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%) scale(0.88);
+  transform-origin: 0 50%;
+  transition: opacity 300ms cubic-bezier(0.16, 1, 0.3, 1), transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about__cue-float img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about__cue.is-show .about__cue-float {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about__cue,
+  .about__cue-float {
+    transition-duration: 120ms;
+  }
+
+  .about__cue-float {
+    transform: translateY(-50%) scale(1);
+  }
 }
 
 .about__content p:last-child {

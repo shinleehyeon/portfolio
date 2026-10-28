@@ -1,4 +1,5 @@
 import type { CaseStudyCopy, CaseStudySeo, CaseStudyWork } from "@/features/case-study/model/types";
+import { PETCLINIC_REPO } from "@/features/case-study/model/copy/file-trees";
 import { PETCLINIC_PIPELINE, PETCLINIC_SYSTEM } from "@/features/case-study/model/copy/trees";
 
 export const PETCLINIC_SEO: CaseStudySeo = {
@@ -29,6 +30,7 @@ const NAV = {
   ko: [
     { id: "overview", label: "개요" },
     { id: "focus", label: "초점" },
+    { id: "repo", label: "레포" },
     { id: "pipeline", label: "배포" },
     { id: "system", label: "시스템" },
     { id: "product", label: "운영" },
@@ -37,6 +39,7 @@ const NAV = {
   en: [
     { id: "overview", label: "Overview" },
     { id: "focus", label: "Focus" },
+    { id: "repo", label: "Repo" },
     { id: "pipeline", label: "Deploy" },
     { id: "system", label: "System" },
     { id: "product", label: "Operations" },
@@ -98,6 +101,7 @@ export const PETCLINIC_COPY: CaseStudyCopy = {
           { title: "엣지 · 운영", items: ["Route 53, ACM, CloudFront", "WAF 두 개 (CloudFront, ALB)", "CloudWatch, SNS, Lambda", "GuardDuty, CloudTrail, IAM"] },
         ],
       },
+      { type: "fileTree", id: "repo", heading: "레포", root: "PetClinic", tree: PETCLINIC_REPO },
       {
         type: "textSection",
         id: "pipeline",
@@ -191,6 +195,7 @@ export const PETCLINIC_COPY: CaseStudyCopy = {
           { title: "Edge · operations", items: ["Route 53, ACM, CloudFront", "Two WAFs (CloudFront, ALB)", "CloudWatch, SNS, Lambda", "GuardDuty, CloudTrail, IAM"] },
         ],
       },
+      { type: "fileTree", id: "repo", heading: "Repo", root: "PetClinic", tree: PETCLINIC_REPO },
       {
         type: "textSection",
         id: "pipeline",

@@ -1,4 +1,5 @@
 import type { CaseStudyCopy, CaseStudySeo, CaseStudyWork } from "@/features/case-study/model/types";
+import { SLOP_REPO } from "@/features/case-study/model/copy/file-trees";
 import { SLOP_PIPELINE, SLOP_SYSTEM } from "@/features/case-study/model/copy/trees";
 
 export const SLOP_SEO: CaseStudySeo = {
@@ -20,6 +21,7 @@ const NAV = {
   ko: [
     { id: "overview", label: "개요" },
     { id: "focus", label: "초점" },
+    { id: "repo", label: "레포" },
     { id: "pipeline", label: "파이프라인" },
     { id: "system", label: "시스템" },
     { id: "product", label: "제품" },
@@ -27,6 +29,7 @@ const NAV = {
   en: [
     { id: "overview", label: "Overview" },
     { id: "focus", label: "Focus" },
+    { id: "repo", label: "Repo" },
     { id: "pipeline", label: "Pipeline" },
     { id: "system", label: "System" },
     { id: "product", label: "Product" },
@@ -85,6 +88,7 @@ export const SLOP_COPY: CaseStudyCopy = {
           { title: "모델", items: ["OpenRouter", "요약·스크립트", "진행 상태 회신", "피드 추천"] },
         ],
       },
+      { type: "fileTree", id: "repo", heading: "레포", root: "SLOP", tree: SLOP_REPO },
       {
         type: "textSection",
         id: "pipeline",
@@ -174,6 +178,7 @@ export const SLOP_COPY: CaseStudyCopy = {
           { title: "Models", items: ["OpenRouter", "Summary and script", "Progress callbacks", "Feed ranking"] },
         ],
       },
+      { type: "fileTree", id: "repo", heading: "Repo", root: "SLOP", tree: SLOP_REPO },
       {
         type: "textSection",
         id: "pipeline",
