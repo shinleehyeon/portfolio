@@ -183,7 +183,7 @@ function RollText({ text, active }: { text: string; active?: boolean }) {
 }
 
 export function TopNav({ active }: { active: string }) {
-  const headerRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
   const [setMeasure, panelHeight] = useElementHeight<HTMLDivElement>();
   const heightInstant = useRef(true);
   const closeTimer = useRef<number | undefined>(undefined);

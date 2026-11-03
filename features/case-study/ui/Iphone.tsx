@@ -27,7 +27,12 @@ export type DeviceVideoProps = {
   onLoadedMetadata?: (event: SyntheticEvent<HTMLVideoElement>) => void;
 };
 
-export interface IphoneProps extends HTMLAttributes<HTMLDivElement>, DeviceVideoProps {
+type DeviceFrameProps = Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "onClick" | "onPlay" | "onPause" | "onTimeUpdate" | "onLoadedMetadata"
+>;
+
+export interface IphoneProps extends DeviceFrameProps, DeviceVideoProps {
   src?: string;
   alt?: string;
   videoSrc?: string;

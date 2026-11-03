@@ -1,4 +1,16 @@
-const JOBS = [
+import type { CSSProperties, ReactNode } from "react";
+
+type ExperienceRow = {
+  src: string;
+  alt: string;
+  style?: CSSProperties;
+  role: string;
+  org: string;
+  dates: string;
+  desc: ReactNode;
+};
+
+const JOBS: ExperienceRow[] = [
   {
     src: "/images/logo-daangn-pin.png",
     alt: "Daangn",
@@ -25,7 +37,7 @@ const JOBS = [
   },
 ];
 
-const EDUCATION = [
+const EDUCATION: ExperienceRow[] = [
   {
     src: "/images/logo-sunrin.png",
     alt: "선린인터넷고등학교",
@@ -46,7 +58,7 @@ const EDUCATION = [
   },
 ];
 
-function ExperienceRows({ rows }: { rows: typeof JOBS }) {
+function ExperienceRows({ rows }: { rows: ExperienceRow[] }) {
   return (
     <div className="experience__rows">
       {rows.map((row) => (

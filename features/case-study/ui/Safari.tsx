@@ -17,7 +17,12 @@ const HEIGHT_PCT = (SCREEN_HEIGHT / SAFARI_HEIGHT) * 100;
 
 type SafariMode = "default" | "simple";
 
-export interface SafariProps extends HTMLAttributes<HTMLDivElement>, DeviceVideoProps {
+type DeviceFrameProps = Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "onClick" | "onPlay" | "onPause" | "onTimeUpdate" | "onLoadedMetadata"
+>;
+
+export interface SafariProps extends DeviceFrameProps, DeviceVideoProps {
   url?: string;
   imageSrc?: string;
   imageAlt?: string;
