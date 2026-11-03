@@ -33,7 +33,7 @@ const JOBS: ExperienceRow[] = [
     role: "Full-stack",
     org: "인피니티텐서",
     dates: "2025. 08 − 2025. 11",
-    desc: "AI 피팅 모델인 'EffectGen'을 처음부터 구축했습니다. 학습용 크롤러, 전체 대시보드, AI 영상 생성 파이프라인을 개발 및 배포했습니다.",
+    desc: "EffectGen에서 패션 이미지 생성·편집, 누끼컷, 어드민을 만들었고, Agentmon 웹의 채팅·Twitter 연동·MCP를 맡았습니다.",
   },
 ];
 
