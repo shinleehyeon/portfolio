@@ -1,8 +1,18 @@
 "use client";
 
 import { useRef, useState, type ReactNode } from "react";
-
-type Award = (typeof AWARDS)[number];
+type Award = {
+  org: string;
+  date: string;
+  icon: string;
+  iconPad?: boolean;
+  title: string;
+  award: string;
+  project: string;
+  href: string;
+  image: string;
+  gradient: string;
+};
 
 const HOVER_EDGE_PAD = 8;
 const HOVER_MAX_ROTATE = 3;
@@ -11,8 +21,111 @@ const HOVER_HIDE_OFFSET = 10;
 const HOVER_SHOW_SCALE = 0.92;
 const HOVER_HIDE_SCALE = 0.96;
 
+const AWARDS: Award[] = [
+  {
+    org: "당근마켓",
+    date: "2025.09",
+    icon: "/images/logo-daangn-pin.png",
+    title: "Daangn Builder's Camp 해커톤",
+    award: "우승 (1등)",
+    project: "우리동네 청사진",
+    href: "",
+    image: "/images/awards/daangn-blueprint.jpg",
+    gradient: "linear-gradient(135deg, #FF8A3D 0%, #FF5C4D 100%)",
+  },
+  {
+    org: "과학기술정보통신부",
+    date: "2024.12",
+    icon: "/images/logo-korea-gov.png",
+    title: "SW 동행 해커톤",
+    award: "창의재단이사장상 (2등)",
+    project: "Fresio",
+    href: "/case-studies/fresio",
+    image: "/images/work/fresio.png",
+    gradient: "linear-gradient(135deg, #4DD9C0 0%, #2E8FA8 100%)",
+  },
+  {
+    org: "SK 플래닛",
+    date: "2024",
+    icon: "/images/logo-sk-wing.png?v=2",
+    iconPad: true,
+    title: "STA+C",
+    award: "가작상",
+    project: "SaveQuest",
+    href: "/case-studies/savequest",
+    image: "/images/work-savequest.jpg",
+    gradient: "linear-gradient(135deg, #FF8A3D 0%, #F2C14E 100%)",
+  },
+  {
+    org: "SK 플래닛",
+    date: "2025.02",
+    icon: "/images/logo-sk-wing.png?v=2",
+    iconPad: true,
+    title: "AppJam 미래산업 부문",
+    award: "최우수상 (1등)",
+    project: "Speakit",
+    href: "",
+    image: "/images/awards/speakit.jpg",
+    gradient: "linear-gradient(135deg, #7B5CFF 0%, #FF5CA8 100%)",
+  },
+  {
+    org: "USLASH",
+    date: "2025.07",
+    icon: "/images/logo-uslash.png",
+    title: "U/THON",
+    award: "우수상 (2등)",
+    project: "Fusion M",
+    href: "",
+    image: "/images/awards/fusionm.jpg",
+    gradient: "linear-gradient(135deg, #FFC93D 0%, #FF7A3D 100%)",
+  },
+  {
+    org: "선린인터넷고등학교",
+    date: "2025.07",
+    icon: "/images/logo-sunrin-emblem.png",
+    title: "제 11회 선린 해커톤",
+    award: "은상 (2등)",
+    project: "십시일반",
+    href: "/case-studies/sipsiilban",
+    image: "/images/work-sipsiilban.jpg",
+    gradient: "linear-gradient(135deg, #6E8CFF 0%, #3E5CB1 100%)",
+  },
+  {
+    org: "선린인터넷고등학교",
+    date: "2025.11",
+    icon: "/images/logo-sunrin-emblem.png",
+    title: "디지털 콘텐츠 개발 대회 생활 부문",
+    award: "금상 (1등)",
+    project: "Scholub",
+    href: "/case-studies/scholub",
+    image: "/images/work/scholub.jpg",
+    gradient: "linear-gradient(135deg, #2B2E63 0%, #3E7CB1 100%)",
+  },
+  {
+    org: "선린인터넷고등학교",
+    date: "2026.07",
+    icon: "/images/logo-sunrin-emblem.png",
+    title: "제 12회 선린 해커톤",
+    award: "금상 (1등)",
+    project: "SLOP",
+    href: "/case-studies/slop",
+    image: "/images/work/slop.jpg",
+    gradient: "linear-gradient(135deg, #FF5C8A 0%, #7B3FF2 100%)",
+  },
+];
+
 function hoverTransform(x: number, y: number, rotate: number, scale: number) {
   return `translate3d(${x}px, ${y}px, 0) rotate(${rotate}deg) scale(${scale})`;
+}
+
+function groupAwardsByYear(awards: Award[]) {
+  const sorted = [...awards].sort((a, b) => b.date.localeCompare(a.date));
+  const groups = new Map<string, Award[]>();
+  for (const award of sorted) {
+    const year = award.date.slice(0, 4);
+    groups.set(year, [...(groups.get(year) ?? []), award]);
+  }
+  return [...groups.entries()].map(([year, yearAwards]) => ({ year, awards: yearAwards }));
 }
 
 function AwardHoverGroup({ items }: { items: Award[] }) {
@@ -22,6 +135,7 @@ function AwardHoverGroup({ items }: { items: Award[] }) {
   const lastPos = useRef({ x: 0, y: 0 });
   const isShown = useRef(false);
   const [preview, setPreview] = useState<Award | null>(null);
+  const groups = groupAwardsByYear(items);
 
   const show = (award: Award) => {
     isShown.current = false;
@@ -65,41 +179,44 @@ function AwardHoverGroup({ items }: { items: Award[] }) {
 
   return (
     <div className="award-list reveal-scroll" ref={containerRef} onMouseLeave={hide}>
-      {items.map((award) => {
-        const rowProps = {
-          className: "award-row",
-          onMouseEnter: () => show(award),
-          onMouseMove: move,
-          onMouseLeave: hide,
-        };
-        const rowContent = (
-          <div className="award-row__text">
-            <span className="award-row__title-row">
-              {"icon" in award && award.icon && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={award.icon}
-                  alt=""
-                  className={`award-row__icon${"iconPad" in award && award.iconPad ? " award-row__icon--pad" : ""}`}
-                  width="26"
-                  height="26"
-                />
-              )}
-              <span className="award-row__title">{award.title} {award.award}</span>
-            </span>
-            <span className="award-row__badge">{award.org} · {award.date}</span>
-          </div>
-        );
-        return award.href ? (
-          <a href={award.href} key={award.title} {...rowProps}>
-            {rowContent}
-          </a>
-        ) : (
-          <div key={award.title} {...rowProps}>
-            {rowContent}
-          </div>
-        );
-      })}
+      {groups.map((group) => (
+        <div className="award-year" key={group.year}>
+          <span className="award-year__label">{group.year}</span>
+          {group.awards.map((award) => {
+            const rowProps = {
+              className: "award-row",
+              onMouseEnter: () => show(award),
+              onMouseMove: move,
+              onMouseLeave: hide,
+            };
+            const rowContent = (
+              <div className="award-row__text">
+                <span className="award-row__title-row">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={award.icon}
+                    alt=""
+                    className={award.iconPad ? "award-row__icon award-row__icon--pad" : "award-row__icon"}
+                    width="26"
+                    height="26"
+                  />
+                  <span className="award-row__title">{award.title} {award.award}</span>
+                </span>
+                <span className="award-row__badge">{award.org} · {award.date}</span>
+              </div>
+            );
+            return award.href ? (
+              <a href={award.href} key={`${award.project}-${award.date}`} {...rowProps}>
+                {rowContent}
+              </a>
+            ) : (
+              <div key={`${award.project}-${award.date}`} {...rowProps}>
+                {rowContent}
+              </div>
+            );
+          })}
+        </div>
+      ))}
 
       <div className="award-preview" ref={previewRef} aria-hidden>
         <div className="award-preview__image-frame" style={{ background: preview?.image ? undefined : preview?.gradient }}>
@@ -193,14 +310,18 @@ function ActivityItem({ activity }: { activity: (typeof ACTIVITIES)[number] }) {
 
 function ActivitySection() {
   return (
-    <div className="activity">
-      <h2 className="activity__title">활동</h2>
-      <div className="activity__list">
-        {ACTIVITIES.map((activity) => (
-          <ActivityItem activity={activity} key={activity.title} />
-        ))}
+    <section id="activity" className="section activity-section">
+      <div className="centered">
+        <h2 className="publications__heading shiny-hover reveal-scroll">Activity</h2>
+        <div className="activity">
+          <div className="activity__list">
+            {ACTIVITIES.map((activity) => (
+              <ActivityItem activity={activity} key={activity.title} />
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -228,169 +349,173 @@ function FlowerRating({ rating }: { rating: number }) {
   );
 }
 
-const AWARDS = [
-  {
-    org: "당근마켓",
-    date: "2025.09",
-    icon: "/images/logo-daangn-pin.png",
-    title: "Daangn Builder's Camp 해커톤",
-    award: "우승 (1등)",
-    rank: "1st",
-    project: "우리동네 청사진",
-    href: "",
-    image: "/images/awards/daangn-blueprint.jpg",
-    gradient: "linear-gradient(135deg, #FF8A3D 0%, #FF5C4D 100%)",
-    badgeColor: "#FF5C1F",
-  },
-  {
-    org: "과학기술정보통신부",
-    date: "2024.12",
-    icon: "/images/logo-korea-gov.png",
-    title: "SW 동행 해커톤",
-    award: "창의재단이사장상 (2등)",
-    rank: "2nd",
-    project: "Fresio",
-    href: "/case-studies/fresio",
-    image: "/images/work/fresio.png",
-    gradient: "linear-gradient(135deg, #4DD9C0 0%, #2E8FA8 100%)",
-    badgeColor: "#1F7A70",
-  },
-  {
-    org: "SK 플래닛",
-    date: "2025.02",
-    icon: "/images/logo-sk-wing.png?v=2",
-    iconPad: true,
-    title: "AppJam 미래산업 부문",
-    award: "최우수상 (1등)",
-    rank: "1st",
-    project: "Speakit",
-    href: "",
-    image: "/images/awards/speakit.jpg",
-    gradient: "linear-gradient(135deg, #7B5CFF 0%, #FF5CA8 100%)",
-    badgeColor: "#7B3FF2",
-  },
-  {
-    org: "USLASH",
-    date: "2025.07",
-    icon: "/images/logo-uslash.png",
-    title: "U/THON",
-    award: "우수상 (2등)",
-    rank: "2nd",
-    project: "Fusion M",
-    href: "",
-    image: "/images/awards/fusionm.jpg",
-    gradient: "linear-gradient(135deg, #FFC93D 0%, #FF7A3D 100%)",
-    badgeColor: "#E08600",
-  },
-  {
-    org: "선린인터넷고등학교",
-    date: "2025.07",
-    icon: "/images/logo-sunrin-emblem.png",
-    title: "제 11회 선린 해커톤",
-    award: "은상 (2등)",
-    rank: "2nd",
-    project: "십시일반",
-    href: "/case-studies/sipsiilban",
-    image: "/images/work-sipsiilban.jpg",
-    gradient: "linear-gradient(135deg, #6E8CFF 0%, #3E5CB1 100%)",
-    badgeColor: "#3149A8",
-  },
-  {
-    org: "선린인터넷고등학교",
-    date: "2025.11",
-    icon: "/images/logo-sunrin-emblem.png",
-    title: "디지털 콘텐츠 개발 대회 생활 부문",
-    award: "금상 (1등)",
-    rank: "1st",
-    project: "Scholub",
-    href: "/case-studies/scholub",
-    image: "/images/work/scholub.jpg",
-    gradient: "linear-gradient(135deg, #2B2E63 0%, #3E7CB1 100%)",
-    badgeColor: "#1F2547",
-  },
-  {
-    org: "선린인터넷고등학교",
-    date: "2026.07",
-    icon: "/images/logo-sunrin-emblem.png",
-    title: "제 12회 선린 해커톤",
-    award: "금상 (1등)",
-    rank: "1st",
-    project: "SLOP",
-    href: "/case-studies/slop",
-    image: "/images/work/slop.jpg",
-    gradient: "linear-gradient(135deg, #FF5C8A 0%, #7B3FF2 100%)",
-    badgeColor: "#D6266E",
-  },
-];
+type StackLine = {
+  label: string;
+  icon?: string;
+};
 
-const STACK: {
+type StackItem = {
   name: string;
   shortName?: string;
   rating: number;
   caption: string;
+  phoneOrder: number;
+  lines: StackLine[];
   logo: ReactNode;
-}[] = [
-  { name: "Next.js", rating: 5, caption: "실무 경험 & 해커톤 2회 수상", logo: (
+};
+
+const AWS_ICON = "https://icon.icepanel.io/AWS/svg";
+
+function StackTool({ item }: { item: StackItem }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className={`pub-tool${open ? " is-open" : ""}`} style={{ ["--phone-order" as string]: item.phoneOrder }}>
+      <button type="button" className="pub-tool__toggle" aria-expanded={open} onClick={() => setOpen((value) => !value)}>
+        <div className="pub-tool__logo pub-tool__logo--icon" aria-hidden>
+          {item.logo}
+        </div>
+        <div className="pub-tool__details">
+          <div className="pub-tool__title">
+            <span className="pub-tool__title-full">
+              <span className="pub-tool__title-name">{item.name}</span>
+              <FlowerRating rating={item.rating} />
+            </span>
+            <span className="pub-tool__title-short">{item.shortName ?? item.name}</span>
+          </div>
+          <span className="pub-tool__card-caption">{item.caption}</span>
+        </div>
+        <svg className="pub-tool__chev" viewBox="0 0 24 24" width="16" height="16" aria-hidden>
+          <path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      <div className="pub-tool__drop">
+        <div className="pub-tool__drop-inner">
+          <div className="pub-tool__branches">
+            {item.lines.map((line) => (
+              <span className="pub-tool__branch" key={line.label}>
+                {line.icon ? <img src={line.icon} alt="" width="20" height="20" /> : null}
+                {line.label}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const STACK: { title: string; items: StackItem[] }[] = [
+  {
+    title: "Infrastructure",
+    items: [
+  { name: "Docker", rating: 4, caption: "프로젝트 4회", phoneOrder: 4, lines: [
+    { label: "앱을 이미지로 빌드해 레지스트리에 올리기" },
+    { label: "multi-stage로 이미지 크기 줄이기" },
+    { label: "컨테이너 교체로 서버 배포" },
+  ], logo: (
+    <img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker" width="42" height="42" />
+  ) },
+  { name: "AWS", rating: 4, caption: "프로젝트 2회", phoneOrder: 5, lines: [
+    { label: "VPC", icon: `${AWS_ICON}/Networking-Content-Delivery/Virtual-Private-Cloud.svg` },
+    { label: "ALB", icon: `${AWS_ICON}/Networking-Content-Delivery/Elastic-Load-Balancing.svg` },
+    { label: "ECS", icon: `${AWS_ICON}/Containers/Elastic-Container-Service.svg` },
+    { label: "Lambda", icon: `${AWS_ICON}/Compute/Lambda.svg` },
+    { label: "RDS", icon: `${AWS_ICON}/Database/RDS.svg` },
+    { label: "Redshift", icon: `${AWS_ICON}/Analytics/Redshift.svg` },
+    { label: "CloudFront", icon: `${AWS_ICON}/Networking-Content-Delivery/CloudFront.svg` },
+    { label: "WAF", icon: `${AWS_ICON}/Security-Identity-Compliance/WAF.svg` },
+    { label: "IAM", icon: `${AWS_ICON}/Security-Identity-Compliance/Identity-and-Access-Management.svg` },
+  ], logo: (
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" width="52" height="32" />
+  ) },
+  { name: "Terraform", rating: 3, caption: "프로젝트 2회", phoneOrder: 6, lines: [
+    { label: "인프라를 모듈로 나눠 코드로 재현" },
+    { label: "원격 상태와 잠금으로 구성 관리" },
+    { label: "콘솔에 만든 리소스를 코드로 가져오기" },
+  ], logo: (
+    <img src="https://cdn.simpleicons.org/terraform/7B42BC" alt="Terraform" width="40" height="40" />
+  ) },
+  { name: "GCP", rating: 2, caption: "프로젝트 1회", phoneOrder: 9, lines: [
+    { label: "BigQuery로 테이블 조회" },
+    { label: "조회 결과에서 사용 패턴 찾기" },
+  ], logo: (
+    <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/googlecloud/googlecloud-original.svg" alt="GCP" width="40" height="40" />
+  ) },
+  { name: "Prometheus", rating: 2, caption: "인프라 지표 수집", phoneOrder: 10, lines: [
+    { label: "인프라 지표를 시계열로 수집" },
+    { label: "수집 대상에서 지표를 가져오기" },
+  ], logo: (
+    <img src="https://cdn.simpleicons.org/prometheus/E6522C" alt="Prometheus" width="40" height="40" />
+  ) },
+    ],
+  },
+  {
+    title: "Application",
+    items: [
+  { name: "Next.js", rating: 5, caption: "실무 경험 & 해커톤 2회 수상", phoneOrder: 1, lines: [
+    { label: "App Router로 페이지와 레이아웃 구성" },
+    { label: "API Routes로 외부 요청 프록시" },
+    { label: "서버 렌더와 클라이언트 상태 나누기" },
+  ], logo: (
     <img className="pub-tool__logo-next" src="https://cdn.simpleicons.org/nextdotjs/000000" alt="Next.js" width="40" height="40" />
   ) },
-  { name: "React & ReactNative", rating: 5, caption: "해커톤 3회 수상 & 프로젝트 5회 이상", logo: (
+  { name: "React & ReactNative", rating: 5, caption: "해커톤 3회 수상 & 프로젝트 5회 이상", phoneOrder: 2, lines: [
+    { label: "컴포넌트로 화면 재사용" },
+    { label: "웹뷰와 네이티브 브릿지 연결" },
+    { label: "React Native 화면과 탭 네비게이션" },
+    { label: "카메라, 음성, BLE 기기 기능 연결" },
+  ], logo: (
     <img src="https://cdn.simpleicons.org/react/61DAFB" alt="React Native" width="42" height="42" />
   ) },
-  { name: "Typescript & Javascript", shortName: "TS & JS", rating: 4, caption: "해커톤 7회 수상 & 프로젝트 10회 이상", logo: (
+  { name: "Typescript & Javascript", shortName: "TS & JS", rating: 4, caption: "해커톤 7회 수상 & 프로젝트 10회 이상", phoneOrder: 3, lines: [
+    { label: "화면과 API의 타입 계약" },
+    { label: "조건이 많은 분기를 타입으로 정리" },
+    { label: "ES6+와 브라우저 확장 스크립트" },
+  ], logo: (
     <span className="pub-tool__logo-stack">
       <img className="pub-tool__logo-stack-item" src="https://cdn.simpleicons.org/typescript/3178C6" alt="" width="38" height="38" />
       <img className="pub-tool__logo-stack-item" src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="" width="38" height="38" />
     </span>
   ) },
-  { name: "Terraform", rating: 2, caption: "프로젝트 2회", logo: (
-    <img src="https://cdn.simpleicons.org/terraform/7B42BC" alt="Terraform" width="40" height="40" />
-  ) },
-  { name: "Docker", rating: 4, caption: "프로젝트 4회", logo: (
-    <img src="https://cdn.simpleicons.org/docker/2496ED" alt="Docker" width="42" height="42" />
-  ) },
-  { name: "NestJS", rating: 3, caption: "프로젝트 10회 이상", logo: (
+  { name: "NestJS", rating: 3, caption: "프로젝트 10회 이상", phoneOrder: 7, lines: [
+    { label: "모듈로 REST API 나누기" },
+    { label: "JWT로 로그인 세션 유지" },
+    { label: "Prisma로 스키마와 쿼리 연결" },
+  ], logo: (
     <img src="https://cdn.simpleicons.org/nestjs/E0234E" alt="NestJS" width="40" height="40" />
   ) },
-  { name: "AWS", rating: 4, caption: "프로젝트 2회", logo: (
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" width="52" height="32" />
+  { name: "Spring", rating: 3, caption: "프로젝트 1회", phoneOrder: 8, lines: [
+    { label: "Spring PetClinic을 WAS로 구성" },
+    { label: "애플리케이션을 이미지로 빌드해 배포" },
+    { label: "헬스체크 통과 후 트래픽 받기" },
+  ], logo: (
+    <img src="https://cdn.simpleicons.org/spring/6DB33F" alt="Spring" width="40" height="40" />
   ) },
-  { name: "GCP", rating: 2, caption: "프로젝트 1회", logo: (
-    <img src="https://cdn.jsdelivr.net/npm/devicon@2.15.1/icons/googlecloud/googlecloud-original.svg" alt="GCP" width="40" height="40" />
-  ) },
+    ],
+  },
 ];
 
 export function PublicationsSection() {
   return (
     <>
+          <ActivitySection />
           <section id="highlights" className="section publications-section">
             <div className="centered">
               <h2 className="publications__heading shiny-hover reveal-scroll">Highlights</h2>
               <div className="publications__content">
 
-                <div className="publications__awards-column">
+                <div id="awards" className="publications__awards-column">
                   <AwardHoverGroup items={AWARDS} />
-                  <ActivitySection />
                 </div>
 
                 <div className="publications__tools reveal-scroll">
-                  {STACK.map((item) => (
-                    <div className="pub-tool" key={item.name}>
-                      <div className="pub-tool__logo pub-tool__logo--icon" aria-hidden>
-                        {item.logo}
-                      </div>
-                      <div className="pub-tool__details">
-                        <div className="pub-tool__title">
-                          <span className="pub-tool__title-full">
-                            <span className="pub-tool__title-name">{item.name}</span>
-                            <FlowerRating rating={item.rating} />
-                          </span>
-                          <span className="pub-tool__title-short">{item.shortName ?? item.name}</span>
-                        </div>
-                        <div className="pub-tool__caption">
-                          <span className="pub-tool__caption-full">{item.caption}</span>
-                          <span className="pub-tool__caption-short">{item.caption}</span>
-                        </div>
-                      </div>
+                  {STACK.map((group) => (
+                    <div className="pub-tool-group" key={group.title}>
+                      <h3 className="pub-tool-group__title">{group.title}</h3>
+                      {group.items.map((item) => (
+                        <StackTool item={item} key={item.name} />
+                      ))}
                     </div>
                   ))}
                 </div>

@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type SyntheticEvent } from "react";
+import { Iphone } from "@/features/case-study/ui/Iphone";
+import { Safari } from "@/features/case-study/ui/Safari";
 
 const RATES = [0.5, 0.75, 1] as const;
 
@@ -87,32 +89,24 @@ export function CaseStudyDemo({
     setTime(next);
   };
 
+  const videoProps = {
+    videoRef,
+    videoSrc: src,
+    poster,
+    onClick: toggle,
+    onPlay: () => setPlaying(true),
+    onPause: () => setPlaying(false),
+    onTimeUpdate: (e: SyntheticEvent<HTMLVideoElement>) => {
+      const v = e.currentTarget;
+      const d = readDuration(v);
+      if (d && d !== duration) setDuration(d);
+      setTime(v.currentTime);
+    },
+  };
+
   return (
-    <div
-      className={`cs-demo${portrait ? " cs-demo--portrait" : ""}`}
-      style={portrait ? { maxWidth: 280, marginLeft: "auto", marginRight: "auto" } : undefined}
-    >
-      <div className="cs-demo__stage">
-        <video
-          ref={videoRef}
-          className="cs-demo__video"
-          style={portrait ? { width: "100%", height: "auto", maxHeight: "68vh", objectFit: "contain" } : undefined}
-          poster={poster}
-          playsInline
-          preload="auto"
-          onClick={toggle}
-          onPlay={() => setPlaying(true)}
-          onPause={() => setPlaying(false)}
-          onTimeUpdate={(e) => {
-            const v = e.currentTarget;
-            const d = readDuration(v);
-            if (d && d !== duration) setDuration(d);
-            setTime(v.currentTime);
-          }}
-        >
-          <source src={src} type="video/mp4" />
-        </video>
-      </div>
+    <div className={`cs-demo${portrait ? " cs-demo--portrait" : " cs-demo--web"}`}>
+      {portrait ? <Iphone {...videoProps} /> : <Safari url={src.split("/").filter(Boolean).at(-2)} {...videoProps} />}
       <div className="cs-demo__bar">
         <button type="button" className="cs-demo__play" onClick={toggle} aria-label={playing ? "Pause" : "Play"}>
           {playing ? (

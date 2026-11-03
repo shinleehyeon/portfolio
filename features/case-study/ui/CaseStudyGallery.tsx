@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type SyntheticEvent } from "react";
+import { Iphone } from "@/features/case-study/ui/Iphone";
+import { Safari } from "@/features/case-study/ui/Safari";
 
 export type CaseStudyFit = "phone" | "web";
 
@@ -19,6 +21,11 @@ const RATES = [0.5, 0.75, 1] as const;
 
 function isVideo(src: string) {
   return /\.mp4($|\?)/i.test(src);
+}
+
+function frameHost(src: string) {
+  const folder = src.split("/").filter(Boolean).at(-2) ?? "preview";
+  return folder;
 }
 
 function formatTime(sec: number) {
@@ -178,37 +185,44 @@ export function CaseStudyGallery({
   const defaultFit: CaseStudyFit = variant === "phone" ? "phone" : "web";
   const fit = slideFit(slides[i], defaultFit);
 
+  const poster = slides.find((slide) => slide.src === shown)?.poster;
+  const videoProps = {
+    videoRef,
+    videoSrc: shown,
+    poster,
+    onClick: toggle,
+    onPlay: () => setPlaying(true),
+    onPause: () => setPlaying(false),
+    onTimeUpdate: (e: SyntheticEvent<HTMLVideoElement>) => {
+      const v = e.currentTarget;
+      const d = readDuration(v);
+      if (d && d !== duration) setDuration(d);
+      setTime(v.currentTime);
+    },
+    onLoadedMetadata: (e: SyntheticEvent<HTMLVideoElement>) => {
+      const d = readDuration(e.currentTarget);
+      if (d) setDuration(d);
+    },
+  };
+  const showingVideo = isVideo(shown);
+
+  const phone = fit === "phone";
+  const frame = showingVideo
+    ? phone
+      ? <Iphone key={shown} {...videoProps} />
+      : <Safari key={shown} url={frameHost(shown)} {...videoProps} />
+    : phone
+      ? <Iphone key={shown} src={shown} alt={slides[i].alt} />
+      : <Safari key={shown} url={frameHost(shown)} imageSrc={shown} imageAlt={slides[i].alt} />;
+
   return (
-    <div className={`cs-gallery cs-gallery--fixed-frame cs-gallery--react cs-gallery--fit-${fit}${variant === "phone" && fit === "phone" ? " cs-gallery--phone" : ""}`}>
-      <div className="cs-gallery__main">
-        {isVideo(shown) ? (
-          <video
-            ref={videoRef}
-            src={shown}
-            poster={slides.find((slide) => slide.src === shown)?.poster}
-            playsInline
-            preload="metadata"
-            onClick={toggle}
-            onPlay={() => setPlaying(true)}
-            onPause={() => setPlaying(false)}
-            onTimeUpdate={(e) => {
-              const v = e.currentTarget;
-              const d = readDuration(v);
-              if (d && d !== duration) setDuration(d);
-              setTime(v.currentTime);
-            }}
-            onLoadedMetadata={(e) => {
-              const d = readDuration(e.currentTarget);
-              if (d) setDuration(d);
-            }}
-          />
-        ) : (
-          <img src={shown} alt={slides[i].alt} />
-        )}
+    <div className={`cs-gallery cs-gallery--fixed-frame cs-gallery--react cs-gallery--fit-${fit}${variant === "phone" && phone ? " cs-gallery--phone" : ""} cs-gallery--device`}>
+      <div className={`cs-gallery__device cs-gallery__device--${phone ? "phone" : "web"}`}>
+        {frame}
         <div
           ref={pixelsRef}
           aria-hidden
-          style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden", zIndex: 2, borderRadius: 10 }}
+          style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden", zIndex: 2, borderRadius: phone ? 36 : 12 }}
         >
           {cells.map(({ n, size, col, row }) => (
             <div
@@ -226,7 +240,7 @@ export function CaseStudyGallery({
           ))}
         </div>
       </div>
-      {isVideo(shown) ? (
+      {showingVideo ? (
         <div className="cs-demo__bar">
           <button type="button" className="cs-demo__play" onClick={toggle} aria-label={playing ? "Pause" : "Play"}>
             {playing ? (

@@ -44,6 +44,7 @@ export function SiteFooter() {
                 <a href="#hero">Hero</a>
                 <a href="#about">About</a>
                 <a href="#experience">Experience</a>
+                <a href="#activity">Activity</a>
                 <a href="#highlights">Highlights</a>
                 <a href="#projects">Projects</a>
               </div>

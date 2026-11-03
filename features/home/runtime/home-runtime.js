@@ -892,10 +892,11 @@
         e.preventDefault();
         navigator.clipboard.writeText(email).then(function() {
           createSparks(e.clientX, e.clientY);
+          if (btn.querySelector('.top-nav__roll')) return;
           btn.textContent = 'Copied';
           btn.style.color = 'var(--text)';
           setTimeout(function() {
-            btn.textContent = 'Email';
+            btn.textContent = 'Contact';
             btn.style.color = '';
           }, 2000);
         });
@@ -1423,7 +1424,7 @@
           createSparks(e.clientX, e.clientY);
           btn.textContent = 'Copied';
           btn.style.color = 'var(--text)';
-          setTimeout(function() { btn.textContent = 'Email'; btn.style.color = ''; }, 2000);
+          setTimeout(function() { btn.textContent = 'Contact'; btn.style.color = ''; }, 2000);
         });
       });
     })();

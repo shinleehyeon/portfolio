@@ -32,15 +32,6 @@ export function AboutSection() {
               <span className="about__more-btn-close">접기</span>
             </label>
           </AboutTextReveal>
-
-          <div className="about__hero-photo" id="aboutHeroPhoto">
-            <div className="about__hero-glare"></div>
-            <div className="about__hero-stack" id="aboutHeroStack" role="button" tabIndex={0} aria-label="다음 사진 보기">
-              <img className="about__hero-card" data-pos="0" src="/images/about-id.png" alt="신이현" width="300" height="400" />
-              <img className="about__hero-card" data-pos="1" src="/images/about-hero.png" alt="" width="300" height="400" />
-              <img className="about__hero-card" data-pos="2" src="/images/about-office.jpg" alt="" width="300" height="400" />
-            </div>
-          </div>
         </div>
       </div>
     </section>

@@ -4,7 +4,7 @@ export const SCHOLUB_REPO: FileTreeItem[] = [
   { name: "README.md", note: "architecture overview" },
   {
     name: "frontend/",
-    note: "Next.js — feed, search, discussion",
+    note: "Vite + React — feed, search, discussion",
     children: [
       { name: "src/app/", note: "App Router" },
       { name: "src/pages/", note: "paper / profile screens" },

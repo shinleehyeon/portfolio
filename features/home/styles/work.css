@@ -442,6 +442,10 @@ video.case-study__image {
   margin: 0 0 49px;
 }
 
+.experience__heading--split {
+  margin-top: 88px;
+}
+
 .experience__rows {
   display: flex;
   flex-direction: column;
@@ -454,18 +458,6 @@ video.case-study__image {
   padding: 18px 20px;
   margin: -18px -20px;
   border-radius: 28px;
-  transition: background 0.35s var(--ease-out-quart);
-}
-
-@media (hover: hover) {
-  .experience__row:hover {
-    background: rgba(245, 240, 240, 0.48);
-  }
-
-  .experience__row:hover .experience__desc,
-  .experience__row:hover .experience__caption {
-    color: var(--neutral-700);
-  }
 }
 
 .experience__left {
@@ -493,23 +485,6 @@ video.case-study__image {
   border-radius: 0;
   object-fit: cover;
   flex-shrink: 0;
-  transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
-  transform-origin: center center;
-}
-
-.experience__row:hover .experience__logo {
-  animation: logo-tilt 2s ease-in-out;
-}
-
-@keyframes logo-tilt {
-  0%   { transform: perspective(300px) rotateY(0deg) rotateX(0deg) scale(1); }
-  10%  { transform: perspective(300px) rotateY(7deg) rotateX(-3.5deg) scale(1.06); }
-  25%  { transform: perspective(300px) rotateY(-3deg) rotateX(2deg) scale(1.03); }
-  40%  { transform: perspective(300px) rotateY(1.5deg) rotateX(-1deg) scale(1.015); }
-  55%  { transform: perspective(300px) rotateY(-0.7deg) rotateX(0.4deg) scale(1.007); }
-  70%  { transform: perspective(300px) rotateY(0.3deg) rotateX(-0.15deg) scale(1.003); }
-  85%  { transform: perspective(300px) rotateY(-0.1deg) rotateX(0.05deg) scale(1.001); }
-  100% { transform: perspective(300px) rotateY(0deg) rotateX(0deg) scale(1); }
 }
 
 .experience__details {
@@ -575,6 +550,9 @@ video.case-study__image {
   }
   .experience__heading {
     margin-bottom: 29px;
+  }
+  .experience__heading--split {
+    margin-top: 56px;
   }
   .experience-section {
     padding-top: 76px;

@@ -1,7 +1,9 @@
 @import "./hero.css";
+@import "./hero-agent.css";
 @import "./now-playing.css";
 @import "./work.css";
 @import "./publications.css";
+@import "./awards.css";
 @import "./about.css";
 @import "./footer.css";
 @import "./top-nav.css";

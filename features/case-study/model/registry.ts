@@ -12,9 +12,9 @@ export function caseStudyPath(slug: string) {
 }
 
 export const CASE_STUDIES: CaseStudyEntry[] = [
+  { slug: "petclinic", seo: PETCLINIC_SEO, work: PETCLINIC_WORK, copy: PETCLINIC_COPY },
   { slug: "seoul-bike", seo: SEOUL_BIKE_SEO, work: SEOUL_BIKE_WORK, copy: SEOUL_BIKE_COPY },
   { slug: "fresio", seo: FRESIO_SEO, work: FRESIO_WORK, copy: FRESIO_COPY },
-  { slug: "petclinic", seo: PETCLINIC_SEO, work: PETCLINIC_WORK, copy: PETCLINIC_COPY },
   { slug: "scholub", seo: SCHOLUB_SEO, work: SCHOLUB_WORK, copy: SCHOLUB_COPY },
   { slug: "slop", seo: SLOP_SEO, work: SLOP_WORK, copy: SLOP_COPY },
   { slug: "sipsiilban", seo: SIPSIILBAN_SEO, work: SIPSIILBAN_WORK, copy: SIPSIILBAN_COPY },

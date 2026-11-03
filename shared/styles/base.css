@@ -60,7 +60,7 @@ html[data-theme="dark"] {
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {

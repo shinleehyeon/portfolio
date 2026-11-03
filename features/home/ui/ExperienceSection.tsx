@@ -1,4 +1,4 @@
-const ROWS = [
+const JOBS = [
   {
     src: "/images/logo-daangn-pin.png",
     alt: "Daangn",
@@ -23,6 +23,9 @@ const ROWS = [
     dates: "2025. 08 − 2025. 11",
     desc: "AI 피팅 모델인 'EffectGen'을 처음부터 구축했습니다. 학습용 크롤러, 전체 대시보드, AI 영상 생성 파이프라인을 개발 및 배포했습니다.",
   },
+];
+
+const EDUCATION = [
   {
     src: "/images/logo-sunrin.png",
     alt: "선린인터넷고등학교",
@@ -32,7 +35,35 @@ const ROWS = [
     dates: "2024 − Present",
     desc: "학업을 병행하며 여러 대회의 수상과, 초기 스타트업부터, 수백만명이 쓰는 서비스까지 실무에서 직접 경험했습니다.",
   },
+  {
+    src: "/images/logo-sesac.png",
+    alt: "SeSAC",
+    style: { borderRadius: "14px", objectFit: "contain", background: "#fff", padding: "6px" } as const,
+    role: "SeSAC",
+    org: "새싹 (베스핀글로벌)",
+    dates: "2026. 07 − 2026. 12",
+    desc: "AI 서비스 운영을 위한 클라우드 데이터 엔지니어 과정(806시간)을 수강. Linux, VPC·3-Tier, SQL, Redshift, ETL 등을 다룹니다.",
+  },
 ];
+
+function ExperienceRows({ rows }: { rows: typeof JOBS }) {
+  return (
+    <div className="experience__rows">
+      {rows.map((row) => (
+        <div className="experience__row reveal-scroll" key={row.org}>
+          <div className="experience__left">
+            <img src={row.src} alt={row.alt} className="experience__logo" style={row.style} width="56" height="56" />
+            <div className="experience__details">
+              <div className="experience__title">{row.role}</div>
+              <div className="experience__caption">{row.org} <span className="experience__caption-dot">&nbsp;・&nbsp;</span> {row.dates}</div>
+            </div>
+          </div>
+          <p className="experience__desc">{row.desc}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export function ExperienceSection() {
   return (
@@ -40,20 +71,9 @@ export function ExperienceSection() {
           <section id="experience" className="section experience-section">
             <div className="centered">
               <h2 className="experience__heading shiny-hover reveal-scroll">Experience</h2>
-              <div className="experience__rows">
-                {ROWS.map((row) => (
-                  <div className="experience__row reveal-scroll" key={row.org}>
-                    <div className="experience__left">
-                      <img src={row.src} alt={row.alt} className="experience__logo" style={row.style} width="56" height="56" />
-                      <div className="experience__details">
-                        <div className="experience__title">{row.role}</div>
-                        <div className="experience__caption">{row.org} <span className="experience__caption-dot">&nbsp;・&nbsp;</span> {row.dates}</div>
-                      </div>
-                    </div>
-                    <p className="experience__desc">{row.desc}</p>
-                  </div>
-                ))}
-              </div>
+              <ExperienceRows rows={JOBS} />
+              <h2 className="experience__heading experience__heading--split shiny-hover reveal-scroll">Education</h2>
+              <ExperienceRows rows={EDUCATION} />
             </div>
           </section>
     </>

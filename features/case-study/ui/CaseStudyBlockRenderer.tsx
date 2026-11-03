@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { CaseStudyGallery } from "@/features/case-study/ui/CaseStudyGallery";
+import { Iphone } from "@/features/case-study/ui/Iphone";
 import { CaseStudyDemo } from "@/features/case-study/ui/CaseStudyDemo";
 import { CaseStudyTree } from "@/features/case-study/ui/CaseStudyTree";
 import { CaseStudyFileTree } from "@/features/case-study/ui/CaseStudyFileTree";
@@ -53,7 +54,7 @@ export function CaseStudyBlockRenderer({ block }: { block: CaseStudyBlock }) {
           <div className="centered">
             <div className="cs-phones reveal-load" data-reveal-delay="300">
               {block.images.map((screen) => (
-                <img key={screen.src} src={screen.src} alt={screen.alt} loading="lazy" />
+                <Iphone key={screen.src} src={screen.src} alt={screen.alt} />
               ))}
             </div>
           </div>

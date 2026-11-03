@@ -1,0 +1,67 @@
+.highlights-agent {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  overflow: visible;
+}
+
+.highlights-agent .hero-agent__face {
+  position: relative;
+  width: min(100%, 440px);
+  height: 260px;
+  overflow: hidden;
+}
+
+.hero-agent__src,
+.hero-agent__gl {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 200%;
+  bottom: -100%;
+}
+
+.hero-agent__src {
+  visibility: hidden;
+}
+
+.hero-agent__gl {
+  opacity: 0;
+}
+
+.hero-agent.is-live .hero-agent__gl {
+  opacity: 1;
+}
+
+.hero-agent__hand {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 160px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hero-agent__hand canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.pub-tool-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pub-tool-group__title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.4px;
+  color: var(--neutral-500);
+}
