@@ -40,6 +40,7 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: inset 0 4px 6px rgba(255, 255, 255, 0.25);
+  transform: translateZ(0);
 }
 
 .top-nav__backdrop {
@@ -73,6 +74,7 @@
   right: max(calc(var(--nav-spread) * -1), calc((100% - (100vw - 48px)) / 2));
   z-index: 0;
   pointer-events: none;
+  will-change: clip-path;
 }
 
 .top-nav__liquid {

@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, type Variants } from "framer-motion";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
+import { memo, useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { CASE_STUDIES, caseStudyPath } from "@/features/case-study/model/registry";
 
 const NAV_LINKS = [
@@ -32,6 +32,10 @@ type Preview = {
   layout: "cards" | "rows" | "paper";
   items: PreviewItem[];
 };
+
+function navThumb(src: string) {
+  return `/images/nav-thumb/${src.replace(/^\/images\//, "").replace(/\//g, "-").replace(/\.[a-z]+$/i, "")}.webp`;
+}
 
 const PREVIEWS: Record<PreviewKey, Preview> = {
   about: {
@@ -94,7 +98,7 @@ const PREVIEWS: Record<PreviewKey, Preview> = {
       title: entry.work.title,
       meta: entry.work.caption,
       href: caseStudyPath(entry.slug),
-      image: entry.work.image,
+      image: navThumb(entry.work.image),
     })),
   },
   resume: {
@@ -124,32 +128,28 @@ const PREVIEWS: Record<PreviewKey, Preview> = {
 };
 
 function useElementHeight<T extends HTMLElement>() {
-  const [node, setNodeState] = useState<T | null>(null);
+  const [node, setNode] = useState<T | null>(null);
   const [height, setHeight] = useState(0);
 
-  const commit = useCallback((next: number) => {
-    const rounded = Math.round(next);
-    if (rounded <= 0) return;
-    setHeight((current) => (current === rounded ? current : rounded));
-  }, []);
-
-  const setNode = useCallback((next: T | null) => {
-    setNodeState(next);
-    if (!next) {
+  useLayoutEffect(() => {
+    if (!node) {
       setHeight(0);
       return;
     }
-    commit(next.getBoundingClientRect().height);
-  }, [commit]);
-
-  useLayoutEffect(() => {
-    if (!node) return;
-    const measure = () => commit(node.getBoundingClientRect().height);
-    measure();
-    const observer = new ResizeObserver(measure);
+    const commit = (next: number) => {
+      const rounded = Math.round(next);
+      if (rounded <= 0) return;
+      setHeight((current) => (current === rounded ? current : rounded));
+    };
+    // 최초 1회만 레이아웃을 강제로 읽고, 이후 변화는 ResizeObserver 값을 그대로 사용한다.
+    commit(node.offsetHeight);
+    const observer = new ResizeObserver((entries) => {
+      const box = entries[0]?.borderBoxSize?.[0];
+      commit(box ? box.blockSize : node.offsetHeight);
+    });
     observer.observe(node);
     return () => observer.disconnect();
-  }, [node, commit]);
+  }, [node]);
 
   return [setNode, height] as const;
 }
@@ -182,7 +182,7 @@ function RollText({ text, active }: { text: string; active?: boolean }) {
   );
 }
 
-export function TopNav({ active }: { active: string }) {
+export const TopNav = memo(function TopNav({ active }: { active: string }) {
   const headerRef = useRef<HTMLDivElement>(null);
   const [setMeasure, panelHeight] = useElementHeight<HTMLDivElement>();
   const heightInstant = useRef(true);
@@ -425,7 +425,7 @@ export function TopNav({ active }: { active: string }) {
                               animate={{ y: "0%" }}
                               transition={{ duration: 0.9, ease: LANDING_EASE, delay: 0.12 + index * 0.06 }}
                             >
-                            <img src={item.image} alt="" decoding="async" />
+                            <img src={item.image} alt="" decoding="async" loading="eager" />
                             <span className="top-nav__card-arrow" aria-hidden="true">
                               <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                                 <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -498,4 +498,4 @@ export function TopNav({ active }: { active: string }) {
       </div>
     </nav>
   );
-}
+});
