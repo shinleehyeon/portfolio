@@ -24,6 +24,17 @@ const HOVER_HIDE_SCALE = 0.96;
 
 const AWARDS: Award[] = [
   {
+    org: "SBA 서울경제진흥원",
+    date: "2026.11",
+    icon: "/images/logo-sesac.png",
+    title: "SESAC 해커톤",
+    award: "서울경제진흥원 대표이사 장려상",
+    project: "청춘패치",
+    href: "",
+    image: "/images/awards/sesac-hackathon.jpg",
+    gradient: "linear-gradient(135deg, #3CB44A 0%, #1F8A4C 100%)",
+  },
+  {
     org: "당근마켓",
     date: "2025.09",
     icon: "/images/logo-daangn-pin.png",
@@ -31,7 +42,7 @@ const AWARDS: Award[] = [
     award: "우승 (1등)",
     project: "우리동네 청사진",
     href: "",
-    image: "/images/awards/daangn-blueprint.jpg",
+    image: "/images/awards/daangn-first.jpg",
     gradient: "linear-gradient(135deg, #FF8A3D 0%, #FF5C4D 100%)",
   },
   {
@@ -42,7 +53,7 @@ const AWARDS: Award[] = [
     award: "창의재단이사장상 (2등)",
     project: "Fresio",
     href: "/case-studies/fresio",
-    image: "/images/work/fresio.png",
+    image: "/images/awards/donghaeng-award.jpg",
     gradient: "linear-gradient(135deg, #4DD9C0 0%, #2E8FA8 100%)",
   },
   {
@@ -66,7 +77,7 @@ const AWARDS: Award[] = [
     award: "최우수상 (1등)",
     project: "Speakit",
     href: "",
-    image: "/images/awards/speakit.jpg",
+    image: "/images/awards/appjam-grand.jpg",
     gradient: "linear-gradient(135deg, #7B5CFF 0%, #FF5CA8 100%)",
   },
   {
@@ -77,7 +88,7 @@ const AWARDS: Award[] = [
     award: "우수상 (2등)",
     project: "Fusion M",
     href: "",
-    image: "/images/awards/fusionm.jpg",
+    image: "/images/awards/uthon-excellence.jpg",
     gradient: "linear-gradient(135deg, #FFC93D 0%, #FF7A3D 100%)",
   },
   {
@@ -88,7 +99,7 @@ const AWARDS: Award[] = [
     award: "은상 (2등)",
     project: "십시일반",
     href: "/case-studies/sipsiilban",
-    image: "/images/work-sipsiilban.jpg",
+    image: "/images/awards/sunrin-11-silver.jpg",
     gradient: "linear-gradient(135deg, #6E8CFF 0%, #3E5CB1 100%)",
   },
   {
@@ -110,7 +121,7 @@ const AWARDS: Award[] = [
     award: "금상 (1등)",
     project: "SLOP",
     href: "/case-studies/slop",
-    image: "/images/work/slop.jpg",
+    image: "/images/awards/sunrin-12-gold.jpg",
     gradient: "linear-gradient(135deg, #FF5C8A 0%, #7B3FF2 100%)",
   },
 ];

@@ -84,6 +84,7 @@ const PREVIEWS: Record<PreviewKey, Preview> = {
     more: { label: "수상 전체 보기", href: "#highlights" },
     layout: "rows",
     items: [
+      { title: "SESAC 해커톤", meta: "대표이사 장려상 · 2026", href: "#highlights" },
       { title: "제 12회 선린 해커톤", meta: "금상 · 2026", href: "#highlights" },
       { title: "Daangn Builder's Camp", meta: "우승 · 2025", href: "#highlights" },
       { title: "디지털 콘텐츠 개발 대회", meta: "금상 · 2025", href: "#highlights" },
